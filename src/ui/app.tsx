@@ -73,7 +73,8 @@ export class App extends React.Component<any, State> {
 			verifyData={verifyData}
 			captions="Edit Your Name" 
 			hint={null}
-			onClose = {this.onDialogClose.bind(this)}
+			onClose={this.onDialogClose.bind(this)}
+			contentProps={{textColor: "green"}}
 			/>
 		) : null);
 		return (

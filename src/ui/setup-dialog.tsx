@@ -12,6 +12,7 @@ interface DialogProps {
     captions?: string;
     hint?: any;
     onClose: (data?: any, hint?: any) => void;
+    contentProps?: any;
 }
 
 interface DialogState {
@@ -65,7 +66,15 @@ export class Dialog extends React.Component<DialogProps, DialogState> {
 
     render() {
         const caption = (this.props.captions ? this.props.captions : "");
-        const ContentComponent = this.props.contentComponentConstructor;
+        const ContentComponentClass = this.props.contentComponentConstructor;
+        const contentProperties = Object.assign({
+            value: this.state.data
+            ,fieldErrors: this.state.fieldErrors
+            ,onChange: this.onDataChanged.bind(this)
+            ,onFieldErrorsChang: this.onFieldErrorsChanged.bind(this)
+        }, (this.props.contentProps ? this.props.contentProps : {})
+        );
+        const contentElement = React.createElement(ContentComponentClass, contentProperties);
         return (
             <div className="w3-modal" style={{display: "block"}}>
                 <div className="w3-modal-content" style={{maxWidth:"600px"}}>
@@ -74,7 +83,7 @@ export class Dialog extends React.Component<DialogProps, DialogState> {
                         <h6>{caption}</h6>
                     </header>
                     <div className="w3-container">
-                        <ContentComponent value={this.state.data} fieldErrors={this.state.fieldErrors} onChange={this.onDataChanged.bind(this)} onFieldErrorsChange={this.onFieldErrorsChanged.bind(this)} />
+                        {contentElement}
                         <div className="w3-bar w3-padding-16">
                             <div className="w3-right">
                                 <button className="w3-btn w3-white w3-border w3-border-blue w3-round" onClick={() => this.onOK()}>OK</button>

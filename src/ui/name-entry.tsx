@@ -8,16 +8,20 @@ export interface Name {
     lastName?: string;    
 }
 
+export type TextColor = "black" | "green";
+
 export interface Props {
     value?: Name
     fieldErrors?: FieldErrors;
     onChange?: (value: Name) => void;
     onFieldErrorsChange?: (fieldError: FieldErrors) => void;
+    textColor: TextColor;
 }
 
 export interface State {
     name?: Name;
     fieldErrors?: FieldErrors;
+    textColor?: TextColor;
 }
 
 export class NameEntry extends React.Component<Props, State> {
@@ -29,6 +33,7 @@ export class NameEntry extends React.Component<Props, State> {
                 ,lastName: ""
             }
             ,fieldErrors: {}
+            ,textColor: "black"
         };
     }
     static getDerivedStateFromProps(props: Props, state: State) {
@@ -38,6 +43,7 @@ export class NameEntry extends React.Component<Props, State> {
                 ,lastName: (props.value && props.value.lastName ? props.value.lastName : "")
             }
             ,fieldErrors: (props.fieldErrors ? props.fieldErrors : {})
+            ,textColor: (props.textColor ? props.textColor : "black")
         };
     }
     onFirstNameChanged(event: React.ChangeEvent<HTMLInputElement>) {
@@ -68,15 +74,16 @@ export class NameEntry extends React.Component<Props, State> {
         return (errorHint ? (<span className="w3-text-red"><i className="fa fa-times"/> {errorHint}</span>) : null);
     }
     render() {
+        const inputClassName = `w3-input w3-text-${this.state.textColor}`;
         return (
         <div>
             <p>
                 <label>First Name</label>{' '}{this.getFieldErrorHintUI(this.state.fieldErrors["first-name"])}
-                <input className="w3-input" type="text" value={this.state.name.firstName} onChange={this.onFirstNameChanged.bind(this)}/>
+                <input className={inputClassName} type="text" value={this.state.name.firstName} onChange={this.onFirstNameChanged.bind(this)}/>
             </p>
             <p>
                 <label>Last Name</label>{' '}{this.getFieldErrorHintUI(this.state.fieldErrors["last-name"])}
-                <input className="w3-input" type="text" value={this.state.name.lastName} onChange={this.onLastNameChanged.bind(this)}/>
+                <input className={inputClassName} type="text" value={this.state.name.lastName} onChange={this.onLastNameChanged.bind(this)}/>
             </p>
         </div>
         );
