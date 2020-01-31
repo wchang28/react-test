@@ -23,17 +23,19 @@ interface DialogState {
 }
 
 export class Dialog extends React.Component<DialogProps, DialogState> {
-    private _documentEscapeKeyListner: (event: KeyboardEvent) => void
-    private get DocumentEscapeKeyListner() {
+    private _documentKeyUpListner: (event: KeyboardEvent) => void
+    private get DocumentKeyUpListner() {
         return ((event: KeyboardEvent) => {
-            if (event.key === "Escape") {
+            if (event.key === "Enter") {
+                this.onOK();
+            } else if (event.key === "Escape") {
                 this.onClose();
             }
         }).bind(this);
     }
     constructor(props) {
         super(props);
-        this._documentEscapeKeyListner = this.DocumentEscapeKeyListner;
+        this._documentKeyUpListner = this.DocumentKeyUpListner;
         this.state = {
             data: deepCopy(this.props.data)
             ,fieldErrors: {}
@@ -104,10 +106,10 @@ export class Dialog extends React.Component<DialogProps, DialogState> {
 
     componentDidMount() {
         //console.log(`Dialog.componentDidMount`);
-        document.addEventListener("keyup", this._documentEscapeKeyListner);
+        document.addEventListener("keyup", this._documentKeyUpListner);
     }
     componentWillUnmount() {
         //console.log(`Dialog.componentWillUnmount`);
-        document.removeEventListener("keyup", this._documentEscapeKeyListner);
+        document.removeEventListener("keyup", this._documentKeyUpListner);
     }
 }
