@@ -1,18 +1,23 @@
 import * as React from 'react';
+import {FieldErrors} from "./setup-dialog";
+
+const deepCopy = (src: any) => (JSON.parse(JSON.stringify(src)));
+
+export interface Name {
+    firstName?: string;
+    lastName?: string;    
+}
 
 export interface Props {
-    value?: {
-        firstName?: string;
-        lastName?: string;
-    }
-    onChange?: (value: {firstName?: string, lastName?: string}) => void;
+    value?: Name
+    fieldErrors?: FieldErrors;
+    onChange?: (value: Name) => void;
+    onFieldErrorsChange?: (fieldError: FieldErrors) => void;
 }
 
 export interface State {
-    name?: {
-        firstName?: string;
-        lastName?: string;
-    }
+    name?: Name;
+    fieldErrors?: FieldErrors;
 }
 
 export class NameEntry extends React.Component<Props, State> {
@@ -23,6 +28,7 @@ export class NameEntry extends React.Component<Props, State> {
                 firstName: ""
                 ,lastName: ""
             }
+            ,fieldErrors: {}
         };
     }
     static getDerivedStateFromProps(props: Props, state: State) {
@@ -31,9 +37,15 @@ export class NameEntry extends React.Component<Props, State> {
                 firstName: (props.value && props.value.firstName ? props.value.firstName : "")
                 ,lastName: (props.value && props.value.lastName ? props.value.lastName : "")
             }
+            ,fieldErrors: (props.fieldErrors ? props.fieldErrors : {})
         };
     }
     onFirstNameChanged(event: React.ChangeEvent<HTMLInputElement>) {
+        if (this.props.onFieldErrorsChange) {
+            const fieldErrors = deepCopy(this.state.fieldErrors);
+            delete fieldErrors["first-name"];
+            this.props.onFieldErrorsChange(fieldErrors);
+        }
         if (this.props.onChange) {
             const firstName = event.target.value;
             const value = Object.assign({}, this.state.name, {firstName});
@@ -41,21 +53,29 @@ export class NameEntry extends React.Component<Props, State> {
         }
     }
     onLastNameChanged(event: React.ChangeEvent<HTMLInputElement>) {
+        if (this.props.onFieldErrorsChange) {
+            const fieldErrors = deepCopy(this.state.fieldErrors);
+            delete fieldErrors["last-name"];
+            this.props.onFieldErrorsChange(fieldErrors);
+        }
         if (this.props.onChange) {
             const lastName = event.target.value;
             const value = Object.assign({}, this.state.name, {lastName});
             this.props.onChange(value);
         }
     }
+    private getFieldErrorHintUI(errorHint: string) {
+        return (errorHint ? (<span className="w3-text-red"><i className="fa fa-times"/> {errorHint}</span>) : null);
+    }
     render() {
         return (
-        <div className="w3-container w3-border w3-card-4">
+        <div>
             <p>
-                <label>First Name</label>
+                <label>First Name</label>{' '}{this.getFieldErrorHintUI(this.state.fieldErrors["first-name"])}
                 <input className="w3-input" type="text" value={this.state.name.firstName} onChange={this.onFirstNameChanged.bind(this)}/>
             </p>
             <p>
-                <label>Last Name</label>
+                <label>Last Name</label>{' '}{this.getFieldErrorHintUI(this.state.fieldErrors["last-name"])}
                 <input className="w3-input" type="text" value={this.state.name.lastName} onChange={this.onLastNameChanged.bind(this)}/>
             </p>
         </div>
