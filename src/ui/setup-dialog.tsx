@@ -6,13 +6,15 @@ export type ContentComponentConstructor = new (props: any) => any;
 const deepCopy = (src: any) => (JSON.parse(JSON.stringify(src)));
 
 interface DialogProps {
-    contentComponentConstructor: ContentComponentConstructor;
+    contentComponentClass: ContentComponentConstructor;
     data: any;
     verifyData: (date: any) => Promise<FieldErrors>
     captions?: string;
+    titleBarColor?: string;
     hint?: any;
     onClose: (data?: any, hint?: any) => void;
     contentProps?: any;
+    maxWidthPx?: number;
 }
 
 interface DialogState {
@@ -57,28 +59,31 @@ export class Dialog extends React.Component<DialogProps, DialogState> {
     }
 
     private onDataChanged(data: any) {
-        this.setState({data: deepCopy(data)})
+        this.setState({data: deepCopy(data)});
     }
 
     private onFieldErrorsChanged(fieldErrors: FieldErrors) {
-        this.setState({fieldErrors: deepCopy(fieldErrors)})
+        this.setState({fieldErrors: deepCopy(fieldErrors)});
     }
 
     render() {
         const caption = (this.props.captions ? this.props.captions : "");
-        const ContentComponentClass = this.props.contentComponentConstructor;
+        const titleBarColor = (this.props.titleBarColor ? this.props.titleBarColor : "blue");
+        const titleBarClassName = `w3-container w3-${titleBarColor}`;
+        const maxWidthPx = (this.props.maxWidthPx ? this.props.maxWidthPx : 600);
+        const ContentComponentClass = this.props.contentComponentClass;
         const contentProperties = Object.assign({
             value: this.state.data
             ,fieldErrors: this.state.fieldErrors
             ,onChange: this.onDataChanged.bind(this)
-            ,onFieldErrorsChang: this.onFieldErrorsChanged.bind(this)
+            ,onFieldErrorsChange: this.onFieldErrorsChanged.bind(this)
         }, (this.props.contentProps ? this.props.contentProps : {})
         );
         const contentElement = React.createElement(ContentComponentClass, contentProperties);
         return (
             <div className="w3-modal" style={{display: "block"}}>
-                <div className="w3-modal-content" style={{maxWidth:"600px"}}>
-                    <header className="w3-container w3-blue"> 
+                <div className="w3-modal-content" style={{maxWidth:`${maxWidthPx}px`}}>
+                    <header className={titleBarClassName}> 
                         <span onClick={() => this.onClose()} className="w3-button w3-display-topright">x</span>
                         <h6>{caption}</h6>
                     </header>

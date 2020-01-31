@@ -68,13 +68,15 @@ export class App extends React.Component<any, State> {
 		};
 		const dialog = (this.state.dialogVisible ? (
 			<Dialog
-			contentComponentConstructor={NameEntry}
+			contentComponentClass={NameEntry}
 			data={this.state.name}
 			verifyData={verifyData}
-			captions="Edit Your Name" 
+			captions="Edit Your Name"
+			titleBarColor="black"
 			hint={null}
 			onClose={this.onDialogClose.bind(this)}
 			contentProps={{textColor: "green"}}
+			maxWidthPx={400}
 			/>
 		) : null);
 		return (
