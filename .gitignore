@@ -6,3 +6,7 @@ logs
 npm-debug.log*
 
 dist
+
+.vscode
+
+public/js/bundle.min.js
