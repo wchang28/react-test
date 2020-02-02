@@ -18,7 +18,7 @@ export interface Props {
     textColor: TextColor;
 }
 
-export interface State {
+interface State {
     name?: Name;
     fieldErrors?: FieldErrors;
     textColor?: TextColor;

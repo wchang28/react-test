@@ -5,7 +5,7 @@ export type ContentComponentConstructor = new (props: any) => any;
 
 const deepCopy = (src: any) => (JSON.parse(JSON.stringify(src)));
 
-interface DialogProps {
+export interface Props {
     contentComponentClass: ContentComponentConstructor;
     data: any;
     verifyData: (date: any) => Promise<FieldErrors>
@@ -17,12 +17,12 @@ interface DialogProps {
     maxWidthPx?: number;
 }
 
-interface DialogState {
+interface State {
     data?: any;
     fieldErrors?: FieldErrors;
 }
 
-export class Dialog extends React.Component<DialogProps, DialogState> {
+export class Dialog extends React.Component<Props, State> {
     private _documentKeyUpListner: (event: KeyboardEvent) => void
     private get DocumentKeyUpListner() {
         return ((event: KeyboardEvent) => {
