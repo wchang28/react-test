@@ -39,8 +39,8 @@ export class App extends React.Component<any, State> {
 		const testComponentClass = (this.tests[this.state.testSelected] ? this.tests[this.state.testSelected].componentClass : null);
 		const testElement = (testComponentClass ? React.createElement(testComponentClass): null);
 		const testDiv = (testElement ? (<div className="w3-container w3-card-4 w3-border w3-margin-top">{testElement}</div>) : null);
-		const testSelectOptions = [(<option value="" disabled={true}>Choose your test</option>)].concat(testConfig.map((item) => {
-			return (<option value={item.id}>{item.name}</option>);
+		const testSelectOptions = [(<option key={0} value="" disabled={true}>Choose your test</option>)].concat(testConfig.map((item, index) => {
+			return (<option key={index+1} value={item.id}>{item.name}</option>);
 		}));
 		return (
 			<div className="w3-row-padding">
