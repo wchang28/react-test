@@ -1,92 +1,49 @@
 import * as React from 'react';
-import {NameEntry, Name} from "./name-entry";
-import {Dialog, FieldErrors} from "./setup-dialog";
+import {Test as TestNameEntry} from "./test-name-entry";
+import {Test as TestNameDialog} from "./test-dialog";
 
-/*
+export type TestComponentConstructor = new (props?: any) => any;
+
 interface State {
-	name?: Name
+	testSelected?: string;
 }
 
 export class App extends React.Component<any, State> {
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: {
-				firstName: "Wen"
-				,lastName: "Chang"
-			}
+			testSelected: ""
 		};
 	}
-	onNameEntryChange(value: Name) {
-		this.setState({name: value});
+	onTestSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
+		this.setState({testSelected: event.target.value});
 	}
 	render() {
-		return (
-		<div className="w3-container w3-card-4 w3-border">
-			<NameEntry value={this.state.name} onChange={this.onNameEntryChange.bind(this)}/>
-		</div>
-		);
-	}
-}
-*/
-
-interface State {
-	name?: Name
-	,dialogVisible?: boolean;
-}
-
-export class App extends React.Component<any, State> {
-	constructor(props) {
-		super(props);
-		this.state = {
-			name: {
-				firstName: "Wen"
-				,lastName: "Chang"
-			}
-			,dialogVisible: false
-		};
-	}
-	onDialogClose(data: Name, hint?: any) {
-		this.setState({dialogVisible: false});
-		if (data) {
-			this.setState({name: data});
+		let testComponentClass: TestComponentConstructor = null;
+		switch(this.state.testSelected) {
+			case "name-entry":
+				testComponentClass = TestNameEntry;
+				break;
+			case "dialog":
+				testComponentClass = TestNameDialog;
+				break;
 		}
-	}
-	onEditClick() {
-		this.setState({dialogVisible: true});
-	}
-	render() {
-		const verifyData = async (data: Name) => {
-			const ret: FieldErrors = {};
-			if (!data || !data.firstName) {
-				ret["first-name"] = "Frist name cannot be blank"
-			}
-			if (!data || !data.lastName) {
-				ret["last-name"] = "Last name cannot be blank"
-			}
-			return ret;
-		};
-		const dialog = (this.state.dialogVisible ? (
-			<Dialog
-			contentComponentClass={NameEntry}
-			data={this.state.name}
-			verifyData={verifyData}
-			captions="Edit Your Name"
-			titleBarColor="black"
-			hint={null}
-			onClose={this.onDialogClose.bind(this)}
-			contentProps={{textColor: "green"}}
-			maxWidthPx={400}
-			/>
-		) : null);
+		let testElement = (testComponentClass ? React.createElement(testComponentClass): null);
+		let testDiv = (testElement ? (<div className="w3-container w3-card-4 w3-border w3-margin-top">{testElement}</div>) : null);
 		return (
-		<div className="w3-container w3-card-4 w3-border">
-			<label>Hi {this.state.name.firstName} {this.state.name.lastName}!</label>
-			<p>
-				<button className="w3-button w3-border w3-round" onClick={() => this.onEditClick()}>Edit name</button>
-			</p>
-			{dialog}
-		</div>
+			<div className="w3-row-padding">
+				<div className="w3-third">
+					<div>
+						<label>Test Selection:</label>
+						<select className="w3-select w3-border" value={this.state.testSelected} onChange={this.onTestSelectChange.bind(this)}>
+							<option value="" disabled selected>Choose your option</option>
+							<option value="name-entry">Name Entry</option>
+							<option value="dialog">Dialog</option>
+						</select>
+					</div>
+					{testDiv}
+				</div>
+			</div>
 		);
 	}
 }

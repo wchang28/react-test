@@ -15,7 +15,7 @@ export interface Props {
     fieldErrors?: FieldErrors;
     onChange?: (value: Name) => void;
     onFieldErrorsChange?: (fieldErrors: FieldErrors) => void;
-    textColor: TextColor;
+    textColor?: TextColor;
 }
 
 interface State {
