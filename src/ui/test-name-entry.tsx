@@ -21,7 +21,7 @@ export class Test extends React.Component<any, State> {
 	render() {
 		return (
 		<div>
-			<NameEntry value={this.state.name} onChange={this.onNameEntryChange.bind(this)}/>
+			<NameEntry value={this.state.name} textColor="green" onChange={this.onNameEntryChange.bind(this)}/>
 		</div>
 		);
 	}
