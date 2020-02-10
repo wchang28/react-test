@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Test as TestNameEntry} from "./test-name-entry";
 import {Test as TestDialog} from "./test-dialog";
-import {Test as TestAceEditor} from "./test-simple-code-editor";
+import {Test as TestCodeMirrorEditor} from "./test-codemirror";
 
 type TestComponentConstructor = new (props?: any) => any;
 
@@ -14,7 +14,7 @@ interface TestItem {
 const testConfig: TestItem[] = [
 	{id: "name-entry", name: "Name Entry", componentClass: TestNameEntry}
 	,{id: "dialog", name: "Dialog", componentClass: TestDialog}
-	,{id: "ace-editor", name: "Ace Editor", componentClass: TestAceEditor}
+	,{id: "codemirror", name: "CodeMirror Editor", componentClass: TestCodeMirrorEditor}
 	// TODO: add more test cases here
 ];
 
