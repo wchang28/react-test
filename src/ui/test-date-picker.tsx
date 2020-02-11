@@ -9,7 +9,7 @@ export class Test extends React.Component<any, State> {
 	constructor(props) {
 		super(props);
 		this.state = {
-			date: new Date()
+			date: null	// new Date()
 		};
 	}
 	onChange(date: Date) {
@@ -17,7 +17,7 @@ export class Test extends React.Component<any, State> {
 	}
 	render() {
 		const CustomInput = (({value, onClick}) => (
-			<input className="w3-input" type="text" value={value} onClick={onClick} readOnly={true}/>
+			<input className="w3-input" type="text" value={value} onClick={onClick} readOnly={true} placeholder="Enter a date"/>
 		)) as any;
 		return (
 		<div>
