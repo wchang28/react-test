@@ -17,21 +17,19 @@ export class Test extends React.Component<any, State> {
 	}
 	render() {
 		const CustomInput = (({value, onClick}) => (
-			<input className="w3-input" type="text" value={value} onClick={onClick}/>
+			<input className="w3-input" type="text" value={value} onClick={onClick} readOnly={true}/>
 		)) as any;
 		return (
 		<div>
-            <p>
-                <label>Select a date</label>
-				<DatePicker.default
-					selected={this.state.date}
-					onChange={(date) => this.onChange(date)}
-					customInput={<CustomInput />}
-					showYearDropdown
-					dateFormatCalendar="MMMM"
-					yearDropdownItemNumber={15}
-				/>
-			</p>
+			<label>Select a date</label>
+			<DatePicker.default
+				selected={this.state.date}
+				onChange={(date) => this.onChange(date)}
+				customInput={<CustomInput />}
+				showYearDropdown
+				dateFormatCalendar="MMMM"
+				yearDropdownItemNumber={15}
+			/>
 		</div>
 		);
 	}
