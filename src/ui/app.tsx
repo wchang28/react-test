@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Test as TestNameEntry} from "./test-name-entry";
 import {Test as TestDialog} from "./test-dialog";
 import {Test as TestCodeMirrorEditor} from "./test-codemirror";
+import {Test as TestDatePicker} from "./test-date-picker";
 
 type TestComponentConstructor = new (props?: any) => any;
 
@@ -15,6 +16,7 @@ const testConfig: TestItem[] = [
 	{id: "name-entry", name: "Name Entry", componentClass: TestNameEntry}
 	,{id: "dialog", name: "Dialog", componentClass: TestDialog}
 	,{id: "codemirror", name: "CodeMirror Editor", componentClass: TestCodeMirrorEditor}
+	,{id: "date-picker", name: "Date Picker", componentClass: TestDatePicker}
 	// TODO: add more test cases here
 ];
 
