@@ -22,14 +22,16 @@ export class Test extends React.Component<any, State> {
 		return (
 		<div>
 			<label>Select a date</label>
-			<DatePicker.default
-				selected={this.state.date}
-				onChange={(date) => this.onChange(date)}
-				customInput={<CustomInput />}
-				showYearDropdown
-				dateFormatCalendar="MMMM"
-				yearDropdownItemNumber={15}
-			/>
+			<div>
+				<DatePicker.default
+					selected={this.state.date}
+					onChange={(date) => this.onChange(date)}
+					customInput={<CustomInput />}
+					showYearDropdown
+					dateFormatCalendar="MMMM"
+					yearDropdownItemNumber={15}
+				/>
+			</div>
 		</div>
 		);
 	}
