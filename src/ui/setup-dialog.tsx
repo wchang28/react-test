@@ -8,7 +8,7 @@ const deepCopy = (src: any) => (JSON.parse(JSON.stringify(src)));
 export interface Props {
     contentComponentClass: ContentComponentConstructor;
     data: any;
-    verifyData: (date: any) => Promise<FieldErrors>
+    verifyData: (date: any, hint?: any) => Promise<FieldErrors>
     captions?: string;
     titleBarColor?: string;
     hint?: any;
@@ -51,7 +51,7 @@ export class Dialog extends React.Component<Props, State> {
 
     private async onOK() {
         const data = this.state.data;
-        const fieldErrors = await this.props.verifyData(data);
+        const fieldErrors = await this.props.verifyData(data, this.props.hint);
         if (fieldErrors && JSON.stringify(fieldErrors) !== '{}') {
             this.setState({fieldErrors});
         } else {
