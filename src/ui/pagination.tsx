@@ -155,8 +155,10 @@ export class Pagination extends React.Component<Props, State> {
             if (this.state.totalPages > 1) {
                 const barContent = (this.ViewLocked ? this.ViewLockedBarContent : this.ViewNotLockedBarContent);
                 return (
-                    <div className="w3-bar w3-border w3-round">
-                        {barContent}
+                    <div className="w3-show-inline-block">
+                        <div className="w3-bar w3-border w3-round">
+                            {barContent}
+                        </div>
                     </div>
                 );
             } else {
@@ -170,15 +172,13 @@ export class Pagination extends React.Component<Props, State> {
         const topBar = (this.state.mode === "top" || this.state.mode === "both" ? this.PaginationBar : null);
         const bottomBar = (this.state.mode === "bottom" || this.state.mode === "both" ? this.PaginationBar : null);
         return (
-        <div>
-            <div className="w3-center">
+            <div>
                 {topBar}
                 <div>
                     {this.props.children}
                 </div>
                 {bottomBar}
             </div>
-        </div>
         );
     }
 }

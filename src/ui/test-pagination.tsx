@@ -11,7 +11,7 @@ export class Test extends React.Component<any, State> {
 	constructor(props) {
 		super(props);
 		this.state = {
-            totalPages: 8
+            totalPages: 53
             ,pageIndex: 0
             ,data: []
 		};
@@ -23,16 +23,18 @@ export class Test extends React.Component<any, State> {
     }
     render() {
         return (
-        <div>
-            <div className="w3-container">
-                <p>Pagination Test</p>
-                <Pagination mode="both" viewLength={10} totalPages={this.state.totalPages} pageIndex={this.state.pageIndex} onPageChange={this.getOnPageChangeHandler()}>
+            <div>
+                <div className="w3-container">
+                    <p><b>Pagination Test</b></p>
                     <div className="w3-container">
-                        Showing content for page {this.state.pageIndex+1}
+                        <Pagination mode="both" viewLength={10} totalPages={this.state.totalPages} pageIndex={this.state.pageIndex} onPageChange={this.getOnPageChangeHandler()}>
+                            <div className="w3-container">
+                                Showing content for page {this.state.pageIndex+1}
+                            </div>
+                        </Pagination>
                     </div>
-                </Pagination>
+                </div>
             </div>
-        </div>
         );
     }
 }
