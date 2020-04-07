@@ -3,6 +3,7 @@ import {Test as TestNameEntry} from "./test-name-entry";
 import {Test as TestDialog} from "./test-dialog";
 import {Test as TestCodeMirrorEditor} from "./test-codemirror";
 import {Test as TestDatePicker} from "./test-date-picker";
+import {Test as TestPagination} from "./test-pagination";
 
 type TestComponentConstructor = new (props?: any) => any;
 
@@ -17,6 +18,7 @@ const testConfig: TestItem[] = [
 	,{id: "dialog", name: "Dialog", componentClass: TestDialog}
 	,{id: "codemirror", name: "CodeMirror Editor", componentClass: TestCodeMirrorEditor}
 	,{id: "date-picker", name: "Date Picker", componentClass: TestDatePicker}
+	,{id: "pagination", name: "Pagination", componentClass: TestPagination}
 	// TODO: add more test cases here
 ];
 
@@ -48,7 +50,7 @@ export class App extends React.Component<any, State> {
 		}));
 		return (
 			<div className="w3-row-padding">
-				<div className="w3-third">
+				<div className="w3-half">
 					<div>
 						<label>Test Selection:</label>
 						<select className="w3-select w3-border" value={this.state.testSelected} onChange={this.onTestSelectChange.bind(this)}>
