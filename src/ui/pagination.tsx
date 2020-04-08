@@ -65,7 +65,7 @@ interface State {
 export class Pagination extends React.Component<Props, State> {
 	constructor(props) {
 		super(props);
-		this.state = {
+        this.state = {
             totalPages: (typeof this.props.totalPages === "number" ? this.props.totalPages : null)
             ,pageIndex: (typeof this.props.pageIndex === "number" ? this.props.pageIndex : null)
             ,viewLeft: 0
@@ -73,7 +73,7 @@ export class Pagination extends React.Component<Props, State> {
             ,mode: (this.props.mode ? this.props.mode : DEFAULT_MODE)
             ,fontSize: (this.props.fontSize ? this.props.fontSize : DEFAULT_FONT_SIZE)
             ,selectedColor: (this.props.selectedColor ? this.props.selectedColor: DEFAULT_SELECTED_COLOR)
-		};
+        };
     }
     static ValidState(state: State) {
         if (

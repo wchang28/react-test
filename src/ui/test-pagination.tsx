@@ -65,7 +65,7 @@ export class Test extends React.Component<any, State> {
             ,fontSize: "small"
             ,selectedColor: "green"
             ,pageData: this.makeupSomeData(0, totalPages)
-		};
+        };
     }
     // make up some data
     makeupSomeData(pageIndex: number, totalPages: number) {
