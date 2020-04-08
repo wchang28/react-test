@@ -61,8 +61,8 @@ export class Test extends React.Component<any, State> {
                         </select>
                     </form>
                     <Pagination mode={this.state.mode} fontSize={this.state.fontSize} viewLength={10} totalPages={this.state.totalPages} pageIndex={this.state.pageIndex} onPageChange={this.getOnPageChangeHandler()}>
-                        <div className="w3-container">
-                            Showing content for page {this.state.pageIndex+1}
+                        <div className="w3-container w3-border" style={{marginTop: "8px", marginBottom: "8px"}}>
+                            <p>Showing content for page {this.state.pageIndex+1}</p>
                         </div>
                     </Pagination>
                 </div>

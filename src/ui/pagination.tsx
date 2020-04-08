@@ -164,6 +164,7 @@ export class Pagination extends React.Component<Props, State> {
             if (this.state.totalPages > 1) {
                 const barContent = (this.ViewLocked ? this.ViewLockedBarContent : this.ViewNotLockedBarContent);
                 const barClassName = `w3-bar w3-border w3-round w3-${this.state.fontSize}`;
+                // w3-show-inline-block (display: inline-block) will add a whitespace (6px height) at the bottom of the <div>
                 return (
                     <div className="w3-show-inline-block">
                         <div className={barClassName}>
@@ -181,10 +182,11 @@ export class Pagination extends React.Component<Props, State> {
     render() {
         const topBar = (this.state.mode === "top" || this.state.mode === "both" ? this.PaginationBar : null);
         const bottomBar = (this.state.mode === "bottom" || this.state.mode === "both" ? this.PaginationBar : null);
+        const contentDivStyle = (topBar ? {marginTop:"-6px"} : null);   // remove the 6px height whiteapce if there is a top bar with display=inline-block
         return (
             <div>
                 {topBar}
-                <div>
+                <div style={contentDivStyle}>
                     {this.props.children}
                 </div>
                 {bottomBar}
