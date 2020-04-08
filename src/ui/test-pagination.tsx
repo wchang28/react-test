@@ -142,7 +142,7 @@ export class Test extends React.Component<any, State> {
                 </tr>
             );         
         });
-        const smallTopBottomPadding = {paddingTop: "2px", paddingBottom: "2px"};
+        const smallTopBottomPadding = {paddingTop: "4px", paddingBottom: "4px"};
         return (
             <div>
                 <p><b>Pagination Test</b></p>
