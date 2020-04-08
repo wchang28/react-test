@@ -113,9 +113,12 @@ export class Test extends React.Component<any, State> {
     get OnTotalPagesChangeHandler() {
         return ((event: React.ChangeEvent<HTMLInputElement>) => {
             const totalPages = event.target.valueAsNumber;
+            const pageIndex = (totalPages > 0 ? 0 : -1);
+            const pageData = this.makeupSomeData(pageIndex, totalPages)
             this.setState({
                 totalPages
-                ,pageIndex: (totalPages > 0 ? 0 : -1)
+                ,pageIndex
+                ,pageData
             });
         }).bind(this);
     }
