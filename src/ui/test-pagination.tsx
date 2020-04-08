@@ -37,30 +37,60 @@ const allColors: pg.Color[] = [
     ,"pale-blue"
 ];
 
+const PAGE_SIZE = 40;
+
+interface DataItem {
+    id: string;
+    name: string;
+    sex: "Male" | "Female";
+}
+
 interface State {
     totalPages?: number;
     pageIndex?: number;
     mode?: pg.Mode;
     fontSize?: pg.FontSize;
     selectedColor?: pg.Color;
-    data?: any[];
+    pageData?: DataItem[];
 }
 
 export class Test extends React.Component<any, State> {
 	constructor(props) {
-		super(props);
+        super(props);
+        const totalPages = 53;
 		this.state = {
-            totalPages: 53
+            totalPages
             ,pageIndex: 0
             ,mode: "both"
             ,fontSize: "small"
             ,selectedColor: "green"
-            ,data: []
+            ,pageData: this.makeupSomeData(0, totalPages)
 		};
+    }
+    // make up some data
+    makeupSomeData(pageIndex: number, totalPages: number) {
+        const ret: DataItem[] = [];
+        const onLastPage = (pageIndex === totalPages - 1);
+        const n = (onLastPage ? Math.max(1, Math.floor(PAGE_SIZE/2)) : PAGE_SIZE);
+        for (let i = 0; i < n; i++) {
+            const ordinal = pageIndex * PAGE_SIZE + i;
+            const item: DataItem = {
+                id: `${ordinal+1}`
+                ,name: `Customer ${ordinal+1}`
+                ,sex: (ordinal % 2 === 0 ? "Female" : "Male")
+            };
+            ret.push(item);
+        }
+        return ret;
+    }
+    async getPageData(pageIndex: number) {
+        return this.makeupSomeData(pageIndex, this.state.totalPages);
     }
     get OnPageChangeHandler() {
         return (async (pageIndex: number) => {
             this.setState({pageIndex});
+            const pageData = await this.getPageData(pageIndex);
+            this.setState({pageData});
         }).bind(this);
     }
     get OnModeChangeHandler() {
@@ -126,7 +156,7 @@ export class Test extends React.Component<any, State> {
                 </form>
                 <Pagination mode={this.state.mode} fontSize={this.state.fontSize} selectedColor={this.state.selectedColor} viewLength={10} totalPages={this.state.totalPages} pageIndex={this.state.pageIndex} onPageChange={this.OnPageChangeHandler}>
                     <div className="w3-container w3-border" style={{marginTop: "8px", marginBottom: "8px"}}>
-                        <p>Showing content for page {this.state.pageIndex+1}</p>
+                        <p>page {this.state.pageIndex+1} has {this.state.pageData.length} items</p>
                     </div>
                 </Pagination>
             </div>
