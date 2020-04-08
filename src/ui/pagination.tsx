@@ -63,8 +63,8 @@ interface State {
 }
 
 export class Pagination extends React.Component<Props, State> {
-	constructor(props) {
-		super(props);
+    constructor(props) {
+	    super(props);
         this.state = {
             totalPages: (typeof this.props.totalPages === "number" ? this.props.totalPages : null)
             ,pageIndex: (typeof this.props.pageIndex === "number" ? this.props.pageIndex : null)
