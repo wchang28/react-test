@@ -2,10 +2,43 @@ import * as React from 'react';
 
 export type Mode = "top" | "bottom" | "both";
 export type FontSize = "tiny" | "small" | "medium" | "large" | "xlarge" | "xxlarge" | "xxxlarge" | "jumbo";
+export type Color
+= "amber"
+| "aqua"
+| "blue"
+| "light-blue"
+| "brown"
+| "cyan"
+| "blue-grey"
+| "green"
+| "light-green"
+| "indigo"
+| "khaki"
+| "lime"
+| "orange"
+| "deep-orange"
+| "pink"
+| "purple"
+| "deep-purple"
+| "red"
+| "sand"
+| "teal"
+| "yellow"
+| "white"
+| "black"
+| "grey"
+| "light-grey"
+| "dark-grey"
+| "pale-red"
+| "pale-green"
+| "pale-yellow"
+| "pale-blue"
+;
 
 const DEFAULT_VIEW_LENGTH = 10;
 const DEFAULT_MODE: Mode = "both";
 const DEFAULT_FONT_SIZE: FontSize = "medium";
+const DEFAULT_SELECTED_COLOR: Color = "green";
 
 export interface Props {
     totalPages: number;
@@ -14,6 +47,7 @@ export interface Props {
     viewLength?: number;
     mode?: Mode;
     fontSize?: FontSize;
+    selectedColor?: Color;
 }
 
 interface State {
@@ -25,6 +59,7 @@ interface State {
     viewLength?: number;
     mode?: Mode;
     fontSize?: FontSize;
+    selectedColor?: Color;
 }
 
 export class Pagination extends React.Component<Props, State> {
@@ -37,6 +72,7 @@ export class Pagination extends React.Component<Props, State> {
             ,viewLength: (typeof this.props.viewLength === "number" ? this.props.viewLength : DEFAULT_VIEW_LENGTH)
             ,mode: (this.props.mode ? this.props.mode : DEFAULT_MODE)
             ,fontSize: (this.props.fontSize ? this.props.fontSize : DEFAULT_FONT_SIZE)
+            ,selectedColor: (this.props.selectedColor ? this.props.selectedColor: DEFAULT_SELECTED_COLOR)
 		};
     }
     static ValidState(state: State) {
@@ -61,13 +97,14 @@ export class Pagination extends React.Component<Props, State> {
     static getDerivedStateFromProps(props: Props, state: State) {
         const debugState = {viewLength: state.viewLength, totalPages: state.totalPages, pageIndex: state.pageIndex, viewLeft: state.viewLeft};
         const debugProps = {viewLength: props.viewLength, totalPages: props.totalPages, pageIndex: props.pageIndex};
-        console.log(`getDerivedStateFromProps()\nstate (old)=${JSON.stringify(debugState)}\nprops (new)=${JSON.stringify(debugProps)}`);
+        //console.log(`getDerivedStateFromProps()\nstate (old)=${JSON.stringify(debugState)}\nprops (new)=${JSON.stringify(debugProps)}`);
         const ret: State = {
             totalPages: (typeof props.totalPages === "number" ? props.totalPages : null)
             ,pageIndex: (typeof props.pageIndex === "number" ? props.pageIndex : null)
             ,viewLength: (typeof props.viewLength === "number" ? props.viewLength : DEFAULT_VIEW_LENGTH)
             ,mode: (props.mode ? props.mode : DEFAULT_MODE)
             ,fontSize: (props.fontSize ? props.fontSize : DEFAULT_FONT_SIZE)
+            ,selectedColor: (props.selectedColor ? props.selectedColor: DEFAULT_SELECTED_COLOR)
         };
         let viewLeft = 0;
         if (Pagination.ValidState(ret)) {
@@ -131,7 +168,7 @@ export class Pagination extends React.Component<Props, State> {
         return {padding: "8px 12px", opacity: "1", cursor: "auto"};
     }
     getPageButtonClassName(selected: boolean) {
-        return "w3-bar-item w3-button" + (selected ? " w3-green": "");
+        return "w3-bar-item w3-button" + (selected ? ` w3-${this.state.selectedColor}`: "");
     }
     get ViewLockedBarContent() {
         const ret: JSX.Element[] = [];
