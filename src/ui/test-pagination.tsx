@@ -27,7 +27,7 @@ export class Test extends React.Component<any, State> {
                 <div className="w3-container">
                     <p><b>Pagination Test</b></p>
                     <div className="w3-container">
-                        <Pagination mode="both" viewLength={10} totalPages={this.state.totalPages} pageIndex={this.state.pageIndex} onPageChange={this.getOnPageChangeHandler()}>
+                        <Pagination mode="both" fontSize="small" viewLength={10} totalPages={this.state.totalPages} pageIndex={this.state.pageIndex} onPageChange={this.getOnPageChangeHandler()}>
                             <div className="w3-container">
                                 Showing content for page {this.state.pageIndex+1}
                             </div>

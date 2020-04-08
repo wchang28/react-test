@@ -1,34 +1,42 @@
 import * as React from 'react';
 
 export type Mode = "top" | "bottom" | "both";
+export type FontSize = "tiny" | "small" | "medium" | "large" | "xlarge" | "xxlarge" | "xxxlarge" | "jumbo";
+
+const DEFAULT_VIEW_LENGTH = 10;
+const DEFAULT_MODE: Mode = "both";
+const DEFAULT_FONT_SIZE: FontSize = "medium";
 
 export interface Props {
-    mode: Mode;
-    viewLength: number;
     totalPages: number;
     pageIndex: number;
     onPageChange: (pageIndex: number) => void;
+    viewLength?: number;
+    mode?: Mode;
+    fontSize?: FontSize;
 }
 
 interface State {
-    mode?: Mode;
-
-    viewLength?: number;
     totalPages?: number;
     pageIndex?: number;
 
     viewLeft?: number;
+
+    viewLength?: number;
+    mode?: Mode;
+    fontSize?: FontSize;
 }
 
 export class Pagination extends React.Component<Props, State> {
 	constructor(props) {
 		super(props);
 		this.state = {
-            mode: this.props.mode
-            ,viewLength: this.props.viewLength
-            ,totalPages: this.props.totalPages
-            ,pageIndex: this.props.pageIndex
+            totalPages: (typeof this.props.totalPages === "number" ? this.props.totalPages : null)
+            ,pageIndex: (typeof this.props.pageIndex === "number" ? this.props.pageIndex : null)
             ,viewLeft: 0
+            ,viewLength: (typeof this.props.viewLength === "number" ? this.props.viewLength : DEFAULT_VIEW_LENGTH)
+            ,mode: (this.props.mode ? this.props.mode : DEFAULT_MODE)
+            ,fontSize: (this.props.fontSize ? this.props.fontSize : DEFAULT_FONT_SIZE)
 		};
     }
     static ValidState(state: State) {
@@ -55,10 +63,11 @@ export class Pagination extends React.Component<Props, State> {
         const debugProps = {viewLength: props.viewLength, totalPages: props.totalPages, pageIndex: props.pageIndex};
         console.log(`getDerivedStateFromProps()\nstate (old)=${JSON.stringify(debugState)}\nprops (new)=${JSON.stringify(debugProps)}`);
         const ret: State = {
-            mode: (props.mode ? props.mode: "both")
-            ,viewLength: (typeof props.viewLength === "number" ? props.viewLength : null)
-            ,totalPages: (typeof props.totalPages === "number" ? props.totalPages : null)
+            totalPages: (typeof props.totalPages === "number" ? props.totalPages : null)
             ,pageIndex: (typeof props.pageIndex === "number" ? props.pageIndex : null)
+            ,viewLength: (typeof props.viewLength === "number" ? props.viewLength : DEFAULT_VIEW_LENGTH)
+            ,mode: (props.mode ? props.mode : DEFAULT_MODE)
+            ,fontSize: (props.fontSize ? props.fontSize : DEFAULT_FONT_SIZE)
         };
         let viewLeft = 0;
         if (Pagination.ValidState(ret)) {
@@ -154,9 +163,10 @@ export class Pagination extends React.Component<Props, State> {
         if (this.ValidState) {
             if (this.state.totalPages > 1) {
                 const barContent = (this.ViewLocked ? this.ViewLockedBarContent : this.ViewNotLockedBarContent);
+                const barClassName = `w3-bar w3-border w3-round w3-${this.state.fontSize}`;
                 return (
                     <div className="w3-show-inline-block">
-                        <div className="w3-bar w3-border w3-round">
+                        <div className={barClassName}>
                             {barContent}
                         </div>
                     </div>
