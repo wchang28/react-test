@@ -132,6 +132,16 @@ export class Test extends React.Component<any, State> {
         const colorOptions = allColors.map((color, index) => {
             return (<option key={index} value={color}>{color}</option>);
         });
+        const dataRows = this.state.pageData.map((item, index) => {
+            return (
+                <tr key={index}>
+                    <td>{index+1}</td>
+                    <td>{item.id}</td>
+                    <td>{item.name}</td>
+                    <td>{item.sex}</td>
+                </tr>
+            );         
+        });
         return (
             <div>
                 <p><b>Pagination Test</b></p>
@@ -159,10 +169,21 @@ export class Test extends React.Component<any, State> {
                         <input className="w3-input w3-border" name="totalPages" type="number" min="0" step="1" value={this.state.totalPages} onChange={this.OnTotalPagesChangeHandler}/>
                     </p>
                 </form>
+                <p>page {this.state.pageIndex+1} has {this.state.pageData.length} item(s)</p>
                 <Pagination mode={this.state.mode} fontSize={this.state.fontSize} selectedColor={this.state.selectedColor} viewLength={10} totalPages={this.state.totalPages} pageIndex={this.state.pageIndex} onPageChange={this.OnPageChangeHandler}>
-                    <div className="w3-container w3-border" style={{marginTop: "8px", marginBottom: "8px"}}>
-                        <p>page {this.state.pageIndex+1} has {this.state.pageData.length} items</p>
-                    </div>
+                    <table className="w3-table-all w3-tiny w3-card-2" style={{marginTop: "8px", marginBottom: "8px", width: "50%"}}>
+                        <thead>
+                            <tr className="w3-light-blue">
+                                <th>#</th>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Sex</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {dataRows}
+                        </tbody>
+                    </table>
                 </Pagination>
             </div>
         );
