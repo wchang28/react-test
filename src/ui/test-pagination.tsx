@@ -58,7 +58,7 @@ export class Test extends React.Component<any, State> {
 	constructor(props) {
         super(props);
         const totalPages = 53;
-		this.state = {
+        this.state = {
             totalPages
             ,pageIndex: 0
             ,mode: "both"
