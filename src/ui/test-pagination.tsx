@@ -48,24 +48,22 @@ export class Test extends React.Component<any, State> {
         });
         return (
             <div>
-                <div className="w3-container">
-                    <p><b>Pagination Test</b></p>
-                    <form className="w3-container w3-border w3-round w3-padding-16 w3-margin-bottom w3-small" style={{width:"33%"}}>
-                        <label>Mode</label>
-                        <select className="w3-select w3-border w3-round" name="mode" value={this.state.mode} onChange={this.getOnModeChangeHandler()}>
-                            {modeOptions}
-                        </select>
-                        <label>Font Size</label>
-                        <select className="w3-select w3-border w3-round" name="fontSize" value={this.state.fontSize} onChange={this.getOnFontSizeChangeHandler()}>
-                            {fontSizeOptions}
-                        </select>
-                    </form>
-                    <Pagination mode={this.state.mode} fontSize={this.state.fontSize} viewLength={10} totalPages={this.state.totalPages} pageIndex={this.state.pageIndex} onPageChange={this.getOnPageChangeHandler()}>
-                        <div className="w3-container w3-border" style={{marginTop: "8px", marginBottom: "8px"}}>
-                            <p>Showing content for page {this.state.pageIndex+1}</p>
-                        </div>
-                    </Pagination>
-                </div>
+                <p><b>Pagination Test</b></p>
+                <form className="w3-container w3-border w3-round w3-padding-16 w3-margin-bottom w3-small" style={{width:"33%"}}>
+                    <label>Mode</label>
+                    <select className="w3-select w3-border w3-round" name="mode" value={this.state.mode} onChange={this.getOnModeChangeHandler()}>
+                        {modeOptions}
+                    </select>
+                    <label>Font Size</label>
+                    <select className="w3-select w3-border w3-round" name="fontSize" value={this.state.fontSize} onChange={this.getOnFontSizeChangeHandler()}>
+                        {fontSizeOptions}
+                    </select>
+                </form>
+                <Pagination mode={this.state.mode} fontSize={this.state.fontSize} viewLength={10} totalPages={this.state.totalPages} pageIndex={this.state.pageIndex} onPageChange={this.getOnPageChangeHandler()}>
+                    <div className="w3-container w3-border" style={{marginTop: "8px", marginBottom: "8px"}}>
+                        <p>Showing content for page {this.state.pageIndex+1}</p>
+                    </div>
+                </Pagination>
             </div>
         );
     }

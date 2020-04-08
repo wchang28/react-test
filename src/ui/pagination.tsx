@@ -124,11 +124,20 @@ export class Pagination extends React.Component<Props, State> {
             }
         }).bind(this);
     }
+    get PageButtonStyle() {
+        return {padding: "8px 12px"};
+    }
+    get DotDotDotButtonStyle() {
+        return {padding: "8px 12px", opacity: "1", cursor: "auto"};
+    }
+    getPageButtonClassName(selected: boolean) {
+        return "w3-bar-item w3-button" + (selected ? " w3-green": "");
+    }
     get ViewLockedBarContent() {
         const ret: JSX.Element[] = [];
         for (let pageIndex = 0; pageIndex < this.state.totalPages; pageIndex++) {
-            const className = "w3-bar-item w3-button" + (pageIndex === this.state.pageIndex ? " w3-green": "");
-            ret.push(<button key={pageIndex} className={className} onClick={this.getOnPageButtonOnClikcedHandler(pageIndex)}>{pageIndex+1}</button>);
+            const selected = (pageIndex === this.state.pageIndex);
+            ret.push(<button key={pageIndex} className={this.getPageButtonClassName(selected)} style={this.PageButtonStyle} onClick={this.getOnPageButtonOnClikcedHandler(pageIndex)}>{pageIndex+1}</button>);
         }
         return ret;
     }
@@ -139,22 +148,22 @@ export class Pagination extends React.Component<Props, State> {
         let key = 0;
         let pageIndex = 0;
         if (!viewHitLeftBoundary) {
-            ret.push(<button key={key} className="w3-bar-item w3-button" onClick={this.getOnPageButtonOnClikcedHandler(pageIndex)}>{pageIndex+1}</button>);
+            ret.push(<button key={key} className={this.getPageButtonClassName(false)} style={this.PageButtonStyle} onClick={this.getOnPageButtonOnClikcedHandler(pageIndex)}>{pageIndex+1}</button>);
             key++;
-            ret.push(<button key={key} className="w3-bar-item w3-button" disabled={true} style={{opacity:"1",cursor:"auto"}}>...</button>);
+            ret.push(<button key={key} className={this.getPageButtonClassName(false)} disabled={true} style={this.DotDotDotButtonStyle}>...</button>);
             key++;
         }
         for (let i = 0; i < this.state.viewLength; i++) {
             pageIndex = this.state.viewLeft + i;
-            const className = "w3-bar-item w3-button" + (pageIndex === this.state.pageIndex ? " w3-green": "");
-            ret.push(<button key={key} className={className} onClick={this.getOnPageButtonOnClikcedHandler(pageIndex)}>{pageIndex+1}</button>);
+            const selected = (pageIndex === this.state.pageIndex);
+            ret.push(<button key={key} className={this.getPageButtonClassName(selected)} style={this.PageButtonStyle} onClick={this.getOnPageButtonOnClikcedHandler(pageIndex)}>{pageIndex+1}</button>);
             key++;
         }
         if (!viewHitRightBoundary) {
-            ret.push(<button key={key} className="w3-bar-item w3-button" disabled={true} style={{opacity:"1",cursor:"auto"}}>...</button>);
+            ret.push(<button key={key} className={this.getPageButtonClassName(false)} disabled={true} style={this.DotDotDotButtonStyle}>...</button>);
             key++;
             pageIndex = this.state.totalPages-1;
-            ret.push(<button key={key} className="w3-bar-item w3-button" onClick={this.getOnPageButtonOnClikcedHandler(pageIndex)}>{pageIndex+1}</button>);
+            ret.push(<button key={key} className={this.getPageButtonClassName(false)} style={this.PageButtonStyle} onClick={this.getOnPageButtonOnClikcedHandler(pageIndex)}>{pageIndex+1}</button>);
             key++;
         }
         return ret;
