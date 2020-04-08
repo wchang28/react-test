@@ -70,16 +70,18 @@ export class Test extends React.Component<any, State> {
     // make up some data
     makeupSomeData(pageIndex: number, totalPages: number) {
         const ret: DataItem[] = [];
-        const onLastPage = (pageIndex === totalPages - 1);
-        const n = (onLastPage ? Math.max(1, Math.floor(PAGE_SIZE/2)) : PAGE_SIZE);
-        for (let i = 0; i < n; i++) {
-            const ordinal = pageIndex * PAGE_SIZE + i;
-            const item: DataItem = {
-                id: `${ordinal+1}`
-                ,name: `Customer ${ordinal+1}`
-                ,sex: (ordinal % 2 === 0 ? "Female" : "Male")
-            };
-            ret.push(item);
+        if (totalPages > 0) {
+            const onLastPage = (pageIndex === totalPages - 1);
+            const n = (onLastPage ? Math.max(1, Math.floor(PAGE_SIZE/2)) : PAGE_SIZE);
+            for (let i = 0; i < n; i++) {
+                const ordinal = pageIndex * PAGE_SIZE + i;
+                const item: DataItem = {
+                    id: `${ordinal+1}`
+                    ,name: `Customer ${ordinal+1}`
+                    ,sex: (ordinal % 2 === 0 ? "Female" : "Male")
+                };
+                ret.push(item);
+            }
         }
         return ret;
     }
