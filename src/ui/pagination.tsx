@@ -95,9 +95,11 @@ export class Pagination extends React.Component<Props, State> {
         return true;
     }
     static getDerivedStateFromProps(props: Props, state: State) {
+        /*
         const debugState = {viewLength: state.viewLength, totalPages: state.totalPages, pageIndex: state.pageIndex, viewLeft: state.viewLeft};
         const debugProps = {viewLength: props.viewLength, totalPages: props.totalPages, pageIndex: props.pageIndex};
-        //console.log(`getDerivedStateFromProps()\nstate (old)=${JSON.stringify(debugState)}\nprops (new)=${JSON.stringify(debugProps)}`);
+        console.log(`getDerivedStateFromProps()\nstate (old)=${JSON.stringify(debugState)}\nprops (new)=${JSON.stringify(debugProps)}`);
+        */
         const ret: State = {
             totalPages: (typeof props.totalPages === "number" ? props.totalPages : null)
             ,pageIndex: (typeof props.pageIndex === "number" ? props.pageIndex : null)

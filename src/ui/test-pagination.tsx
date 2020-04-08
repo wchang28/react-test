@@ -58,24 +58,33 @@ export class Test extends React.Component<any, State> {
             ,data: []
 		};
     }
-    getOnPageChangeHandler() {
+    get OnPageChangeHandler() {
         return (async (pageIndex: number) => {
             this.setState({pageIndex});
         }).bind(this);
     }
-    getOnModeChangeHandler() {
+    get OnModeChangeHandler() {
         return ((event: React.ChangeEvent<HTMLSelectElement>) => {
             this.setState({mode: event.target.value as pg.Mode});
         }).bind(this);
     }
-    getOnFontSizeChangeHandler() {
+    get OnFontSizeChangeHandler() {
         return ((event: React.ChangeEvent<HTMLSelectElement>) => {
             this.setState({fontSize: event.target.value as pg.FontSize});
         }).bind(this);
     }
-    getOnSelectedColorChangeHandler() {
+    get OnSelectedColorChangeHandler() {
         return ((event: React.ChangeEvent<HTMLSelectElement>) => {
             this.setState({selectedColor: event.target.value as pg.Color});
+        }).bind(this);
+    }
+    get OnTotalPagesChangeHandler() {
+        return ((event: React.ChangeEvent<HTMLInputElement>) => {
+            const totalPages = event.target.valueAsNumber;
+            this.setState({
+                totalPages
+                ,pageIndex: (totalPages > 0 ? 0 : -1)
+            });
         }).bind(this);
     }
     render() {
@@ -94,24 +103,28 @@ export class Test extends React.Component<any, State> {
                 <form className="w3-container w3-border w3-round w3-margin-bottom w3-small" style={{width:"33%"}}>
                     <p>
                         <label>Mode</label>
-                        <select className="w3-select w3-border w3-round" name="mode" value={this.state.mode} onChange={this.getOnModeChangeHandler()}>
+                        <select className="w3-select w3-border" name="mode" value={this.state.mode} onChange={this.OnModeChangeHandler}>
                             {modeOptions}
                         </select>
                     </p>
                     <p>
                         <label>Font Size</label>
-                        <select className="w3-select w3-border w3-round" name="fontSize" value={this.state.fontSize} onChange={this.getOnFontSizeChangeHandler()}>
+                        <select className="w3-select w3-border" name="fontSize" value={this.state.fontSize} onChange={this.OnFontSizeChangeHandler}>
                             {fontSizeOptions}
                         </select>
                     </p>
                     <p>
                         <label>Selected Color</label>
-                        <select className="w3-select w3-border w3-round" name="selectedColor" value={this.state.selectedColor} onChange={this.getOnSelectedColorChangeHandler()}>
+                        <select className="w3-select w3-border" name="selectedColor" value={this.state.selectedColor} onChange={this.OnSelectedColorChangeHandler}>
                             {colorOptions}
                         </select>
                     </p>
+                    <p>
+                        <label>Total Pages</label>
+                        <input className="w3-input w3-border" name="totalPages" type="number" min="0" step="1" value={this.state.totalPages} onChange={this.OnTotalPagesChangeHandler}/>
+                    </p>
                 </form>
-                <Pagination mode={this.state.mode} fontSize={this.state.fontSize} selectedColor={this.state.selectedColor} viewLength={10} totalPages={this.state.totalPages} pageIndex={this.state.pageIndex} onPageChange={this.getOnPageChangeHandler()}>
+                <Pagination mode={this.state.mode} fontSize={this.state.fontSize} selectedColor={this.state.selectedColor} viewLength={10} totalPages={this.state.totalPages} pageIndex={this.state.pageIndex} onPageChange={this.OnPageChangeHandler}>
                     <div className="w3-container w3-border" style={{marginTop: "8px", marginBottom: "8px"}}>
                         <p>Showing content for page {this.state.pageIndex+1}</p>
                     </div>
