@@ -142,31 +142,32 @@ export class Test extends React.Component<any, State> {
                 </tr>
             );         
         });
+        const smallTopBottomPadding = {paddingTop: "2px", paddingBottom: "2px"};
         return (
             <div>
                 <p><b>Pagination Test</b></p>
                 <form className="w3-container w3-border w3-round w3-margin-bottom w3-small" style={{width:"33%"}}>
                     <p>
                         <label>Mode</label>
-                        <select className="w3-select w3-border" name="mode" value={this.state.mode} onChange={this.OnModeChangeHandler}>
+                        <select className="w3-select w3-border" name="mode" value={this.state.mode} onChange={this.OnModeChangeHandler} style={smallTopBottomPadding}>
                             {modeOptions}
                         </select>
                     </p>
                     <p>
                         <label>Font Size</label>
-                        <select className="w3-select w3-border" name="fontSize" value={this.state.fontSize} onChange={this.OnFontSizeChangeHandler}>
+                        <select className="w3-select w3-border" name="fontSize" value={this.state.fontSize} onChange={this.OnFontSizeChangeHandler} style={smallTopBottomPadding}>
                             {fontSizeOptions}
                         </select>
                     </p>
                     <p>
                         <label>Selected Color</label>
-                        <select className="w3-select w3-border" name="selectedColor" value={this.state.selectedColor} onChange={this.OnSelectedColorChangeHandler}>
+                        <select className="w3-select w3-border" name="selectedColor" value={this.state.selectedColor} onChange={this.OnSelectedColorChangeHandler} style={smallTopBottomPadding}>
                             {colorOptions}
                         </select>
                     </p>
                     <p>
                         <label>Total Pages</label>
-                        <input className="w3-input w3-border" name="totalPages" type="number" min="0" step="1" value={this.state.totalPages} onChange={this.OnTotalPagesChangeHandler}/>
+                        <input className="w3-input w3-border" name="totalPages" type="number" min="0" step="1" value={this.state.totalPages} onChange={this.OnTotalPagesChangeHandler} style={smallTopBottomPadding}/>
                     </p>
                 </form>
                 <p>page {this.state.pageIndex+1} has {this.state.pageData.length} item(s)</p>
