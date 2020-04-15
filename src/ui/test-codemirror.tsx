@@ -4,6 +4,7 @@ import "codemirror/mode/sql/sql";
 import {Editor, Position} from "codemirror";
 
 const DEFAULT_CODE = "select * from user;\nselect * from organization;"
+type Theme = "default" | "material";
 
 interface State {
 	code?: string;
@@ -12,6 +13,7 @@ interface State {
 	selectTo?: Position;
 	lineCount?: number;
 	selectionLength?: number;
+	themeSelected?: Theme;
 }
 
 export class Test extends React.Component<any, State> {
@@ -25,6 +27,7 @@ export class Test extends React.Component<any, State> {
 			,selectTo: {ch: 0, line: 0}
 			,lineCount: null
 			,selectionLength: null
+			,themeSelected: "material"
 		};
 	}
 	getLinesCumChars(code: string) {
@@ -67,6 +70,11 @@ export class Test extends React.Component<any, State> {
 				code = insertedCode;
 			}
 			this.setState({code});
+		}).bind(this);
+	}
+	get OnThemeSelectChange() {
+		return ((event: React.ChangeEvent<HTMLSelectElement>) => {
+			this.setState({themeSelected: event.target.value as any});
 		}).bind(this);
 	}
 	get OnBeforeChangeHandler() {
@@ -116,15 +124,29 @@ export class Test extends React.Component<any, State> {
 	}
 	render() {
 		const selectionLines = this.getSelectionLines(this.state.selectionLength, this.state.selectFrom, this.state.selectTo);
+		const themes: Theme[] = ["default", "material"];
+		const themeOptions = themes.map((theme, index) => {
+			return (<option key={index} value={theme}>{theme}</option>);
+		});
 		return (
 		<div>
 			<div className="w3-bar w3-small">
-				<div className="w3-bar-item" style={{padding: "4px"}}>
+				<div className="w3-bar-item" style={{padding: "4px 0px"}}>
 					<button className="w3-button w3-border" style={{padding: "2px 4px"}} onClick={this.OnResetCodeClickHandler}>Reset Code</button>
-					<button className="w3-button w3-border" style={{padding: "2px 4px", marginLeft: "4px"}} onClick={this.OnIsertCodeClickHandler}>Insert Code</button>
+				</div>
+				<div className="w3-bar-item" style={{padding: "4px 0px", marginLeft: "4px"}}>
+					<button className="w3-button w3-border" style={{padding: "2px 4px"}} onClick={this.OnIsertCodeClickHandler}>Insert Code</button>
+				</div>
+				<div className="w3-bar-item" style={{padding: "4px 0px", marginLeft: "4px", marginTop: "2px"}}>
+					<label>Theme:</label>
+				</div>
+				<div className="w3-bar-item" style={{padding: "4px 0px"}}>
+					<select className="w3-select w3-border" style={{padding: "2px 0px"}} value={this.state.themeSelected} onChange={this.OnThemeSelectChange}>
+						{themeOptions}
+					</select>
 				</div>
 			</div>
-			<div className="w3-tiny">
+			<div className="w3-tiny w3-border">
 				<CodeMirror
 					value={this.state.code}
 					cursor={this.state.cursor}
@@ -134,7 +156,7 @@ export class Test extends React.Component<any, State> {
 					editorDidMount={this.OnEditorDidMountHandler}
 					options={{
 						mode: "sql"
-						,theme: 'material'
+						,theme: this.state.themeSelected
 						,lineNumbers: true
 					}}
 				/>
