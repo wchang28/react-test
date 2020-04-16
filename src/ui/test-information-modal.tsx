@@ -23,17 +23,20 @@ export class Test extends React.Component<any, State> {
     }
     render() {
         const modal = (this.state.showModel ? 
-            <InformationModal
-                caption="This is some info"
-                closeText="Close"
-                onClose={this.OnModalCloseHandler}
-                hint="{some id}"
-                widthPx={300}
-            >
-                <div>
-                    Howdy
-                </div>
-            </InformationModal>
+            <div className="w3-tiny">
+                <InformationModal
+                    caption="This is some info"
+                    captionColor="teal"
+                    closeText="Close"
+                    onClose={this.OnModalCloseHandler}
+                    hint="{some id}"
+                    widthPx={300}
+                >
+                    <div>
+                        Howdy
+                    </div>
+                </InformationModal>
+            </div>
             : null);
         return (
             <div>

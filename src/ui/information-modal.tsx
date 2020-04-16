@@ -1,10 +1,45 @@
 import * as React from 'react';
 
+export type Color
+= "amber"
+| "aqua"
+| "black"
+| "blue"
+| "blue-grey"
+| "brown"
+| "cyan"
+| "dark-grey"
+| "deep-orange"
+| "deep-purple"
+| "green"
+| "grey"
+| "indigo"
+| "khaki"
+| "light-blue"
+| "light-green"
+| "light-grey"
+| "lime"
+| "orange"
+| "pale-blue"
+| "pale-green"
+| "pale-red"
+| "pale-yellow"
+| "pink"
+| "purple"
+| "red"
+| "sand"
+| "teal"
+| "white"
+| "yellow"
+;
+
 const DEFAULT_CAPTION = "Information";
 const DEFAULT_CLOSE_TEXT = "OK";
+const DEFAULT_CAPTION_COLOR: Color = "blue";
 
 export interface Props {
     caption?: string;
+    captionColor?: Color;
     closeText?: string;
     hint?: any;
     widthPx?: number;
@@ -13,6 +48,7 @@ export interface Props {
 
 export interface State {
     caption?: string;
+    captionColor?: Color;
     closeText?: string;
     hint?: any;
     widthPx?: number;
@@ -32,6 +68,7 @@ export class InformationModal extends React.Component<Props, State> {
         this._documentKeyUpListner = this.DocumentKeyUpListner;
         this.state = {
             caption: (this.props.caption ? this.props.caption : DEFAULT_CAPTION)
+            ,captionColor: (this.props.captionColor ? this.props.captionColor : DEFAULT_CAPTION_COLOR)
             ,closeText: (this.props.closeText ? this.props.closeText : DEFAULT_CLOSE_TEXT)
             ,hint: (this.props.hint ? this.props.hint : null)
             ,widthPx: (typeof this.props.widthPx === "number" ? this.props.widthPx : null)
@@ -40,6 +77,7 @@ export class InformationModal extends React.Component<Props, State> {
     static getDerivedStateFromProps(props: Props, state: State) {
         return {
             caption: (props.caption ? props.caption : DEFAULT_CAPTION)
+            ,captionColor: (props.captionColor ? props.captionColor : DEFAULT_CAPTION_COLOR)
             ,closeText: (props.closeText ? props.closeText: DEFAULT_CLOSE_TEXT)
             ,hint: (props.hint ? props.hint : null)
             ,widthPx: (typeof props.widthPx === "number" ? props.widthPx : null)
@@ -55,7 +93,7 @@ export class InformationModal extends React.Component<Props, State> {
             <div className="w3-modal" style={{display:"block"}}>
                 <div className="w3-modal-content w3-card-4" style={typeof this.state.widthPx === "number" ? {width: `${this.state.widthPx}px`} : null}>
                     <div className="w3-container" style={{padding: "4px"}}>
-                        <div className="w3-bar w3-blue">
+                        <div className={`w3-bar w3-${this.state.captionColor}`}>
                             <div className="w3-bar-item" style={{padding: "2px"}}>{this.state.caption}</div>
                             <div className="w3-bar-item w3-right" style={{padding: "0px", marginRight: "2px"}}>
                                 <button className="w3-button w3-small" style={{padding: "0px 6px"}} onClick={() => this.onClose()}>x</button>
