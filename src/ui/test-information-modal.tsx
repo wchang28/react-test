@@ -10,7 +10,7 @@ export class Test extends React.Component<any, State> {
         super(props);
         this.state = {
             showModel: false
-        }
+        };
     }
     onShowModal() {
         this.setState({showModel: true});
