@@ -127,3 +127,29 @@ export class YesNoConfirm extends React.Component<Props, State> {
         document.removeEventListener("keyup", this._documentKeyUpListner);
     }
 }
+
+export class Confirm {
+    constructor (private parentComponent: React.Component, private stateField: string) {
+    }
+    get element() {
+        const ui = this.parentComponent.state[this.stateField];
+        return (ui ? ui : null) as JSX.Element;
+    }
+    prompt(message: string, widthPx?: number, caption?: string, captionColor?: Color) {
+        return new Promise((resolve: (value: boolean) => void, reject: (err: any) => void) => {
+            const confirmBox = (
+                <YesNoConfirm
+                    caption={caption}
+                    captionColor={captionColor}
+                    message={message}
+                    onClose={(confirm) => {
+                        this.parentComponent.setState({[this.stateField]: null})
+                        resolve(confirm);
+                    }}
+                    widthPx={widthPx}
+                />
+            );
+            this.parentComponent.setState({[this.stateField]: confirmBox});
+        });
+    }
+}

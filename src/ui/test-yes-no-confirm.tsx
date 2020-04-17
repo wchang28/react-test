@@ -22,7 +22,7 @@ export class Test extends React.Component<any, State> {
         }).bind(this);
     }
     render() {
-        const modal = (this.state.showConfirm ? 
+        const confirmBox = (this.state.showConfirm ? 
             <div className="w3-tiny">
                 <YesNoConfirm
                     caption={"Save ?"}
@@ -39,7 +39,7 @@ export class Test extends React.Component<any, State> {
                 <div className="w3-container" style={{padding: "8px 0px"}}>
                     <button className="w3-button w3-border w3-round" onClick={() => this.onShowConfirm()}>Show Confirm</button>
                 </div>
-                {modal}
+                {confirmBox}
             </div>
         );
     }
