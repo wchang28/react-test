@@ -8,6 +8,7 @@ import {Test as TestCodeMirrorEditor} from "./test-codemirror";
 import {Test as TestDatePicker} from "./test-date-picker";
 import {Test as TestPagination} from "./test-pagination";
 import {Test as TestSplitterView} from "./test-splitter-view";
+import {Test as TestButtonPadding} from "./test-button-padding";
 
 type TestComponentConstructor = new (props?: any) => any;
 
@@ -27,6 +28,7 @@ const testConfig: TestItem[] = [
 	,{id: "date-picker", name: "Date Picker", componentClass: TestDatePicker}
 	,{id: "pagination", name: "Pagination", componentClass: TestPagination}
 	,{id: "splitter-view", name: "Splitter View", componentClass: TestSplitterView}
+	,{id: "button-padding", name: "Button Padding", componentClass: TestButtonPadding}
 	// TODO: add more test cases here
 ];
 

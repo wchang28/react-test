@@ -163,11 +163,16 @@ export class Pagination extends React.Component<Props, State> {
             }
         }).bind(this);
     }
+    get PageButtonPadding() {
+        const em = 0.2;
+        const ratio = 2.0;
+        return `${em}em ${em * ratio}em`;
+    }
     get PageButtonStyle() {
-        return {padding: "8px 12px"};
+        return {padding: this.PageButtonPadding};
     }
     get DotDotDotButtonStyle() {
-        return {padding: "8px 12px", opacity: "1", cursor: "auto"};
+        return {padding: this.PageButtonPadding, opacity: "1", cursor: "auto"};
     }
     getPageButtonClassName(selected: boolean) {
         return "w3-bar-item w3-button" + (selected ? ` w3-${this.state.selectedColor}`: "");
