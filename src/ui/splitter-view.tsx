@@ -18,7 +18,7 @@ export interface State {
     firstPaneSize?: string;
 }
 
-export class Splitter extends React.Component<Props, State> {
+export class SplitterView extends React.Component<Props, State> {
     private refFirstPane: React.RefObject<HTMLDivElement>;
     private docMouseMoveListener: (event: MouseEvent) => void;
     private docMouseUpListener: (event: MouseEvent) => void;
