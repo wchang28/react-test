@@ -3,19 +3,19 @@ import * as React from 'react';
 export type Direction = "vertical" | "horizontal";
 
 const DEFAULT_DIRECTION: Direction = "vertical";
-const DEFAULT_FIRST_PANE_SIZE_PX: number = 200;
+const DEFAULT_FIRST_PANE_SIZE: string = "30%";
 const DEFAULT_SPLITTER_SIZE_PX: number = 3;
 
 export interface Props {
     direction: Direction;
     splitterSizePx?: number;
-    defaultFirstPaneSizePx?: number;
+    defaultFirstPaneSize?: string;
 }
 
 export interface State {
     direction?: Direction;
     splitterSizePx?: number;
-    firstPaneSizePx?: number;
+    firstPaneSize?: string;
 }
 
 export class Splitter extends React.Component<Props, State> {
@@ -30,7 +30,7 @@ export class Splitter extends React.Component<Props, State> {
         this.state = {
             direction: null
             ,splitterSizePx: null
-            ,firstPaneSizePx: (typeof this.props.defaultFirstPaneSizePx === "number" && this.props.defaultFirstPaneSizePx > 0 ? this.props.defaultFirstPaneSizePx : DEFAULT_FIRST_PANE_SIZE_PX)
+            ,firstPaneSize: (this.props.defaultFirstPaneSize ? this.props.defaultFirstPaneSize : DEFAULT_FIRST_PANE_SIZE)
         };
     }
     static getDerivedStateFromProps(nextProps: Props, prevState: State) {
@@ -53,7 +53,7 @@ export class Splitter extends React.Component<Props, State> {
             const offsetY = y - rect.y;
             const offset = (this.Direction === "vertical" ? offsetX : offsetY);
             const firstPaneSizePx = offset + Math.floor(this.SplitterSizePx/2);
-            this.setState({firstPaneSizePx});
+            this.setState({firstPaneSize: `${firstPaneSizePx}px`});
         }).bind(this);
     }
     get DocumentMouseUpListener() {
@@ -76,7 +76,7 @@ export class Splitter extends React.Component<Props, State> {
         return (typeof this.state.splitterSizePx === "number" && this.state.splitterSizePx > 0 ? this.state.splitterSizePx : DEFAULT_SPLITTER_SIZE_PX);
     }
     render() {
-        const firstPaneSizePx = this.state.firstPaneSizePx;
+        const firstPaneSize = this.state.firstPaneSize;
         const splitterSizePx = this.SplitterSizePx;
         const direction = this.Direction;
         // styleFirstPane
@@ -88,10 +88,10 @@ export class Splitter extends React.Component<Props, State> {
         };
         if (direction === "vertical") {
             styleFirstPane.bottom = "0px";
-            styleFirstPane.width = `${firstPaneSizePx}px`;
+            styleFirstPane.width = firstPaneSize;
         } else {    // horizontal
             styleFirstPane.right = "0px";
-            styleFirstPane.height = `${firstPaneSizePx}px`;
+            styleFirstPane.height = firstPaneSize;
         }
         /////////////////////////////////////////////////////////////////////////////////////
         // styleSecondPane
@@ -104,10 +104,10 @@ export class Splitter extends React.Component<Props, State> {
         };
         if (direction === "vertical") {
             styleSecondPane.top = "0px";
-            styleSecondPane.left = `${firstPaneSizePx}px`;
+            styleSecondPane.left = firstPaneSize;
         } else {    // horizontal
             styleSecondPane.left = "0px";
-            styleSecondPane.top = `${firstPaneSizePx}px`;
+            styleSecondPane.top = firstPaneSize;
         }
         /////////////////////////////////////////////////////////////////////////////////////
         // styleFirstPaneInner

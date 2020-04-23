@@ -25,11 +25,11 @@ export class Test extends React.Component<any, State> {
                     <input className="w3-input w3-border" type="number" style={{padding:"4px", width: "20%"}} value={this.state.splitterWidthPx} onChange={this.OnSplitterSizePxChangeHandler}/>                        
                 </div>
                 <div className="w3-container" style={{padding: "0px", marginTop: "8px", marginBottom: "8px", height: "600px"}}>
-                    <Splitter direction="vertical" splitterSizePx={this.state.splitterWidthPx} defaultFirstPaneSizePx={150}>
+                    <Splitter direction="vertical" splitterSizePx={this.state.splitterWidthPx} defaultFirstPaneSize="150px">
                         <div className="w3-khaki" style={{height: "2000px", width: "100%"}}>
                             First Pane
                         </div>
-                        <Splitter direction="horizontal" defaultFirstPaneSizePx={200}>
+                        <Splitter direction="horizontal" defaultFirstPaneSize="75%">
                             <div className="w3-pale-green" style={{height: "1500px", width: "1300px"}}>
                                 Second Pane
                             </div>
