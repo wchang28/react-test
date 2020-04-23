@@ -14,14 +14,14 @@ export class Test extends React.Component<any, any> {
                 <div className="w3-container" style={{padding: "8px 0px", height: "600px"}}>
                     <Splitter direction="vertical" splitterSizePx={5} firstPaneSizePx={150}>
                         <div className="w3-khaki" style={{height: "2000px", width: "500px"}}>
-                            First Pane :-)
+                            First Pane
                         </div>
                         <Splitter direction="horizontal" splitterSizePx={3} firstPaneSizePx={200}>
                             <div className="w3-pale-green" style={{height: "1500px", width: "1300px"}}>
-                                Second Pane :-)
+                                Second Pane
                             </div>
                             <div className="w3-light-blue" style={{height: "100%", width: "100%"}}>
-                                Thire Pane :-)
+                                Third Pane
                             </div>
                         </Splitter>
                     </Splitter>
