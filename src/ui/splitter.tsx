@@ -97,8 +97,7 @@ export class Splitter extends React.Component<Props, State> {
         // styleSecondPane
         /////////////////////////////////////////////////////////////////////////////////////
         const styleSecondPane: React.CSSProperties = {
-            padding: "0px"
-            ,overflow: "auto"
+            overflow: "auto"
             ,position: "absolute"
             ,bottom: "0px"
             ,right: "0px"
@@ -114,8 +113,7 @@ export class Splitter extends React.Component<Props, State> {
         // styleFirstPaneInner
         /////////////////////////////////////////////////////////////////////////////////////
         const styleFirstPaneInner: React.CSSProperties = {
-            padding: "0px"
-            ,overflow: "auto"
+            overflow: "auto"
             ,position:"absolute"
             ,left:"0px"
             ,top:"0px"
@@ -147,16 +145,16 @@ export class Splitter extends React.Component<Props, State> {
         const firstPaneContent = this.props.children[0];
         const secondPaneContent = this.props.children[1];
         return (
-            <div className="w3-container" style={{padding:"0px", position: "relative", width: "100%", height:"100%"}}>
+            <div style={{position: "relative", width: "100%", height:"100%"}}>
                 <div ref={this.refFirstPane} style={styleFirstPane}>
                     <div style={{position: "relative", width: "100%", height:"100%"}}>
-                        <div className="w3-container" style={styleFirstPaneInner}>
+                        <div style={styleFirstPaneInner}>
                             {firstPaneContent}
                         </div>
                         <div style={styleDragbar} onMouseDown={this.OnDragbarMouseDownHandler}></div>
                     </div>
                 </div>
-                <div className="w3-container" style={styleSecondPane}>
+                <div style={styleSecondPane}>
                     {secondPaneContent}
                 </div>                
             </div>
