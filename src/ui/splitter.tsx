@@ -132,7 +132,7 @@ export class Splitter extends React.Component<Props, State> {
             styleDragbar.height = `${splitterSizePx}px`;
         }
         /////////////////////////////////////////////////////////////////////////////////////
-
+        /*
         const firstPaneContent = (
             <div className="w3-khaki" style={{height: "2000px", width: "500px"}}>
                 First Pane
@@ -143,6 +143,9 @@ export class Splitter extends React.Component<Props, State> {
                 Second Pane
             </div>
         );
+        */
+        const firstPaneContent = this.props.children[0];
+        const secondPaneContent = this.props.children[1];
         return (
             <div className="w3-container" style={{padding:"0px", position: "relative", width: "100%", height:"100%"}}>
                 <div ref={this.refFirstPane} style={styleFirstPane}>
@@ -161,76 +164,3 @@ export class Splitter extends React.Component<Props, State> {
         );
     }
 }
-
-/*
-export class HorizontalSplitter extends React.Component<Props, State> {
-    private refFirstPane: React.RefObject<HTMLDivElement>;
-    private docMouseMoveListener: (event: MouseEvent) => void;
-    private docMouseUpListener: (event: MouseEvent) => void;
-    constructor(props) {
-        super(props);
-        this.refFirstPane = React.createRef<HTMLDivElement>();
-        this.docMouseMoveListener = this.DocumentMouseMoveListener;
-        this.docMouseUpListener = this.DocumentMouseUpListener;
-        this.state = {
-            firstPaneSizePx: 200
-        };
-    }
-    get DocumentMouseMoveListener() {
-        return ((event: MouseEvent) => {
-            const firstPaneDiv = this.refFirstPane.current;
-            const rect = firstPaneDiv.getBoundingClientRect();
-            const x = event.clientX;
-            const y = event.clientY;
-			const offsetX = x - rect.x;
-            const offsetY = y - rect.y;
-            const offset = offsetY;
-            this.setState({firstPaneSizePx: offset + 2});
-        }).bind(this);
-    }
-    get DocumentMouseUpListener() {
-        return ((event: MouseEvent) => {
-            document.removeEventListener("mousemove", this.docMouseMoveListener);
-            document.removeEventListener("mouseup", this.docMouseUpListener);
-        }).bind(this);
-    }
-    get OnDragbarMouseDownHandler() {
-        return ((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-            e.preventDefault();
-            document.addEventListener("mousemove", this.docMouseMoveListener);
-            document.addEventListener("mouseup", this.docMouseUpListener);
-        }).bind(this);
-    }
-    render() {
-        const firstPaneSizePx = this.state.firstPaneSizePx;
-        const splitterSizePx = 3;
-        const firstPaneContent = (
-            <div className="w3-khaki" style={{height: "2000px", width: "500px"}}>
-                First Pane
-            </div>
-        );
-        const secondPaneContent = (
-            <div className="w3-pale-red" style={{height: "100%", width: "100%"}}>
-                Second Pane
-            </div>
-        );
-        return (
-            <div className="w3-container" style={{padding:"0px", position: "relative", width: "100%", height:"100%"}}>
-
-                <div ref={this.refFirstPane} style={{position: "absolute", left: "0px", top: "0px", right: "0px", height: `${firstPaneSizePx}px`}}>
-                    <div style={{position: "relative", width: "100%", height:"100%"}}>
-                        <div className="w3-container" style={{padding:"0px", position:"absolute", left:"0px", top:"0px", bottom: `${splitterSizePx}px`, right: "0px", overflow: "auto"}}>
-                            {firstPaneContent}
-                        </div>
-                        <div className="w3-grey" style={{position: "absolute", left: "0px", bottom: "0px", right:"0px", height: `${splitterSizePx}px`, cursor: "row-resize"}} onMouseDown={this.OnDragbarMouseDownHandler}></div>
-                    </div>
-                </div>
-
-                <div className="w3-container" style={{padding:"0px", position: "absolute", left: "0px", top: `${firstPaneSizePx}px`, right: "0px", bottom: "0px", overflow: "auto"}}>
-                    {secondPaneContent}
-			    </div>                
-            </div>
-        );
-    }
-}
-*/
