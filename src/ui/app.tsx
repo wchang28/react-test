@@ -7,6 +7,7 @@ import {Test as TestTestNoConfirmPromise} from "./test-yes-no-confirm-promise";
 import {Test as TestCodeMirrorEditor} from "./test-codemirror";
 import {Test as TestDatePicker} from "./test-date-picker";
 import {Test as TestPagination} from "./test-pagination";
+import {Test as TestSplitter} from "./test-splitter";
 
 type TestComponentConstructor = new (props?: any) => any;
 
@@ -25,6 +26,7 @@ const testConfig: TestItem[] = [
 	,{id: "codemirror", name: "CodeMirror Editor", componentClass: TestCodeMirrorEditor}
 	,{id: "date-picker", name: "Date Picker", componentClass: TestDatePicker}
 	,{id: "pagination", name: "Pagination", componentClass: TestPagination}
+	,{id: "splitter", name: "Splitter", componentClass: TestSplitter}
 	// TODO: add more test cases here
 ];
 
