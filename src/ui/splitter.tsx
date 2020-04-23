@@ -147,7 +147,7 @@ export class Splitter extends React.Component<Props, State> {
 
                 <div className="w3-container" style={styleSecondPane}>
                     {secondPaneContent}
-			    </div>                
+                </div>                
             </div>
         );
     }
