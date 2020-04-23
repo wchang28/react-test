@@ -132,18 +132,6 @@ export class Splitter extends React.Component<Props, State> {
             styleDragbar.height = `${splitterSizePx}px`;
         }
         /////////////////////////////////////////////////////////////////////////////////////
-        /*
-        const firstPaneContent = (
-            <div className="w3-khaki" style={{height: "2000px", width: "500px"}}>
-                First Pane
-            </div>
-        );
-        const secondPaneContent = (
-            <div className="w3-pale-red" style={{height: "100%", width: "100%"}}>
-                Second Pane
-            </div>
-        );
-        */
         const firstPaneContent = this.props.children[0];
         const secondPaneContent = this.props.children[1];
         return (
@@ -153,7 +141,7 @@ export class Splitter extends React.Component<Props, State> {
                         <div className="w3-container" style={styleFirstPaneInner}>
                             {firstPaneContent}
                         </div>
-                        <div className="w3-grey" style={styleDragbar} onMouseDown={this.OnDragbarMouseDownHandler}></div>
+                        <div style={styleDragbar} onMouseDown={this.OnDragbarMouseDownHandler}></div>
                     </div>
                 </div>
 
