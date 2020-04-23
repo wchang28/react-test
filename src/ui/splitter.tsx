@@ -39,7 +39,6 @@ export class Splitter extends React.Component<Props, State> {
             const offsetY = y - rect.y;
             const offset = (this.Direction === "vertical" ? offsetX : offsetY);
             const firstPaneSizePx = offset + Math.floor(this.SplitterSizePx/2);
-            //console.log(`\nI am here 3, offset=${offset}, firstPaneSizePx=${firstPaneSizePx}`);
             this.setState({firstPaneSizePx});
         }).bind(this);
     }
@@ -66,7 +65,6 @@ export class Splitter extends React.Component<Props, State> {
         const firstPaneSizePx = this.state.firstPaneSizePx;
         const splitterSizePx = this.SplitterSizePx;
         const direction = this.Direction;
-        //console.log(`\nrender(firstPaneSizePx=${firstPaneSizePx}, splitterSizePx=${splitterSizePx}, direction=${direction})`);
         // styleFirstPane
         /////////////////////////////////////////////////////////////////////////////////////
         const styleFirstPane: React.CSSProperties = {
@@ -144,7 +142,6 @@ export class Splitter extends React.Component<Props, State> {
                         <div style={styleDragbar} onMouseDown={this.OnDragbarMouseDownHandler}></div>
                     </div>
                 </div>
-
                 <div className="w3-container" style={styleSecondPane}>
                     {secondPaneContent}
                 </div>                
