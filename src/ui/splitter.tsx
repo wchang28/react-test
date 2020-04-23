@@ -7,12 +7,14 @@ const DEFAULT_FIRST_PANE_SIZE_PX: number = 200;
 const DEFAULT_SPLITTER_SIZE_PX: number = 3;
 
 export interface Props {
-    direction?: Direction;
-    firstPaneSizePx?: number;
+    direction: Direction;
     splitterSizePx?: number;
+    defaultFirstPaneSizePx?: number;
 }
 
 export interface State {
+    direction?: Direction;
+    splitterSizePx?: number;
     firstPaneSizePx?: number;
 }
 
@@ -26,8 +28,20 @@ export class Splitter extends React.Component<Props, State> {
         this.docMouseMoveListener = this.DocumentMouseMoveListener;
         this.docMouseUpListener = this.DocumentMouseUpListener;
         this.state = {
-            firstPaneSizePx: (typeof this.props.firstPaneSizePx === "number" && this.props.firstPaneSizePx > 0 ? this.props.firstPaneSizePx : DEFAULT_FIRST_PANE_SIZE_PX)
+            direction: null
+            ,splitterSizePx: null
+            ,firstPaneSizePx: (typeof this.props.defaultFirstPaneSizePx === "number" && this.props.defaultFirstPaneSizePx > 0 ? this.props.defaultFirstPaneSizePx : DEFAULT_FIRST_PANE_SIZE_PX)
         };
+    }
+    static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+        const ret: State = {};
+        if (nextProps.direction !== prevState.direction) {
+            ret.direction = nextProps.direction;
+        }
+        if (nextProps.splitterSizePx != undefined && nextProps.splitterSizePx !== prevState.splitterSizePx) {
+            ret.splitterSizePx = nextProps.splitterSizePx;
+        }
+        return (JSON.stringify(ret) === '{}' ? null : ret);
     }
     get DocumentMouseMoveListener() {
         return ((event: MouseEvent) => {
@@ -56,10 +70,10 @@ export class Splitter extends React.Component<Props, State> {
         }).bind(this);
     }
     get Direction() {
-        return (this.props.direction ? this.props.direction : DEFAULT_DIRECTION);
+        return (this.state.direction ? this.state.direction : DEFAULT_DIRECTION);
     }
     get SplitterSizePx() {
-        return (typeof this.props.splitterSizePx === "number" && this.props.splitterSizePx > 0 ? this.props.splitterSizePx : DEFAULT_SPLITTER_SIZE_PX);
+        return (typeof this.state.splitterSizePx === "number" && this.state.splitterSizePx > 0 ? this.state.splitterSizePx : DEFAULT_SPLITTER_SIZE_PX);
     }
     render() {
         const firstPaneSizePx = this.state.firstPaneSizePx;
