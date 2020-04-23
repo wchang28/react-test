@@ -35,7 +35,7 @@ export class Splitter extends React.Component<Props, State> {
             const rect = firstPaneDiv.getBoundingClientRect();
             const x = event.clientX;
             const y = event.clientY;
-			const offsetX = x - rect.x;
+            const offsetX = x - rect.x;
             const offsetY = y - rect.y;
             const offset = (this.Direction === "vertical" ? offsetX : offsetY);
             const firstPaneSizePx = offset + Math.floor(this.SplitterSizePx/2);
