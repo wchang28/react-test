@@ -26,7 +26,7 @@ export class Test extends React.Component<any, State> {
                 </div>
                 <div className="w3-container" style={{padding: "0px", marginTop: "8px", marginBottom: "8px", height: "600px"}}>
                     <Splitter direction="vertical" splitterSizePx={this.state.splitterWidthPx} defaultFirstPaneSizePx={150}>
-                        <div className="w3-khaki" style={{height: "2000px", width: "500px"}}>
+                        <div className="w3-khaki" style={{height: "2000px", width: "100%"}}>
                             First Pane
                         </div>
                         <Splitter direction="horizontal" defaultFirstPaneSizePx={200}>
