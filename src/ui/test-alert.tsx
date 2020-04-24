@@ -8,6 +8,7 @@ const allVerticalLocations: VerticalLocation[] = ["top" , "middle" , "bottom"];
 interface State {
     message?: string;
     importance?: Importance;
+    strong?: boolean;
     horizontalLocation?: HorzontalLocation;
     verticalLocation?: VerticalLocation;
 }
@@ -18,6 +19,7 @@ export class Test extends React.Component<any, State> {
         this.state = {
             message: null
             ,importance: "info"
+            ,strong: true
             ,horizontalLocation: "center"
             ,verticalLocation: "middle"
         };
@@ -25,6 +27,11 @@ export class Test extends React.Component<any, State> {
     get OnImportanceChangeHandler() {
         return ((event: React.ChangeEvent<HTMLSelectElement>) => {
             this.setState({importance: event.target.value as Importance});
+        }).bind(this);
+    }
+    get OnStrongChangeHandler() {
+        return ((event: React.ChangeEvent<HTMLInputElement>) => {
+            this.setState({strong: event.target.checked});
         }).bind(this);
     }
     get OnHorizontalLocationChangeHandler() {
@@ -44,7 +51,7 @@ export class Test extends React.Component<any, State> {
                 <Alert
                     message={this.state.message}
                     importance={this.state.importance}
-                    strong={true}
+                    strong={this.state.strong}
                     horizontalLocation={this.state.horizontalLocation}
                     verticalLocation={this.state.verticalLocation}
                     onClose={() => this.setState({message: null})}
@@ -68,6 +75,9 @@ export class Test extends React.Component<any, State> {
                         <select className="w3-select w3-border" name="importance" value={this.state.importance} onChange={this.OnImportanceChangeHandler} style={{padding: "4px", width: "15%"}}>
                             {importanceOptions}
                         </select>
+                    </p>
+                    <p>
+                        <input className="w3-check" type="checkbox" checked={this.state.strong} onChange={this.OnStrongChangeHandler}/><label>Strong</label>                        
                     </p>
                     <p>
                         <label>Horizontal Location</label>
