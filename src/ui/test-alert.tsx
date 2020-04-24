@@ -1,9 +1,12 @@
 import * as React from 'react';
 import {Alert, Importance, HorzontalLocation, VerticalLocation} from "./alert";
 
+export type FontSize = "tiny" | "small" | "medium" | "large" | "xlarge" | "xxlarge" | "xxxlarge" | "jumbo";
+
 const allImportances: Importance[] = ["error" , "success" , "warning" , "info"];
 const allHorizontalLocations: HorzontalLocation[] = ["left" , "center" , "right"];
 const allVerticalLocations: VerticalLocation[] = ["top" , "middle" , "bottom"];
+const allFontSizes: FontSize[] = ["tiny","small","medium","large","xlarge","xxlarge","xxxlarge","jumbo"];
 
 interface State {
     message?: string;
@@ -11,6 +14,7 @@ interface State {
     strong?: boolean;
     horizontalLocation?: HorzontalLocation;
     verticalLocation?: VerticalLocation;
+    fontSize?: FontSize;
 }
 
 export class Test extends React.Component<any, State> {
@@ -22,6 +26,7 @@ export class Test extends React.Component<any, State> {
             ,strong: true
             ,horizontalLocation: "center"
             ,verticalLocation: "middle"
+            ,fontSize: "small"
         };
     }
     get OnImportanceChangeHandler() {
@@ -44,10 +49,15 @@ export class Test extends React.Component<any, State> {
             this.setState({verticalLocation: event.target.value as VerticalLocation});
         }).bind(this);
     }
+    get OnFontSizeChangeHandler() {
+        return ((event: React.ChangeEvent<HTMLSelectElement>) => {
+            this.setState({fontSize: event.target.value as FontSize});
+        }).bind(this);
+    }
     render() {
         const showMessage = (this.state.message ? true : false);
         const alert = (showMessage ? 
-            <div className="w3-small">
+            <div className={`w3-${this.state.fontSize}`}>
                 <Alert
                     message={this.state.message}
                     importance={this.state.importance}
@@ -65,6 +75,9 @@ export class Test extends React.Component<any, State> {
             return (<option key={index} value={item}>{item}</option>);
         });
         const verticalLocationOptions = allVerticalLocations.map((item, index) => {
+            return (<option key={index} value={item}>{item}</option>);
+        });
+        const fontSizeOptions = allFontSizes.map((item, index) => {
             return (<option key={index} value={item}>{item}</option>);
         });
         return (
@@ -89,6 +102,12 @@ export class Test extends React.Component<any, State> {
                         <label>Vertical Location</label>
                         <select className="w3-select w3-border" name="verticalLocation" value={this.state.verticalLocation} onChange={this.OnVerticalLocationChangeHandler} style={{padding: "4px", width: "15%"}}>
                             {verticalLocationOptions}
+                        </select>
+                    </p>
+                    <p>
+                        <label>Font Size</label>
+                        <select className="w3-select w3-border" name="fontSize" value={this.state.fontSize} onChange={this.OnFontSizeChangeHandler} style={{padding: "4px", width: "15%"}}>
+                            {fontSizeOptions}
                         </select>
                     </p>
                 </div>
