@@ -111,7 +111,7 @@ export class Test extends React.Component<any, State> {
                         </select>
                     </p>
                 </div>
-                <div className="w3-container" style={{padding: "0px", marginTop: "8px", marginBottom: "8px", height: "600px"}}>
+                <div className="w3-container" style={{padding: "0px", marginTop: "8px", marginBottom: "8px"}}>
                     <button className="w3-button w3-border" onClick={() => this.setState({message: "This is a message for the Alert box"})}>Show Alert</button>
                 </div>
                 {alert}
