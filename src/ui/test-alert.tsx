@@ -8,6 +8,8 @@ const allHorizontalLocations: HorzontalLocation[] = ["left" , "center" , "right"
 const allVerticalLocations: VerticalLocation[] = ["top" , "middle" , "bottom"];
 const allFontSizes: FontSize[] = ["tiny","small","medium","large","xlarge","xxlarge","xxxlarge","jumbo"];
 
+const TEXT_MESSAGE = "This is a message for the Alert box. Supports:\n\nMultiple lines\nImportance\nLocation";
+
 interface State {
     message?: string;
     importance?: Importance;
@@ -112,7 +114,7 @@ export class Test extends React.Component<any, State> {
                     </p>
                 </div>
                 <div className="w3-container" style={{padding: "0px", marginTop: "8px", marginBottom: "8px"}}>
-                    <button className="w3-button w3-border" onClick={() => this.setState({message: "This is a message for the Alert box"})}>Show Alert</button>
+                    <button className="w3-button w3-border" onClick={() => this.setState({message: TEXT_MESSAGE})}>Show Alert</button>
                 </div>
                 {alert}
             </div>
