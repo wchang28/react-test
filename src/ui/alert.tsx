@@ -90,11 +90,10 @@ export class Alert extends React.Component<Props, State> {
     get VerticalLocation() {
         return (this.state.verticalLocation ? this.state.verticalLocation : DEFAULT_VERTICAL_LOCATION);
     }
-    defaultTextMessageContent(message: string) {
+    textMessageContent(message: string) {
         message = message || "";
         const lines = message.split("\n");
-        const content = lines.map((line, index) => (<span key={index}>{line}<br/></span>));
-        return (<div style={{paddingLeft: "4px", paddingRight: "4px"}}>{content}</div>);
+        return lines.map((line, index) => (<span key={index}>{line}<br/></span>));
     }
     render() {
         const styleOuterDiv: React.CSSProperties = {
@@ -145,8 +144,8 @@ export class Alert extends React.Component<Props, State> {
                 <div className="w3-bar">
                     <span className="w3-bar-item w3-right w3-button w3-small" style={{padding: "2px 6px"}} onClick={this.props.onClose}>x</span>
                 </div>
-                <div className="w3-container" style={{padding: "0", marginBottom: "8px"}}>
-                    {this.defaultTextMessageContent(this.Message)}
+                <div className="w3-container" style={{marginBottom: "16px"}}>
+                    {this.textMessageContent(this.Message)}
                 </div>
             </div>
         );

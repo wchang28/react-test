@@ -27,7 +27,7 @@ export class Test extends React.Component<any, State> {
             ,importance: "info"
             ,strong: true
             ,horizontalLocation: "center"
-            ,verticalLocation: "middle"
+            ,verticalLocation: "top"
             ,fontSize: "small"
         };
     }
