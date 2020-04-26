@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tester</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div>
+	<div style="padding: 8px" id="position">xxx</div>
+</div>
+<script>
+const reportWindowSize = function() {
+	const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+	const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+	$('#position').html(vw + ' X ' + vh);
+};
+(function() {
+	window.onresize = reportWindowSize;
+	reportWindowSize();
+})();
+</script>
+</body>
+</html>
