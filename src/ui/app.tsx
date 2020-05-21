@@ -10,6 +10,7 @@ import {Test as TestPagination} from "./test-pagination";
 import {Test as TestSplitterView} from "./test-splitter-view";
 import {Test as TestButtonPadding} from "./test-button-padding";
 import {Test as TestAlert} from "./test-alert";
+import {Test as TestBackButtonRouting} from "./test-back-btn-routing";
 
 type TestComponentConstructor = new (props?: any) => any;
 
@@ -31,6 +32,7 @@ const testConfig: TestItem[] = [
 	,{id: "splitter-view", name: "Splitter View", componentClass: TestSplitterView}
 	,{id: "button-padding", name: "Button Padding", componentClass: TestButtonPadding}
 	,{id: "alert", name: "Alert", componentClass: TestAlert}
+	,{id: "back-btn-routing", name: "Back Button Routing", componentClass: TestBackButtonRouting}
 	// TODO: add more test cases here
 ];
 
