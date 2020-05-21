@@ -21,7 +21,7 @@ class PersonImpl extends React.Component<PersonProps, any> {
     }
     static getDerivedStateFromProps(nextProps: PersonProps, prevState: any) {
         console.log(`Person:getDerivedStateFromProps()`);
-        return {}
+        return null
     }
     find(id: string) {
         for (const person of people) {
