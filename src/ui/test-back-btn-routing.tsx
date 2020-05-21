@@ -149,7 +149,7 @@ export class Test extends React.Component<any, any> {
                     <h5>Back Button Routing Test</h5>
                     <Router>
                         <div>
-                            <Link to="/people">Start Test</Link>
+                            <Link to="/people">List of People</Link>
                         </div>
                         <div>
                             <Switch>
@@ -158,7 +158,7 @@ export class Test extends React.Component<any, any> {
                                 </Route>
                                 <Route path="/">
                                     <div>
-                                        <p>Click the link "Start Test" to start testing</p>
+                                        <p>Click the link "List of People" to start testing</p>
                                     </div>
                                 </Route>
                             </Switch>
