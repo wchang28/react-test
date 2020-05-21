@@ -123,11 +123,7 @@ class PeopleImpl extends React.Component<PeopleProps, PeopleState> {
                                 <Route path={`${match.path}/:id`}>
                                     <Person/>                                
                                 </Route>
-                                <Route path={`${match.path}`}>
-                                    <div>
-                                        <p>Click a person to the see the person's home page</p>
-                                    </div>
-                                </Route>
+                                <Route path={`${match.path}`}/>
                             </Switch>
                         </div>
                     </div>
