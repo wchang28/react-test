@@ -142,7 +142,6 @@ export class Test extends React.Component<any, any> {
         };
     }
     render() {
-        //<BackButtomRoutingHome/>
         return (
             <div>
                 <div className="w3-container w3-border" style={{marginTop: "8px", marginBottom: "8px"}}>
