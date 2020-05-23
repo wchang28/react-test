@@ -5,6 +5,8 @@
       "jsx": "react",
       "sourceMap": true,
       "declaration": true,
+      "esModuleInterop": true,
+      "downlevelIteration": true,
       "outDir": "./dist",
       "watch": false,
       "lib": [

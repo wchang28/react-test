@@ -1,4 +1,4 @@
-import * as express from "express";
+import express from "express";
 import * as path from "path";
 const port = ((process.env.PORT as any) as number) || 8080;
 const hostname = process.env.HOSTNAME || "127.0.0.1";
