@@ -42,7 +42,8 @@
     "react-datepicker": "^2.12.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "shortid": "^2.2.15"
+    "shortid": "^2.2.15",
+    "uglify-css": "git+https://github.com/wchang28/uglify-css.git"
   },
   "devDependencies": {
     "browserify": "^16.5.0",
