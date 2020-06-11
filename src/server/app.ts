@@ -25,6 +25,10 @@ app.use((req, res, next) => {
 
 app.use("/", express.static(path.join(__dirname, "../../public")));
 
+app.get('/*', function(req, res) {
+	res.sendFile(path.join(__dirname, '../../public', 'index.html'));
+});
+
 // start the app service
 app.listen(port, hostname, () => {
     console.log(`[${new Date().toISOString()}]: app server listening on port ${hostname}:${port} :-)`);
