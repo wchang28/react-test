@@ -2,7 +2,7 @@ import * as React from "react";
 import {useState, useEffect} from 'react';
 
 export default (props: any) => {
-    const [isActive, setIsActive] = useState<boolean>(true);
+    const [isActive] = useState<boolean>(true);
     const [currentTime, setCurrentTime] = useState<number>(new Date().getTime());
     useEffect(() => {
         console.log(`useEffect Hook called`);
