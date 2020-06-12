@@ -41,36 +41,37 @@ const testConfig: TestItem[] = [
 	// TODO: add more test cases here
 ];
 
-export function App() {
-	const links = testConfig.map(({id, name}, index) => {
-		return <div key={index}><Link to={`/${id}`}>{name}</Link></div>;
-	});
-	const routes = testConfig.map(({id, component}, index) => {
-		const Component = component;
-		return (
-			<Route key={index+1} path={`/${id}`}>
-				<Component/>
-			</Route>
-		);
-	});
+const links = testConfig.map(({id, name}, index) => {
+	return <div key={index}><Link to={`/${id}`}>{name}</Link></div>;
+});
+const routes = testConfig.map(({id, component}, index) => {
+	const Component = component;
 	return (
-	<div className="w3-row-padding">
-		<div className="w3-half">
-			<Router>
-				<label>Test Selection:</label>
-				<div>
-					{links}
-				</div>
-				<div className="w3-container w3-card-4 w3-border w3-margin-top">
-					<Switch>
-						<Route key={0} exact path="/">
-							<h3>Please select a test.</h3>
-						</Route>
-						{routes}
-					</Switch>
-				</div>
-			</Router>
+		<Route key={index+1} path={`/${id}`}>
+			<Component/>
+		</Route>
+	);
+});
+
+export default () => {
+	return (
+		<div className="w3-row-padding">
+			<div className="w3-half">
+				<Router>
+					<label>Test Selection:</label>
+					<div>
+						{links}
+					</div>
+					<div className="w3-container w3-card-4 w3-border w3-margin-top">
+						<Switch>
+							<Route key={0} exact path="/">
+								<h3>Please select a test.</h3>
+							</Route>
+							{routes}
+						</Switch>
+					</div>
+				</Router>
+			</div>
 		</div>
-	</div>
 	);
 }
