@@ -19,8 +19,8 @@ class TestComponent extends React.Component<TestComponentProps, TestComponentSta
             good: true
         }
     }
-    static getDerivedStateFromProps(nextProps: TestComponentProps, prevState: TestComponentState) {
-        console.log(`TestComponent.getDerivedStateFromProps():\nnextProps=${JSON.stringify(nextProps)},\nprevState=${JSON.stringify(prevState)}`);
+    static getDerivedStateFromProps(nextProps: TestComponentProps, currState: TestComponentState) {
+        console.log(`TestComponent.getDerivedStateFromProps():\nnextProps=${JSON.stringify(nextProps)}\ncurrState=${JSON.stringify(currState)}`);
         return null;
     }
     _setState(st) {
@@ -45,8 +45,8 @@ class TestComponent extends React.Component<TestComponentProps, TestComponentSta
     componentDidMount() {
         console.log(`TestComponent.componentDidMount()`);
     }
-    componentDidUpdate() {
-        console.log(`TestComponent.componentDidUpdate()`);
+    componentDidUpdate(prevProps: TestComponentProps, prevState: TestComponentState, snapshot: any) {
+        console.log(`TestComponent.componentDidUpdate():\nprevProps=${JSON.stringify(prevProps)}\nprevState=${JSON.stringify(prevState)}`);
     }
     componentWillUnmount () {
         console.log(`TestComponent.componentWillUnmount()`);
