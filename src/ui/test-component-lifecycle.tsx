@@ -87,7 +87,7 @@ export default () => {
     const fontSizeOptions = allFontSizes.map((item, index) => {
         return (<option key={index} value={item}>{item}</option>);
     });
-    const Component = (testMethod === "Component Class" ? TestComponent : TestFunctional);
+    const ComponentUnderTest = (testMethod === "Component Class" ? TestComponent : TestFunctional);
     const onTestMethodChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setTestMethod(event.target.value as TestMethod);
     }
@@ -111,7 +111,7 @@ export default () => {
                 </p>
             </div>
             <div className="w3-container w3-border" style={{paddingTop: "8px", paddingBottom: "8px", marginTop: "8px"}}>
-                <Component fontSize={fontSize}/>
+                <ComponentUnderTest fontSize={fontSize}/>
             </div>
         </div>
     );
