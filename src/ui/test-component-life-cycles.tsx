@@ -20,7 +20,7 @@ class TestComponent extends React.Component<TestComponentProps, TestComponentSta
         }
     }
     static getDerivedStateFromProps(nextProps: TestComponentProps, prevState: TestComponentState) {
-        console.log(`TestComponent.getDerivedStateFromProps(): nextProps=${JSON.stringify(nextProps)}, prevState=${JSON.stringify(prevState)}`);
+        console.log(`TestComponent.getDerivedStateFromProps():\nnextProps=${JSON.stringify(nextProps)},\nprevState=${JSON.stringify(prevState)}`);
         return null;
     }
     _setState(st) {
