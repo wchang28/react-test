@@ -21,6 +21,12 @@ class TestComponent extends React.Component<TestComponentProps, TestComponentSta
             good: true
         }
     }
+    // called after:
+    //  1. .ctor()
+    //  2. .setState()
+    //  3. props changed
+    // called before:
+    //  1. render()
     static getDerivedStateFromProps(nextProps: TestComponentProps, currState: TestComponentState) {
         console.log(`${componentName}.getDerivedStateFromProps():\nnextProps=${JSON.stringify(nextProps)}\ncurrState=${JSON.stringify(currState)}`);
         return null;
@@ -44,9 +50,11 @@ class TestComponent extends React.Component<TestComponentProps, TestComponentSta
             </div>
         );
     }
+    // called after mounting render()
     componentDidMount() {
         console.log(`${componentName}.componentDidMount()`);
     }
+    // called everytime after the non-mounting render()
     componentDidUpdate(prevProps: TestComponentProps, prevState: TestComponentState, snapshot: any) {
         console.log(`${componentName}.componentDidUpdate():\nprevProps=${JSON.stringify(prevProps)}\nprevState=${JSON.stringify(prevState)}`);
     }
