@@ -1,19 +1,42 @@
 import * as React from 'react';
+import {useState} from "react";
+
+type TestMethod = "component class" | "functional";
+const allTestMethods: TestMethod[] = ["component class","functional"];
 
 type FontSize = "tiny" | "small" | "medium" | "large" | "xlarge" | "xxlarge" | "xxxlarge" | "jumbo";
 const allFontSizes: FontSize[] = ["tiny","small","medium","large","xlarge","xxlarge","xxxlarge","jumbo"];
 
-interface TestComponentProps {
+const functionalName = "TestFunctional";
+const componentName = "TestComponent";
+
+function getUI(fontSize: FontSize, good: boolean, onButtonClick: () => void) {
+    const className = `w3-button w3-border w3-round w3-${fontSize}`;
+    return (
+        <div>
+            <div>Today is a <span className={`w3-${good ? "green": "red"}`} style={{fontWeight:"bold"}}>{good ? "GOOD": "BAD"}</span> day.</div>
+            <div>
+                <button className={className} onClick={onButtonClick}>Toggle Good/Bad</button>
+            </div>
+        </div>
+    );
+}
+
+interface TestProps {
     fontSize: FontSize;
+}
+
+function TestFunctional(props: TestProps) {
+    console.log(`${functionalName}.render()`);
+    const [good, setGood] = useState(true);
+    return getUI(props.fontSize, good, () => {setGood(!good);});
 }
 
 interface TestComponentState {
     good: boolean;
 }
 
-const componentName = "TestComponent";
-
-class TestComponent extends React.Component<TestComponentProps, TestComponentState> {
+class TestComponent extends React.Component<TestProps, TestComponentState> {
     constructor(props: any) {
         super(props);
         console.log(`${componentName}.ctor()`);
@@ -27,7 +50,7 @@ class TestComponent extends React.Component<TestComponentProps, TestComponentSta
     //  3. props changed
     // called before:
     //  1. render()
-    static getDerivedStateFromProps(nextProps: TestComponentProps, currState: TestComponentState) {
+    static getDerivedStateFromProps(nextProps: TestProps, currState: TestComponentState) {
         console.log(`${componentName}.getDerivedStateFromProps():\nnextProps=${JSON.stringify(nextProps)}\ncurrState=${JSON.stringify(currState)}`);
         return null;
     }
@@ -40,22 +63,14 @@ class TestComponent extends React.Component<TestComponentProps, TestComponentSta
     }
     render() {
         console.log(`${componentName}.render()`);
-        const className = `w3-button w3-border w3-round w3-${this.props.fontSize}`;
-        return (
-            <div>
-                <div>Today is a <span className={`w3-${this.state.good ? "green": "red"}`} style={{fontWeight:"bold"}}>{this.state.good ? "GOOD": "BAD"}</span> day.</div>
-                <div>
-                    <button className={className} onClick={this.onToggleClick}>Toggle Good/Bad</button>
-                </div>
-            </div>
-        );
+        return getUI(this.props.fontSize, this.state.good, this.onToggleClick);
     }
     // called after mounting render()
     componentDidMount() {
         console.log(`${componentName}.componentDidMount()`);
     }
     // called everytime after the non-mounting render()
-    componentDidUpdate(prevProps: TestComponentProps, prevState: TestComponentState, snapshot: any) {
+    componentDidUpdate(prevProps: TestProps, prevState: TestComponentState, snapshot: any) {
         console.log(`${componentName}.componentDidUpdate():\nprevProps=${JSON.stringify(prevProps)}\nprevState=${JSON.stringify(prevState)}`);
     }
     componentWillUnmount () {
@@ -64,6 +79,7 @@ class TestComponent extends React.Component<TestComponentProps, TestComponentSta
 }
 
 interface State {
+    testMethod: TestMethod;
     fontSize: FontSize;
 }
 
@@ -71,28 +87,42 @@ export class Test extends React.Component<any, State> {
     constructor(props: any) {
         super(props);
         this.state = {
-            fontSize: "medium"
+            testMethod: "component class"
+            ,fontSize: "medium"
         };
+    }
+    onTestMethodChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        this.setState({testMethod: event.target.value as TestMethod});
     }
     onFontSizeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         this.setState({fontSize: event.target.value as FontSize});
     }
     render() {
+        const testMethodOptions = allTestMethods.map((item, index) => {
+            return (<option key={index} value={item}>{item}</option>);
+        });
         const fontSizeOptions = allFontSizes.map((item, index) => {
             return (<option key={index} value={item}>{item}</option>);
         });
+        const Component = (this.state.testMethod === "component class" ? TestComponent : TestFunctional);
         return (
             <div>
                 <div className="w3-container w3-border" style={{padding: "0 8px", marginTop: "8px"}}>
                     <p>
+                        <label>Test Method: </label>
+                        <select className="w3-select w3-border" name="testMethod" value={this.state.testMethod} onChange={this.onTestMethodChange} style={{padding: "4px", width: "30%"}}>
+                            {testMethodOptions}
+                        </select>
+                    </p>
+                    <p>
                         <label>Font Size: </label>
-                        <select className="w3-select w3-border" name="fontSize" value={this.state.fontSize} onChange={this.onFontSizeChange} style={{padding: "4px", width: "25%"}}>
+                        <select className="w3-select w3-border" name="fontSize" value={this.state.fontSize} onChange={this.onFontSizeChange} style={{padding: "4px", width: "30%"}}>
                             {fontSizeOptions}
                         </select>
                     </p>
                 </div>
                 <div className="w3-container w3-border" style={{paddingTop: "8px", paddingBottom: "8px", marginTop: "8px"}}>
-                    <TestComponent fontSize={this.state.fontSize}/>
+                    <Component fontSize={this.state.fontSize}/>
                 </div>
             </div>
         );
