@@ -11,27 +11,29 @@ interface TestComponentState {
     good: boolean;
 }
 
+const componentName = "TestComponent";
+
 class TestComponent extends React.Component<TestComponentProps, TestComponentState> {
     constructor(props: any) {
         super(props);
-        console.log(`TestComponent.ctor()`);
+        console.log(`${componentName}.ctor()`);
         this.state = {
             good: true
         }
     }
     static getDerivedStateFromProps(nextProps: TestComponentProps, currState: TestComponentState) {
-        console.log(`TestComponent.getDerivedStateFromProps():\nnextProps=${JSON.stringify(nextProps)}\ncurrState=${JSON.stringify(currState)}`);
+        console.log(`${componentName}.getDerivedStateFromProps():\nnextProps=${JSON.stringify(nextProps)}\ncurrState=${JSON.stringify(currState)}`);
         return null;
     }
     _setState(st) {
-        console.log(`Setting state: setState(${JSON.stringify(st)})`);
+        console.log(`${componentName}.setState(${JSON.stringify(st)})`);
         this.setState(st);
     }
     onToggleClick = () => {
         this._setState({good: !this.state.good});
     }
     render() {
-        console.log(`TestComponent.render()`);
+        console.log(`${componentName}.render()`);
         const className = `w3-button w3-border w3-round w3-${this.props.fontSize}`;
         return (
             <div>
@@ -43,13 +45,13 @@ class TestComponent extends React.Component<TestComponentProps, TestComponentSta
         );
     }
     componentDidMount() {
-        console.log(`TestComponent.componentDidMount()`);
+        console.log(`${componentName}.componentDidMount()`);
     }
     componentDidUpdate(prevProps: TestComponentProps, prevState: TestComponentState, snapshot: any) {
-        console.log(`TestComponent.componentDidUpdate():\nprevProps=${JSON.stringify(prevProps)}\nprevState=${JSON.stringify(prevState)}`);
+        console.log(`${componentName}.componentDidUpdate():\nprevProps=${JSON.stringify(prevProps)}\nprevState=${JSON.stringify(prevState)}`);
     }
     componentWillUnmount () {
-        console.log(`TestComponent.componentWillUnmount()`);
+        console.log(`${componentName}.componentWillUnmount()`);
     }
 }
 
