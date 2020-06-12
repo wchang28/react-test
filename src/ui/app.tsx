@@ -14,6 +14,7 @@ import {Test as TestAlert} from "./test-alert";
 import {Test as TestReactDataGrid} from "./test-react-data-grid";
 import {Test as TestNestingRouting} from "./test-nesting-routing";
 import {Test as TestComponentLifecycle} from "./test-component-lifecycle";
+import TestFunctionalHooks from "./test-functional-hooks";
 
 interface TestItem {
 	id: string;
@@ -36,6 +37,7 @@ const testConfig: TestItem[] = [
 	,{id: "splitter-view", name: "Splitter View", component: TestSplitterView}
 	,{id: "button-padding", name: "Button Padding", component: TestButtonPadding}
 	,{id: "alert", name: "Alert", component: TestAlert}
+	,{id: "functional-hooks", name: "Functional Hooks", component: TestFunctionalHooks}
 	// TODO: add more test cases here
 ];
 
