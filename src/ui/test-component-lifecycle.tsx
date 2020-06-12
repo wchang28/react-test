@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {useState} from "react";
 
-type TestMethod = "component class" | "functional";
-const allTestMethods: TestMethod[] = ["component class","functional"];
+type TestMethod = "Component Class" | "Functional";
+const allTestMethods: TestMethod[] = ["Component Class","Functional"];
 
 type FontSize = "tiny" | "small" | "medium" | "large" | "xlarge" | "xxlarge" | "xxxlarge" | "jumbo";
 const allFontSizes: FontSize[] = ["tiny","small","medium","large","xlarge","xxlarge","xxxlarge","jumbo"];
@@ -10,13 +10,13 @@ const allFontSizes: FontSize[] = ["tiny","small","medium","large","xlarge","xxla
 const functionalName = "TestFunctional";
 const componentName = "TestComponent";
 
-function getUI(fontSize: FontSize, good: boolean, onButtonClick: () => void) {
+function getUI(testMethod: TestMethod, fontSize: FontSize, good: boolean, onToggleClick: () => void) {
     const className = `w3-button w3-border w3-round w3-${fontSize}`;
     return (
         <div>
-            <div>Today is a <span className={`w3-${good ? "green": "red"}`} style={{fontWeight:"bold"}}>{good ? "GOOD": "BAD"}</span> day.</div>
+            <div>"{testMethod}" says: Today is a <span className={`w3-${good ? "green": "red"}`} style={{fontWeight:"bold"}}>{good ? "GOOD": "BAD"}</span> day.</div>
             <div>
-                <button className={className} onClick={onButtonClick}>Toggle Good/Bad</button>
+                <button className={className} onClick={onToggleClick}>Toggle Good/Bad</button>
             </div>
         </div>
     );
@@ -29,7 +29,7 @@ interface TestProps {
 function TestFunctional(props: TestProps) {
     console.log(`${functionalName}.render()`);
     const [good, setGood] = useState(true);
-    return getUI(props.fontSize, good, () => {setGood(!good);});
+    return getUI("Functional", props.fontSize, good, () => {setGood(!good);});
 }
 
 interface TestComponentState {
@@ -63,7 +63,7 @@ class TestComponent extends React.Component<TestProps, TestComponentState> {
     }
     render() {
         console.log(`${componentName}.render()`);
-        return getUI(this.props.fontSize, this.state.good, this.onToggleClick);
+        return getUI("Component Class", this.props.fontSize, this.state.good, this.onToggleClick);
     }
     // called after mounting render()
     componentDidMount() {
@@ -78,53 +78,41 @@ class TestComponent extends React.Component<TestProps, TestComponentState> {
     }
 }
 
-interface State {
-    testMethod: TestMethod;
-    fontSize: FontSize;
-}
-
-export class Test extends React.Component<any, State> {
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            testMethod: "component class"
-            ,fontSize: "medium"
-        };
+export default () => {
+    const [testMethod, setTestMethod] = useState<TestMethod>("Component Class");
+    const [fontSize, setFontSize] = useState<FontSize>("medium");
+    const testMethodOptions = allTestMethods.map((item, index) => {
+        return (<option key={index} value={item}>{item}</option>);
+    });
+    const fontSizeOptions = allFontSizes.map((item, index) => {
+        return (<option key={index} value={item}>{item}</option>);
+    });
+    const Component = (testMethod === "Component Class" ? TestComponent : TestFunctional);
+    const onTestMethodChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setTestMethod(event.target.value as TestMethod);
     }
-    onTestMethodChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        this.setState({testMethod: event.target.value as TestMethod});
+    const onFontSizeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setFontSize(event.target.value as FontSize);
     }
-    onFontSizeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        this.setState({fontSize: event.target.value as FontSize});
-    }
-    render() {
-        const testMethodOptions = allTestMethods.map((item, index) => {
-            return (<option key={index} value={item}>{item}</option>);
-        });
-        const fontSizeOptions = allFontSizes.map((item, index) => {
-            return (<option key={index} value={item}>{item}</option>);
-        });
-        const Component = (this.state.testMethod === "component class" ? TestComponent : TestFunctional);
-        return (
-            <div>
-                <div className="w3-container w3-border" style={{padding: "0 8px", marginTop: "8px"}}>
-                    <p>
-                        <label>Test Method: </label>
-                        <select className="w3-select w3-border" name="testMethod" value={this.state.testMethod} onChange={this.onTestMethodChange} style={{padding: "4px", width: "30%"}}>
-                            {testMethodOptions}
-                        </select>
-                    </p>
-                    <p>
-                        <label>Font Size: </label>
-                        <select className="w3-select w3-border" name="fontSize" value={this.state.fontSize} onChange={this.onFontSizeChange} style={{padding: "4px", width: "30%"}}>
-                            {fontSizeOptions}
-                        </select>
-                    </p>
-                </div>
-                <div className="w3-container w3-border" style={{paddingTop: "8px", paddingBottom: "8px", marginTop: "8px"}}>
-                    <Component fontSize={this.state.fontSize}/>
-                </div>
+    return (
+        <div>
+            <div className="w3-container w3-border" style={{padding: "0 8px", marginTop: "8px"}}>
+                <p>
+                    <label>Test Method: </label>
+                    <select className="w3-select w3-border" name="testMethod" value={testMethod} onChange={onTestMethodChange} style={{padding: "4px", width: "30%"}}>
+                        {testMethodOptions}
+                    </select>
+                </p>
+                <p>
+                    <label>Font Size: </label>
+                    <select className="w3-select w3-border" name="fontSize" value={fontSize} onChange={onFontSizeChange} style={{padding: "4px", width: "30%"}}>
+                        {fontSizeOptions}
+                    </select>
+                </p>
             </div>
-        );
-    }
+            <div className="w3-container w3-border" style={{paddingTop: "8px", paddingBottom: "8px", marginTop: "8px"}}>
+                <Component fontSize={fontSize}/>
+            </div>
+        </div>
+    );
 }
