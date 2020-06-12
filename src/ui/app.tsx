@@ -13,6 +13,7 @@ import {Test as TestButtonPadding} from "./test-button-padding";
 import {Test as TestAlert} from "./test-alert";
 import {Test as TestReactDataGrid} from "./test-react-data-grid";
 import {Test as TestNestingRouting} from "./test-nesting-routing";
+import {Test as TestComponentLifeCycles} from "./test-component-life-cycles";
 
 interface TestItem {
 	id: string;
@@ -21,7 +22,8 @@ interface TestItem {
 }
 
 const testConfig: TestItem[] = [
-	{id: "nesting-routing", name: "Nesting Routing", component: TestNestingRouting}
+	{id: "component-life-cycles", name: "Component Life Cycles", component: TestComponentLifeCycles}
+	,{id: "nesting-routing", name: "Nesting Routing", component: TestNestingRouting}
 	,{id: "react-data-grid", name: "Data Grid", component: TestReactDataGrid}
 	,{id: "name-entry", name: "Name Entry", component: TestNameEntry}
 	,{id: "dialog", name: "Dialog", component: TestDialog}
