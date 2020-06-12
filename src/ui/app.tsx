@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {BrowserRouter as Router, Route, Switch, Link, useRouteMatch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
 import {Test as TestNameEntry} from "./test-name-entry";
 import {Test as TestDialog} from "./test-dialog";
 import {Test as TestInformationModal} from "./test-information-modal";
@@ -13,7 +13,7 @@ import {Test as TestButtonPadding} from "./test-button-padding";
 import {Test as TestAlert} from "./test-alert";
 import {Test as TestReactDataGrid} from "./test-react-data-grid";
 import {Test as TestNestingRouting} from "./test-nesting-routing";
-import {Test as TestComponentLifeCycles} from "./test-component-life-cycles";
+import {Test as TestComponentLifecycle} from "./test-component-lifecycle";
 
 interface TestItem {
 	id: string;
@@ -22,7 +22,7 @@ interface TestItem {
 }
 
 const testConfig: TestItem[] = [
-	{id: "component-life-cycles", name: "Component Life Cycles", component: TestComponentLifeCycles}
+	{id: "component-lifecycle", name: "Component Lifecycle", component: TestComponentLifecycle}
 	,{id: "nesting-routing", name: "Nesting Routing", component: TestNestingRouting}
 	,{id: "react-data-grid", name: "Data Grid", component: TestReactDataGrid}
 	,{id: "name-entry", name: "Name Entry", component: TestNameEntry}

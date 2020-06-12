@@ -43,7 +43,7 @@ class TestComponent extends React.Component<TestComponentProps, TestComponentSta
         const className = `w3-button w3-border w3-round w3-${this.props.fontSize}`;
         return (
             <div>
-                <div>Today is a {this.state.good ? "good": "bad"} day.</div>
+                <div>Today is a <span className={`w3-${this.state.good ? "green": "red"}`} style={{fontWeight:"bold"}}>{this.state.good ? "GOOD": "BAD"}</span> day.</div>
                 <div>
                     <button className={className} onClick={this.onToggleClick}>Toggle Good/Bad</button>
                 </div>
