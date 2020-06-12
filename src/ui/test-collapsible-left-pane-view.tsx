@@ -1,6 +1,29 @@
 import React, {useState} from "react";
 import CollapsibleLeftPaneView from "./collapsible-left-pane-view";
 
+const leftPaneContent = (
+<div className="left-content">
+    Hello,---------World!<br/>
+    Hello,---------World!<br/>
+    Hello,---------World!<br/>
+    Hello,---------World!<br/>
+    Hello,---------World!<br/>
+    Hello,---------World!<br/>
+    Hello,---------World!<br/>
+    Hello,---------World!<br/>
+</div>
+);
+    
+const rightPaneContent = (
+<div className="right-content">
+    Hawdy, World!<br/>
+    Hawdy, World!<br/>
+    Hawdy, World!<br/>
+    Hawdy, World!<br/>
+    Hawdy, World!<br/>
+</div>
+);
+
 export default () => {
     const [collapsed, setCollapsed] = useState(false);
     const [leftPaneWidthPx, setLeftPaneWidthPx] = useState(250);
@@ -23,7 +46,10 @@ export default () => {
             </p>
         </div>
         <div className="w3-container w3-border" style={{paddingTop: "8px", paddingBottom: "8px", marginTop: "8px"}}>
-            <CollapsibleLeftPaneView collapsed={collapsed} leftPaneWidthPx={leftPaneWidthPx} onCollapseChanged={(collapsed) => {setCollapsed(collapsed);}}/>
+            <CollapsibleLeftPaneView collapsed={collapsed} leftPaneWidthPx={leftPaneWidthPx} onCollapseChanged={(collapsed) => {setCollapsed(collapsed);}}>
+                {leftPaneContent}
+                {rightPaneContent}
+            </CollapsibleLeftPaneView>
         </div>
     </div>
     );

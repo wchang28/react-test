@@ -1,5 +1,8 @@
 
 import * as React from "react";
+import {ReactNode} from "react";
+
+type ReactProps<P> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
 const DEFAULT_LEDT_PANEL_WIDTH_PX = 300;
 const TOGGLE_AREA_DIM_PX = 24;
@@ -9,29 +12,6 @@ export interface Props {
     leftPaneWidthPx?: number;
     onCollapseChanged: (collapsed: boolean) => void;
 }
-
-const leftPaneContent = (
-<div className="left-content">
-    Hello,---------World!<br/>
-    Hello,---------World!<br/>
-    Hello,---------World!<br/>
-    Hello,---------World!<br/>
-    Hello,---------World!<br/>
-    Hello,---------World!<br/>
-    Hello,---------World!<br/>
-    Hello,---------World!<br/>
-</div>
-);
-
-const rightPaneContent = (
-<div className="content">
-    Hello, World!<br/>
-    Hello, World!<br/>
-    Hello, World!<br/>
-    Hello, World!<br/>
-    Hello, World!<br/>
-</div>
-);
 
 const getToggleArea = (collapsed: boolean, onToggleClicked: () => void) => {
     const icon = (collapsed ? "arrow-circle-o-right" : "arrow-circle-o-left");
@@ -72,11 +52,13 @@ const getLeftView = (collapsed: boolean, onToggleClicked: () => void, content: J
     }
 }
 
-export default (props: Props) => {
+export default (props: ReactProps<Props>) => {
     const collapsed = (typeof props.collapsed === "boolean" ? props.collapsed : false);
     const leftPaneWidthPx = (typeof props.leftPaneWidthPx === "number" && props.leftPaneWidthPx >= 0 ? props.leftPaneWidthPx : DEFAULT_LEDT_PANEL_WIDTH_PX);
     const onToggleClicked = () => {props.onCollapseChanged(!collapsed);};
     const leftWidth = (collapsed ? TOGGLE_AREA_DIM_PX : leftPaneWidthPx);
+    const leftPaneContent = props.children[0];
+    const rightPaneContent = props.children[1];
     //const debugObj = {collapsed, leftPaneWidthPx};
     //const debugButton = <button className="w3-bar-item w3-botton w3-border w3-round" onClick={onToggleClicked}>Toggle Me {`(${JSON.stringify(debugObj)})`}</button>
     return (

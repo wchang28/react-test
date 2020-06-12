@@ -63,6 +63,7 @@ class TestComponent extends React.Component<TestProps, TestComponentState> {
     }
     render() {
         console.log(`${componentName}.render()`);
+        const props = this.props;
         return getUI("Component Class", this.props.fontSize, this.state.good, this.onToggleClick);
     }
     // called after mounting render()
