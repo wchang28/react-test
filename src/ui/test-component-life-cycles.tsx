@@ -23,8 +23,12 @@ class TestComponent extends React.Component<TestComponentProps, TestComponentSta
         console.log(`TestComponent.getDerivedStateFromProps(): nextProps=${JSON.stringify(nextProps)}, prevState=${JSON.stringify(prevState)}`);
         return null;
     }
+    _setState(st) {
+        console.log(`Setting state: setState(${JSON.stringify(st)})`);
+        this.setState(st);
+    }
     onToggleClick = () => {
-        this.setState({good: !this.state.good});
+        this._setState({good: !this.state.good});
     }
     render() {
         console.log(`TestComponent.render()`);
