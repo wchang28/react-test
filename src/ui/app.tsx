@@ -13,8 +13,8 @@ import {Test as TestButtonPadding} from "./test-button-padding";
 import {Test as TestAlert} from "./test-alert";
 import {Test as TestReactDataGrid} from "./test-react-data-grid";
 import {Test as TestNestingRouting} from "./test-nesting-routing";
-import TestComponentLifecycle from "./test-component-lifecycle";
-import TestFunctionalHooks from "./test-functional-hooks";
+import {default as TestComponentLifecycle} from "./test-component-lifecycle";	// import a default export (old method)
+import TestFunctionalHooks from "./test-functional-hooks";						// import a default export (with tsconfig.json with compilerOptions.esModuleInterop=true)
 
 interface TestItem {
 	id: string;
