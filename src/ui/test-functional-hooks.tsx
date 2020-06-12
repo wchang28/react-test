@@ -2,6 +2,7 @@ import * as React from "react";
 import {useState, useEffect} from 'react';
 
 export default () => {
+    console.log(`calling render()...`);
     const [isActive] = useState<boolean>(true);
     const [currentTime, setCurrentTime] = useState<number>(new Date().getTime());
     useEffect(() => {
