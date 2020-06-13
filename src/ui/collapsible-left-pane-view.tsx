@@ -2,7 +2,7 @@
 import * as React from "react";
 import {ReactNode} from "react";
 
-type ReactProps<P> = Readonly<P> & Readonly<{ children?: ReactNode }>;
+type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
 const DEFAULT_LEDT_PANEL_WIDTH_PX = 300;
 const TOGGLE_AREA_DIM_PX = 24;
