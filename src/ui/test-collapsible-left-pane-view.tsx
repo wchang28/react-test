@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import CollapsibleLeftPaneView from "./collapsible-left-pane-view";
+import {injectCSS} from "./utils";
+import shortid from "shortid";
 
 const leftPaneContent = (
 <div className="left-content">
@@ -24,6 +26,15 @@ const rightPaneContent = (
 </div>
 );
 
+const this_class = `test-collapsible-left-pane-view-${shortid.generate()}`;
+
+injectCSS(`
+.${this_class} .clpv-left-pane-top-bar {
+    color:#fff!important;
+    background-color:#000!important;
+}
+`);
+
 export default () => {
     const [collapsed, setCollapsed] = useState(false);
     const [leftPaneWidthPx, setLeftPaneWidthPx] = useState(250);
@@ -46,10 +57,12 @@ export default () => {
             </p>
         </div>
         <div className="w3-container w3-border" style={{paddingTop: "8px", paddingBottom: "8px", marginTop: "8px"}}>
-            <CollapsibleLeftPaneView collapsed={collapsed} leftPaneWidthPx={leftPaneWidthPx} onCollapseChanged={(collapsed) => {setCollapsed(collapsed);}}>
-                {leftPaneContent}
-                {rightPaneContent}
-            </CollapsibleLeftPaneView>
+            <div className={this_class}>
+                <CollapsibleLeftPaneView collapsed={collapsed} leftPaneWidthPx={leftPaneWidthPx} onCollapseChanged={(collapsed) => {setCollapsed(collapsed);}}>
+                    {leftPaneContent}
+                    {rightPaneContent}
+                </CollapsibleLeftPaneView>
+            </div>
         </div>
     </div>
     );
