@@ -16,7 +16,7 @@ import {Test as TestNestingRouting} from "./test-nesting-routing";
 import {default as TestComponentLifecycle} from "./test-component-lifecycle";	// import a default export (old method)
 import TestFunctionalHooks from "./test-functional-hooks";						// import a default export (with tsconfig.json with compilerOptions.esModuleInterop=true)
 import TestCollapsibleLeftPaneView from "./test-collapsible-left-pane-view";
-import TestFileDragDrop from "./test-file-drag-drop";
+import TestFileDragDropSelect from "./test-file-drag-drop-select";
 
 interface TestItem {
 	id: string;
@@ -41,7 +41,7 @@ const testConfig: TestItem[] = [
 	,{id: "alert", name: "Alert", component: TestAlert}
 	,{id: "functional-hooks", name: "Functional Hooks", component: TestFunctionalHooks}
 	,{id: "collapsible-left-pane-view", name: "Collapsible Left Pane View", component: TestCollapsibleLeftPaneView}
-	,{id: "file-drag-drop", name: "File Drag Drop", component: TestFileDragDrop}
+	,{id: "file-drag-drop-select", name: "File Drag Drop Select", component: TestFileDragDropSelect}
 	// TODO: add more test cases here
 ];
 
