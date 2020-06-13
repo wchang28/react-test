@@ -29,9 +29,8 @@ const rightPaneContent = (
 const this_class = `test-collapsible-left-pane-view-${shortid.generate()}`;
 
 injectCSS(`
-.${this_class} .clpv-left-pane-top-bar {
-    color:#fff!important;
-    background-color:#000!important;
+.${this_class} .clpv-left {
+    border-right:1px solid #ccc!important;
 }
 `);
 
