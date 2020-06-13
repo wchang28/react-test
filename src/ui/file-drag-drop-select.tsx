@@ -19,6 +19,8 @@ function getDefaultFileSelectButtonText(allowMultiple: boolean) {
     return `Select file${allowMultiple ? "s" : ""}`;
 }
 
+export const CLASS_PREFIX = "fdds";
+
 type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
 export interface Props {
@@ -33,7 +35,7 @@ export default (props: ReactProps<Props>) => {
     const allowMultiple = (typeof props.multiple === "boolean" ? props.multiple : false);
     const instruction = (props.instruction ? props.instruction : getDefaultInstruction(allowMultiple));
     const fileSelectButtonText = (props.fileSelectButtonText ? props.fileSelectButtonText : getDefaultFileSelectButtonText(allowMultiple));
-    const [fileSelectId] = useState(`fdd-file-select-${uuid()}`);
+    const [fileSelectId] = useState(`${CLASS_PREFIX}-file-select-${uuid()}`);
     const [mouseOverDropArea, setMouseOverDropArea] = useState(false);
     const onSelectFileList = (fList: FileList) => {
         let files = [...fList];
@@ -42,7 +44,7 @@ export default (props: ReactProps<Props>) => {
         }
         props.onFileSelect(files);
     }
-    let dropAreaClassName = "fdd-file-drop-area";
+    let dropAreaClassName = `${CLASS_PREFIX}-file-drop-area`;
     if (mouseOverDropArea) {
         dropAreaClassName += " highlight";
     }
@@ -81,7 +83,7 @@ export default (props: ReactProps<Props>) => {
                 style={{display: "none"}}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {onSelectFileList(event.target.files);}}
             />
-            <label className="fdd-file-select-button w3-button" htmlFor={fileSelectId}>{fileSelectButtonText}</label>
+            <label className={`${CLASS_PREFIX}-file-select-button w3-button`} htmlFor={fileSelectId}>{fileSelectButtonText}</label>
         </div>
     );
 }
