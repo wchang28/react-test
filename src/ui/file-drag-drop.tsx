@@ -34,7 +34,6 @@ export default (props: ReactProps<Props>) => {
     return (
         <div
             className={dropAreaClassName}
-            style={{border: "2px dashed", borderColor: "#ccc", borderRadius: "20px", padding: "20px"}}
             onDragEnter={(event: DragEvent<HTMLDivElement>) => {
                 setMouseOverDropArea(true);
                 event.preventDefault();

@@ -9,8 +9,18 @@ const accept = ".xlsx";
 const this_class = `test-file-drag-drop-${uuid()}`;
 
 injectCSS(`
-${this_class} .fdd-file-drop-area.highlight {
-    border-color: purple
+.${this_class} .fdd-file-drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    padding: "20px";
+}
+.${this_class} .fdd-file-drop-area.highlight {
+    border-color: purple;
+}
+.${this_class} .fdd-file-select-button {
+    background: #2196F3;
+    color: #fff;
+    border-radius: 4px;
 }
 `);
 
