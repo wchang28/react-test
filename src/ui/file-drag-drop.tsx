@@ -1,6 +1,15 @@
 import * as React from "react";
-import {ReactNode, useState, ChangeEvent, DragEvent, useRef} from "react";
-import {uuid} from "./utils";
+import {ReactNode, useState, ChangeEvent, DragEvent} from "react";
+
+function uuid() {
+    let dt = new Date().getTime();
+    const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+        const r = (dt + Math.random()*16)%16 | 0;
+        dt = Math.floor(dt/16);
+        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+}
 
 type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
@@ -18,7 +27,10 @@ export default (props: ReactProps<Props>) => {
         setNumFilesSelected(files.length);
         props.onFileSelect(files);
     }
-    const dropAreaClassName = `fdd-file-drop-area ${mouseOverDropArea ? "highlight" : ""}`;
+    let dropAreaClassName = "fdd-file-drop-area";
+    if (mouseOverDropArea) {
+        dropAreaClassName += " highlight";
+    }
     return (
         <div
             className={dropAreaClassName}
