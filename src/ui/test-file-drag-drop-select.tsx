@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import TestingPane from "./testing-pane";
+import {FontSize, getFontSizeSelector, getCheckbox} from "./test-common";
 import FileDragDropSelect, {CLASS_PREFIX as CTRL_CLASS_PREFIX} from "./file-drag-drop-select";
 import {uuid, injectCSS} from "./utils";
 
@@ -25,23 +26,24 @@ injectCSS(`
 `);
 
 export default () => {
+    const [fontSize, setFontSize] = useState<FontSize>("medium");
     const [multiple, setMultiple] = useState(true);
     return (
         <TestingPane className={this_class}>
             <div>
-                <p>
-                    <input className="w3-check" type="checkbox" checked={multiple} onChange={(event: React.ChangeEvent<HTMLInputElement>) => {setMultiple(event.target.checked);}}/>
-                    <label>Allow Muitiple</label>
-                </p>
+                {getCheckbox("Allow Muitiple", multiple, setMultiple)}
+                {getFontSizeSelector(fontSize, setFontSize)}
             </div>
-            <FileDragDropSelect
-                accept={accept}
-                multiple={multiple}
-                onFileSelect={(files) => {
-                    const names = files.map(({name})=> name);
-                    console.log(`names=${names}`);
-                }}
-            />
+            <div className={`w3-${fontSize}`}>
+                <FileDragDropSelect
+                    accept={accept}
+                    multiple={multiple}
+                    onFileSelect={(files) => {
+                        const names = files.map(({name})=> name);
+                        console.log(`names=${names}`);
+                    }}
+                />
+            </div>
         </TestingPane>
     )
 }
