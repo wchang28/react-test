@@ -10,8 +10,8 @@ const this_class = `test-file-drag-drop-${uuid()}`;
 
 injectCSS(`
 .${this_class} .fdd-file-drop-area {
-    border: 2px dashed #ccc;
-    border-radius: 20px;
+    border: 2px #ccc;
+    border-radius: 10px;
     padding: "20px";
 }
 .${this_class} .fdd-file-drop-area.highlight {

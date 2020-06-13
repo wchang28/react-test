@@ -11,19 +11,30 @@ function uuid() {
     return uuid;
 }
 
+function getDefaultInstruction(allowMultiple: boolean) {
+    return `Select ${allowMultiple ? "multiple files" : "a file"} by clicking the button below or by dragging and dropping ${allowMultiple ? "files": "a file"} onto the dashed region.`;
+}
+
 type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
 export interface Props {
     accept?: string;
+    multiple?: boolean;
+    instruction?: string;
     onFileSelect: (files: File[]) => void;
 }
 
 export default (props: ReactProps<Props>) => {
+    const allowMultiple = (typeof props.multiple === "boolean" ? props.multiple : false);
+    const instruction = (props.instruction ? props.instruction : getDefaultInstruction(allowMultiple));
     const [fileSelectId] = useState(`fdd-file-select-${uuid()}`);
     const [mouseOverDropArea, setMouseOverDropArea] = useState(false);
     const [numFilesSelected, setNumFilesSelected] = useState(0);
     const onSelectFileList = (fList: FileList) => {
-        const files = [...fList];
+        let files = [...fList];
+        if (!allowMultiple) {
+            files = [files[0]];
+        }
         setNumFilesSelected(files.length);
         props.onFileSelect(files);
     }
@@ -34,6 +45,7 @@ export default (props: ReactProps<Props>) => {
     return (
         <div
             className={dropAreaClassName}
+            style={{borderStyle: "dashed"}}
             onDragEnter={(event: DragEvent<HTMLDivElement>) => {
                 setMouseOverDropArea(true);
                 event.preventDefault();
@@ -56,17 +68,17 @@ export default (props: ReactProps<Props>) => {
                 event.stopPropagation()
             }}
         >
-            <div>({numFilesSelected > 0 ? `${numFilesSelected} file(s) selected` : "no file select"})</div>
-            <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed region</p>
+            <p>{instruction}</p>
             <input
                 type="file"
                 id={fileSelectId}
-                multiple={true}
+                multiple={props.multiple}
                 accept={props.accept}
                 style={{display: "none"}}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {onSelectFileList(event.target.files);}}
             />
-            <label className="fdd-file-select-button w3-button" htmlFor={fileSelectId}>Select some files</label>
+            <label className="fdd-file-select-button w3-button" htmlFor={fileSelectId}>Select files</label>
+            <div style={{textAlign:"center"}}>({numFilesSelected > 0 ? `${numFilesSelected} file(s) selected` : "no file selected"})</div>
         </div>
     );
 }
