@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import TestingPane from "./testing-pane";
-import FilesDragDrop from "./file-drag-drop";
+import FileDragDrop from "./file-drag-drop";
 import {uuid, injectCSS} from "./utils";
 
 //const accept = "application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml";
@@ -28,7 +28,7 @@ export default () => {
     return (
         <TestingPane className={this_class}>
             <div>No Config</div>
-            <FilesDragDrop
+            <FileDragDrop
                 accept={accept}
                 onFileSelect={(files) => {
                     const names = files.map(({name})=> name);

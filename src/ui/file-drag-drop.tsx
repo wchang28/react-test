@@ -15,27 +15,31 @@ function getDefaultInstruction(allowMultiple: boolean) {
     return `Select ${allowMultiple ? "multiple files" : "a file"} by clicking the button below or by dragging and dropping ${allowMultiple ? "files": "a file"} onto the dashed region.`;
 }
 
+function getDefaultFileSelectButtonText(allowMultiple: boolean) {
+    return `Select file${allowMultiple ? "s" : ""}`;
+}
+
 type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
 export interface Props {
     accept?: string;
     multiple?: boolean;
     instruction?: string;
+    fileSelectButtonText?: string;
     onFileSelect: (files: File[]) => void;
 }
 
 export default (props: ReactProps<Props>) => {
     const allowMultiple = (typeof props.multiple === "boolean" ? props.multiple : false);
     const instruction = (props.instruction ? props.instruction : getDefaultInstruction(allowMultiple));
+    const fileSelectButtonText = (props.fileSelectButtonText ? props.fileSelectButtonText : getDefaultFileSelectButtonText(allowMultiple));
     const [fileSelectId] = useState(`fdd-file-select-${uuid()}`);
     const [mouseOverDropArea, setMouseOverDropArea] = useState(false);
-    const [numFilesSelected, setNumFilesSelected] = useState(0);
     const onSelectFileList = (fList: FileList) => {
         let files = [...fList];
         if (!allowMultiple) {
             files = [files[0]];
         }
-        setNumFilesSelected(files.length);
         props.onFileSelect(files);
     }
     let dropAreaClassName = "fdd-file-drop-area";
@@ -77,8 +81,7 @@ export default (props: ReactProps<Props>) => {
                 style={{display: "none"}}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {onSelectFileList(event.target.files);}}
             />
-            <label className="fdd-file-select-button w3-button" htmlFor={fileSelectId}>Select files</label>
-            <div style={{textAlign:"center"}}>({numFilesSelected > 0 ? `${numFilesSelected} file(s) selected` : "no file selected"})</div>
+            <label className="fdd-file-select-button w3-button" htmlFor={fileSelectId}>{fileSelectButtonText}</label>
         </div>
     );
 }
