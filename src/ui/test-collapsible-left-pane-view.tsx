@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {FontSize, getFontSizeSelector, getNumberInput, getCheckbox, TestingPane, FontSizeColorTestingWrapper} from "./test-common";
-import CollapsibleLeftPaneView from "./collapsible-left-pane-view";
+import CollapsibleLeftPaneView, {CLASS_PREFIX as CTRL_CLASS_PREFIX} from "./collapsible-left-pane-view";
 import {injectCSS} from "./utils";
 import shortid from "shortid";
 
@@ -30,7 +30,7 @@ const rightPaneContent = (
 const this_class = `test-collapsible-left-pane-view-${shortid.generate()}`;
 
 injectCSS(`
-.${this_class} .clpv-left {
+.${this_class} .${CTRL_CLASS_PREFIX}-left {
     border-right:1px solid #ccc!important;
 }
 `);
