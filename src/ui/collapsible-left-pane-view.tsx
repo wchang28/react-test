@@ -80,5 +80,5 @@ export default (props: ReactProps<Props>) => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
