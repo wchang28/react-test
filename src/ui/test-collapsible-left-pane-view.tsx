@@ -30,6 +30,10 @@ const rightPaneContent = (
 const this_class = `test-collapsible-left-pane-view-${shortid.generate()}`;
 
 injectCSS(`
+.${this_class} .${CTRL_CLASS_PREFIX}-left-pane-top-bar {
+    color:#000!important;
+    background-color:#9e9e9e!important
+}
 .${this_class} .${CTRL_CLASS_PREFIX}-toggle-area {
     color:#000!important;
     background-color:#9e9e9e!important
