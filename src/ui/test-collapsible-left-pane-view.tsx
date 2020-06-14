@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {FontSize, getFontSizeSelector, getNumberInput, getCheckbox, TestingPane, FontSizeTestingWrapper} from "./test-common";
 import CollapsibleLeftPaneView from "./collapsible-left-pane-view";
 import {injectCSS} from "./utils";
 import shortid from "shortid";
@@ -37,32 +38,20 @@ injectCSS(`
 export default () => {
     const [collapsed, setCollapsed] = useState(false);
     const [leftPaneWidthPx, setLeftPaneWidthPx] = useState(250);
-    const onCollpaseChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setCollapsed(event.target.checked);
-    }
-    const onLeftPaneWidthPxChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLeftPaneWidthPx(event.target.valueAsNumber);
-    }
+    const [fontSize, setFontSize] = useState<FontSize>("medium");
     return (
-    <div>
-        <div className="w3-container w3-border" style={{padding: "0 8px", marginTop: "8px"}}>
-            <p>
-                <input className="w3-check" type="checkbox" checked={collapsed} onChange={onCollpaseChange}/>
-                <label>Collapsed</label>
-            </p>
-            <p>
-                <label>Left Pane Width px</label>
-                <input className="w3-input w3-border" type="number" value={leftPaneWidthPx} onChange={onLeftPaneWidthPxChanged}/>
-            </p>
-        </div>
-        <div className="w3-container w3-border" style={{paddingTop: "8px", paddingBottom: "8px", marginTop: "8px"}}>
-            <div className={this_class}>
-                <CollapsibleLeftPaneView collapsed={collapsed} leftPaneWidthPx={leftPaneWidthPx} onCollapseChanged={(collapsed) => {setCollapsed(collapsed);}}>
+        <TestingPane className={this_class}>
+            <div>
+                {getCheckbox("Collapsed", collapsed, setCollapsed)}
+                {getNumberInput("Left Pane Width px:", leftPaneWidthPx, setLeftPaneWidthPx)}
+                {getFontSizeSelector(fontSize, setFontSize)}
+            </div>
+            <FontSizeTestingWrapper fontSize={fontSize}>
+                <CollapsibleLeftPaneView collapsed={collapsed} leftPaneWidthPx={leftPaneWidthPx} onCollapseChanged={setCollapsed}>
                     {leftPaneContent}
                     {rightPaneContent}
                 </CollapsibleLeftPaneView>
-            </div>
-        </div>
-    </div>
+            </FontSizeTestingWrapper>
+        </TestingPane>
     );
 }

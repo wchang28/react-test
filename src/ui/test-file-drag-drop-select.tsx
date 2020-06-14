@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import TestingPane from "./testing-pane";
-import {FontSize, getFontSizeSelector, getCheckbox} from "./test-common";
+import {FontSize, getFontSizeSelector, getCheckbox, TestingPane, FontSizeTestingWrapper} from "./test-common";
 import FileDragDropSelect, {CLASS_PREFIX as CTRL_CLASS_PREFIX} from "./file-drag-drop-select";
 import {uuid, injectCSS} from "./utils";
 
@@ -34,7 +33,7 @@ export default () => {
                 {getCheckbox("Allow Muitiple", multiple, setMultiple)}
                 {getFontSizeSelector(fontSize, setFontSize)}
             </div>
-            <div className={`w3-${fontSize}`}>
+            <FontSizeTestingWrapper fontSize={fontSize}>
                 <FileDragDropSelect
                     accept={accept}
                     multiple={multiple}
@@ -43,7 +42,7 @@ export default () => {
                         console.log(`names=${names}`);
                     }}
                 />
-            </div>
+            </FontSizeTestingWrapper>
         </TestingPane>
     )
 }
