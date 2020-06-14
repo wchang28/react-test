@@ -15,9 +15,10 @@ export interface Props {
 
 const getToggleArea = (collapsed: boolean, onToggleClicked: () => void) => {
     const icon = (collapsed ? "arrow-circle-o-right" : "arrow-circle-o-left");
+    const title = (collapsed ? "Expand to the right" : "Collapse to the left")
     return (
         <div className="clpv-toggle-area" style={{float:"right", height: `${TOGGLE_AREA_DIM_PX}px`, width: `${TOGGLE_AREA_DIM_PX}px`, position: "relative"}}>
-            <i className={`clpv-toggle-button fa fa-${icon}`} style={{fontSize:"1.25em", margin:0, position:"absolute", top:"50%", left:"50%", transform:"translate(-50%, -50%)", cursor:"pointer"}} onClick={onToggleClicked}></i>
+            <i className={`clpv-toggle-button fa fa-${icon}`} title={title} style={{fontSize:"1.25em", margin:0, position:"absolute", top:"50%", left:"50%", transform:"translate(-50%, -50%)", cursor:"pointer"}} onClick={onToggleClicked}></i>
         </div>
     );
 };
