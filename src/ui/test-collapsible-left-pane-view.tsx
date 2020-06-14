@@ -32,13 +32,13 @@ const this_class = `test-collapsible-left-pane-view-${shortid.generate()}`;
 injectCSS(`
 .${this_class} .${CTRL_CLASS_PREFIX}-toggle-area {
     color:#000!important;
-    background-color:#f1f1f1!important
+    background-color:#9e9e9e!important
 }
 `);
 
 export default () => {
     const [collapsed, setCollapsed] = useState(false);
-    const [leftPaneWidthPx, setLeftPaneWidthPx] = useState(250);
+    const [leftPaneWidthPx, setLeftPaneWidthPx] = useState(200);
     const [fontSize, setFontSize] = useState<FontSize>("medium");
     return (
         <TestingPane className={this_class}>
@@ -48,7 +48,7 @@ export default () => {
                 {getFontSizeSelector(fontSize, setFontSize)}
             </div>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
-                <CollapsibleLeftPaneView collapsed={collapsed} leftPaneWidthPx={leftPaneWidthPx} onCollapseChanged={setCollapsed}>
+                <CollapsibleLeftPaneView collapsed={collapsed} leftPaneWidth={`${leftPaneWidthPx}px`} onCollapseChanged={setCollapsed}>
                     {leftPaneContent}
                     {rightPaneContent}
                 </CollapsibleLeftPaneView>

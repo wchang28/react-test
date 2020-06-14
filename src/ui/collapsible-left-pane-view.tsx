@@ -4,7 +4,7 @@ import {ReactNode} from "react";
 
 type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
-const DEFAULT_LEDT_PANEL_WIDTH_PX = 300;
+const DEFAULT_LEDT_PANE_WIDTH = "300px";
 
 function getToggleAreaDimension() {
     return "1.5em";
@@ -14,7 +14,7 @@ export const CLASS_PREFIX = "clpv";
 
 export interface Props {
     collapsed?: boolean;
-    leftPaneWidthPx?: number;
+    leftPaneWidth?: string;
     onCollapseChanged: (collapsed: boolean) => void;
 }
 
@@ -64,9 +64,9 @@ const getLeftPane = (collapsed: boolean, onToggleClicked: () => void, content: J
 
 export default (props: ReactProps<Props>) => {
     const collapsed = (typeof props.collapsed === "boolean" ? props.collapsed : false);
-    const leftPaneWidthPx = (typeof props.leftPaneWidthPx === "number" && props.leftPaneWidthPx >= 0 ? props.leftPaneWidthPx : DEFAULT_LEDT_PANEL_WIDTH_PX);
+    const leftPaneWidth = (props.leftPaneWidth ? props.leftPaneWidth : DEFAULT_LEDT_PANE_WIDTH);
     const onToggleClicked = () => {props.onCollapseChanged(!collapsed);};
-    const leftWidth = (collapsed ? getToggleAreaDimension() : `${leftPaneWidthPx}px`);
+    const leftWidth = (collapsed ? getToggleAreaDimension() : leftPaneWidth);
     const leftPaneContent = props.children[0];
     const rightPaneContent = props.children[1];
     return (
