@@ -12,17 +12,23 @@ function getToggleAreaDimension() {
 
 export const CLASS_PREFIX = "clpv";
 
+const defaultCollapseButtonTitle = (collapsed: boolean) => {
+    return (collapsed ? "Expand to the right" : "Collapse to the left");
+}
+
 export interface Props {
     collapsed?: boolean;
     leftPaneWidth?: string;
+    collapseButtonTitle?: (collapsed: boolean) => string;
     onCollapseChanged: (collapsed: boolean) => void;
 }
 
-const getToggleArea = (collapsed: boolean, onToggleClicked: () => void) => {
+const getToggleArea = (collapsed: boolean, onToggleClicked: () => void, collapseButtonTitle: (collapsed: boolean) => string) => {
+    const dimension = getToggleAreaDimension();
     const icon = (collapsed ? "arrow-circle-o-right" : "arrow-circle-o-left");
-    const title = (collapsed ? "Expand to the right" : "Collapse to the left")
+    const title = collapseButtonTitle(collapsed);
     return (
-        <div className={`${CLASS_PREFIX}-toggle-area`} style={{float:"right", height: `${getToggleAreaDimension()}`, width: `${getToggleAreaDimension()}`, position: "relative"}}>
+        <div className={`${CLASS_PREFIX}-toggle-area`} style={{float:"right", height: `${dimension}`, width: `${dimension}`, position: "relative"}}>
             <i className={`${CLASS_PREFIX}-toggle-button fa fa-${icon}`} title={title} style={{fontSize:"1.25em", margin:0, position:"absolute", top:"50%", left:"50%", transform:"translate(-50%, -50%)", cursor:"pointer"}} onClick={onToggleClicked}></i>
         </div>
     );
@@ -38,7 +44,7 @@ const getLeftContainer = (collapsed: boolean, content: JSX.Element) => {
     );
 }
 
-const getLeftPane = (collapsed: boolean, onToggleClicked: () => void, content: JSX.Element) => {
+const getLeftPane = (collapsed: boolean, onToggleClicked: () => void, content: JSX.Element, collapseButtonTitle: (collapsed: boolean) => string) => {
     let className = `${CLASS_PREFIX}-left-pane`;
     if (collapsed) {
         className += " collpased w3-bar";
@@ -47,14 +53,14 @@ const getLeftPane = (collapsed: boolean, onToggleClicked: () => void, content: J
         return (
             <div className={className}>
                 {getLeftContainer(collapsed, content)}
-                {getToggleArea(collapsed, onToggleClicked)}
+                {getToggleArea(collapsed, onToggleClicked, collapseButtonTitle)}
             </div>
         );
     } else {
         return (
             <div className={className}>
                 <div className={`${CLASS_PREFIX}-left-pane-top-bar w3-bar`}>
-                    {getToggleArea(collapsed, onToggleClicked)}
+                    {getToggleArea(collapsed, onToggleClicked, collapseButtonTitle)}
                 </div>
                 {getLeftContainer(collapsed, content)}
             </div>
@@ -69,10 +75,11 @@ export default (props: ReactProps<Props>) => {
     const leftWidth = (collapsed ? getToggleAreaDimension() : leftPaneWidth);
     const leftPaneContent = props.children[0];
     const rightPaneContent = props.children[1];
+    const collapseButtonTitle = (props.collapseButtonTitle ? props.collapseButtonTitle : defaultCollapseButtonTitle);
     return (
         <div className={`${CLASS_PREFIX}-main w3-bar`}>
             <div className={`${CLASS_PREFIX}-left`} style={{float: "left", width: leftWidth}}>
-                {getLeftPane(collapsed, onToggleClicked, leftPaneContent)}
+                {getLeftPane(collapsed, onToggleClicked, leftPaneContent, collapseButtonTitle)}
             </div>
             <div className={`${CLASS_PREFIX}-right`} style={{marginLeft: leftWidth}}>
                 <div className={`${CLASS_PREFIX}-right-content-container`}>

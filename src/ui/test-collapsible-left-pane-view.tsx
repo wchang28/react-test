@@ -52,7 +52,12 @@ export default () => {
                 {getFontSizeSelector(fontSize, setFontSize)}
             </div>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
-                <CollapsibleLeftPaneView collapsed={collapsed} leftPaneWidth={`${leftPaneWidthPx}px`} onCollapseChanged={setCollapsed}>
+                <CollapsibleLeftPaneView
+                    collapsed={collapsed}
+                    leftPaneWidth={`${leftPaneWidthPx}px`}
+                    onCollapseChanged={setCollapsed}
+                    collapseButtonTitle={(collapsed) => (collapsed ? "Expand" : "Collapse")}
+                >
                     {leftPaneContent}
                     {rightPaneContent}
                 </CollapsibleLeftPaneView>
