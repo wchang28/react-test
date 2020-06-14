@@ -1,5 +1,7 @@
 import * as React from 'react';
+import {useState} from 'react';
 import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
+import CollapsibleLeftPaneView from "./collapsible-left-pane-view";
 import {Test as TestNameEntry} from "./test-name-entry";
 import {Test as TestDialog} from "./test-dialog";
 import {Test as TestInformationModal} from "./test-information-modal";
@@ -57,14 +59,17 @@ const routes = testConfig.map(({id, component}, index) => {
 	);
 });
 
+/*
 export default () => {
 	return (
 		<div className="w3-row-padding">
 			<div className="w3-half">
 				<Router>
-					<label>Test Selection:</label>
 					<div>
-						{links}
+						<label>Test Selection:</label>
+						<div>
+							{links}
+						</div>
 					</div>
 					<div className="w3-container w3-card-4 w3-border w3-margin-top">
 						<Switch>
@@ -77,5 +82,35 @@ export default () => {
 				</Router>
 			</div>
 		</div>
+	);
+}
+*/
+
+export default () => {
+	const [collapsed, setCollapsed] = useState(false);
+	return (
+		<Router>
+			<CollapsibleLeftPaneView
+				collapsed={collapsed}
+				onCollapseChanged={setCollapsed}
+			>
+				<div>
+					<label>Test Selection:</label>
+					<div>
+						{links}
+					</div>
+				</div>
+				<div>
+					<Switch>
+						<Route key={0} exact path="/">
+							<div>
+								<h4>Please select a test.</h4>
+							</div>
+						</Route>
+						{routes}
+					</Switch>
+				</div>
+			</CollapsibleLeftPaneView>
+		</Router>
 	);
 }

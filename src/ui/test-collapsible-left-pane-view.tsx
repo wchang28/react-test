@@ -17,7 +17,7 @@ const leftPaneContent = (
 );
     
 const rightPaneContent = (
-    <div className="right-content">
+    <div className="right-content w3-container">
         Hawdy, World!<br/>
         Hawdy, World!<br/>
         Hawdy, World!<br/>
