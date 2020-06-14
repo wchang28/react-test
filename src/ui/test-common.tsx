@@ -132,9 +132,13 @@ export function TestingPane(props: ReactProps<TestPaneProps>) {
     )
 }
 
-export function FontSizeTestingWrapper(props: ReactProps<{fontSize: FontSize}>) {
+export function FontSizeColorTestingWrapper(props: ReactProps<{fontSize: FontSize, color?: Color}>) {
+    let className = `w3-${props.fontSize}`;
+    if (props.color) {
+        className += ` w3-${props.color}`;
+    }
     return (
-        <div className={`w3-${props.fontSize}`}>
+        <div className={className}>
             {props.children}
         </div>
     );
