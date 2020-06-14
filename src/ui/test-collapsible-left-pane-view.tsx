@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import {FontSize, getFontSizeSelector, getNumberInput, getCheckbox, TestingPane, FontSizeColorTestingWrapper} from "./test-common";
 import CollapsibleLeftPaneView, {CLASS_PREFIX as CTRL_CLASS_PREFIX} from "./collapsible-left-pane-view";
-import {injectCSS} from "./utils";
-import shortid from "shortid";
+import {uuid, injectCSS} from "./utils";
 
 const leftPaneContent = (
     <div className="left-content">
@@ -27,7 +26,7 @@ const rightPaneContent = (
     </div>
 );
 
-const this_class = `test-collapsible-left-pane-view-${shortid.generate()}`;
+const this_class = `test-collapsible-left-pane-view-${uuid()}`;
 
 injectCSS(`
 .${this_class} .${CTRL_CLASS_PREFIX}-left-pane-top-bar {
