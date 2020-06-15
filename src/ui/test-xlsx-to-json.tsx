@@ -1,7 +1,26 @@
 import React from "react";
-import {TestingPane} from "./test-common";
-import FileDragDropSelect from "./file-drag-drop-select";
+import {TestingPane, FontSizeColorTestingWrapper} from "./test-common";
+import FileDragDropSelect, {CLASS_PREFIX as CTRL_CLASS_PREFIX} from "./file-drag-drop-select";
+import {uuid, injectCSS} from "./utils";
 import XLSX2JSON from "./browser-xlsx-to-json";
+
+const this_class = `test-xlsx-to-json-${uuid()}`;
+
+injectCSS(`
+.${this_class} .${CTRL_CLASS_PREFIX}-file-drop-area {
+    border: 2px #ccc;
+    border-radius: 10px;
+    padding: "20px";
+}
+.${this_class} .${CTRL_CLASS_PREFIX}-file-drop-area.highlight {
+    border-color: purple;
+}
+.${this_class} .${CTRL_CLASS_PREFIX}-file-select-button {
+    background: #2196F3;
+    color: #fff;
+    border-radius: 4px;
+}
+`);
 
 export default () => {
     const onFileSelect = async (files: File[]) => {
@@ -11,13 +30,15 @@ export default () => {
         }
     }
     return (
-        <TestingPane>
+        <TestingPane testingClassName={this_class}>
             <div style={{width:"50%"}}>
-                <FileDragDropSelect
-                    accept=".xlsx"
-                    multiple={false}
-                    onFileSelect={onFileSelect}
-                />
+                <FontSizeColorTestingWrapper fontSize={"small"}>
+                    <FileDragDropSelect
+                        accept=".xlsx"
+                        multiple={false}
+                        onFileSelect={onFileSelect}
+                    />
+                </FontSizeColorTestingWrapper>
             </div>
         </TestingPane>
     );
