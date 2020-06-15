@@ -21,6 +21,7 @@ import TestCollapsibleLeftPaneView from "./test-collapsible-left-pane-view";
 import TestFileDragDropSelect from "./test-file-drag-drop-select";
 import TestXLSX2JSON from "./test-xlsx-to-json";
 import TestCSV2JSON from "./test-csv-to-json";
+import TestJumpToRoute from "./test-jump-to-route";
 
 interface TestItem {
 	id: string;
@@ -48,6 +49,7 @@ const testConfig: TestItem[] = [
 	,{id: "functional-hooks", name: "Functional Hooks", component: TestFunctionalHooks}
 	,{id: "collapsible-left-pane-view", name: "Collapsible Left Pane View", component: TestCollapsibleLeftPaneView}
 	,{id: "file-drag-drop-select", name: "File Drag Drop Select", component: TestFileDragDropSelect}
+	,{id: "jump-to-route", name: "Jump to Route", component: TestJumpToRoute}
 	// TODO: add more test cases here
 ];
 

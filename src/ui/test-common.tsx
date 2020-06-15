@@ -116,6 +116,7 @@ export const getTextInput = (label: string, value: string, onChange: (value: str
 
 export interface TestPaneProps {
     testingClassName?: string;
+    configWidth?: string;
 }
 
 export function TestingPane(props: ReactProps<TestPaneProps>) {
@@ -130,7 +131,7 @@ export function TestingPane(props: ReactProps<TestPaneProps>) {
         <CollapsibleLeftPaneView
             collapsed={collapsed}
             onCollapseChanged={setCollapsed}
-            leftPaneWidth="200px"
+            leftPaneWidth={props.configWidth ? props.configWidth : "250px"}
         >
             {props.children[0]}
             <div className={props.testingClassName}>
