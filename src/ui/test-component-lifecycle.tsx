@@ -1,11 +1,9 @@
 import * as React from 'react';
 import {useState} from "react";
+import {FontSize, getFontSizeSelector, getOptionSelector, TestingPane, ConfigurationPane} from "./test-common";
 
 type TestMethod = "Component Class" | "Functional";
 const allTestMethods: TestMethod[] = ["Component Class","Functional"];
-
-type FontSize = "tiny" | "small" | "medium" | "large" | "xlarge" | "xxlarge" | "xxxlarge" | "jumbo";
-const allFontSizes: FontSize[] = ["tiny","small","medium","large","xlarge","xxlarge","xxxlarge","jumbo"];
 
 const functionalName = "TestFunctional";
 const componentName = "TestComponent";
@@ -79,6 +77,7 @@ class TestComponent extends React.Component<TestProps, TestComponentState> {
     }
 }
 
+/*
 export default () => {
     const [testMethod, setTestMethod] = useState<TestMethod>("Component Class");
     const [fontSize, setFontSize] = useState<FontSize>("medium");
@@ -115,5 +114,21 @@ export default () => {
                 <ComponentUnderTest fontSize={fontSize}/>
             </div>
         </div>
+    );
+}
+*/
+
+export default () => {
+    const [testMethod, setTestMethod] = useState<TestMethod>("Component Class");
+    const [fontSize, setFontSize] = useState<FontSize>("medium");
+    const ComponentUnderTest = (testMethod === "Component Class" ? TestComponent : TestFunctional);
+    return (
+        <TestingPane>
+            <ConfigurationPane>
+                {getOptionSelector(allTestMethods, "Test Method:", testMethod, setTestMethod)}
+                {getFontSizeSelector(fontSize, setFontSize)}
+            </ConfigurationPane>
+            <ComponentUnderTest fontSize={fontSize}/>
+        </TestingPane>
     );
 }
