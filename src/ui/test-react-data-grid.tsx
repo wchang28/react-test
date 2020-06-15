@@ -3,8 +3,7 @@ import { Editors} from "react-data-grid-addons";
 import { orderBy } from '@progress/kendo-data-query';
 import {Editors as EditorsExt, Formatters as FormattersExt} from "react-data-grid-addons-extension";
 const ReactDataGrid = require("react-data-grid");
-import shortid from "shortid";
-import {injectCSS} from "./utils";
+import {uuid, injectCSS} from "./utils";
 
 const { DropDownEditor} = Editors;
 const { CheckboxEditor, DateInputEditor, NumericInputEditor, TextInputEditor} = EditorsExt;
@@ -53,7 +52,7 @@ interface State {
     rows: Row[];
 }
 
-const this_class = `test-react-data-grid-${shortid.generate()}`;
+const this_class = `test-react-data-grid-${uuid()}`;
 
 injectCSS(`
 .${this_class} .react-grid-HeaderCell {

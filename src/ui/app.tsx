@@ -22,6 +22,7 @@ import TestFileDragDropSelect from "./test-file-drag-drop-select";
 import TestXLSX2JSON from "./test-xlsx-to-json";
 import TestCSV2JSON from "./test-csv-to-json";
 import TestJumpToRoute from "./test-jump-to-route";
+import TestObjsPropertyEditor from "./test-objs-property-editor";
 
 interface TestItem {
 	id: string;
@@ -36,6 +37,7 @@ const testConfig: TestItem[] = [
 	,{id: "nesting-routing", name: "Nesting Routing", component: TestNestingRouting}
 	,{id: "jump-to-route", name: "Jump to Route", component: TestJumpToRoute}
 	,{id: "react-data-grid", name: "Data Grid", component: TestReactDataGrid}
+	,{id: "objs-property-editor", name: "Objects Property Editor", component: TestObjsPropertyEditor}
 	,{id: "name-entry", name: "Name Entry", component: TestNameEntry}
 	,{id: "dialog", name: "Dialog", component: TestDialog}
 	,{id: "information-modal", name: "Information Modal Box", component: TestInformationModal}
