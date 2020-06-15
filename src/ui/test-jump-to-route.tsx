@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {TestingPane, ConfigurationPane, getTextInput} from "./test-common";
 import {Link, Redirect} from "react-router-dom";
 
-function simulateDoSomeThing() {
+function simulateDoingSomeWork() {
     return new Promise<void>((resolve: () => void) => {
         window.setTimeout(() => {
             resolve();
@@ -14,11 +14,11 @@ export default () => {
     const [routeUrl, setRouteUrl] = useState("/nesting-routing/topics/props-v-state");
     const [jumpViaRedirect, setJumpViaRedirect] = useState(false);
     const onJumpProgramaticallyClick = async () => {
-        await simulateDoSomeThing();
+        await simulateDoingSomeWork();
         window.location.href = routeUrl;
     }
     const onJumpViaRedirectClick = async () => {
-        await simulateDoSomeThing();
+        await simulateDoingSomeWork();
         setJumpViaRedirect(true);
     }
     const redirect = (jumpViaRedirect ? <Redirect push={true} to={routeUrl}/> : null);
