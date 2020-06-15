@@ -1,22 +1,10 @@
 import React from "react";
+import {PropertyDef, PropertyCustomEditor} from "../common/types";
 import {EditorProps, EditorComponent, Editors} from "react-data-grid-addons-extension";
 
 const {TextInputEditor, NumericInputEditor, CheckboxEditor, DateInputEditor} = Editors;
 
-export type PropertyType = "string" | "number" | "boolean" | "date" | "option";
-
-export interface RowPropAttributes {
-    propId: string;
-    propType: PropertyType;
-    propName?: string;
-}
-
-export interface PropertyCustomEditor {
-    propId: string;
-    editor: JSX.Element;
-}
-
-interface Props extends EditorProps<any, RowPropAttributes> {
+interface Props extends EditorProps<any, PropertyDef> {
     customEditors?: PropertyCustomEditor[];
 }
 
@@ -37,9 +25,9 @@ export class PropertyBasedEditor extends React.Component<Props> {
     }
     findCustomEditorByPropId(customEditors: PropertyCustomEditor[], propId: string) {
         if (customEditors && customEditors.length > 0 && propId) {
-            for (const pe of customEditors) {
-                if (pe.propId === propId) {
-                    return pe.editor;
+            for (const ce of customEditors) {
+                if (ce.propId === propId) {
+                    return ce.editor;
                 }
             }
         }
