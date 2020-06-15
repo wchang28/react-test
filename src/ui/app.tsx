@@ -20,6 +20,7 @@ import TestFunctionalHooks from "./test-functional-hooks";						// import a defa
 import TestCollapsibleLeftPaneView from "./test-collapsible-left-pane-view";
 import TestFileDragDropSelect from "./test-file-drag-drop-select";
 import TestXLSX2JSON from "./test-xlsx-to-json";
+import TestCSV2JSON from "./test-csv-to-json";
 
 interface TestItem {
 	id: string;
@@ -29,6 +30,7 @@ interface TestItem {
 
 const testConfig: TestItem[] = [
 	{id: "xlsx-to-json", name: "XLSX to JSON", component: TestXLSX2JSON}
+	,{id: "csv-to-json", name: "CSV to JSON", component: TestCSV2JSON}
 	,{id: "component-lifecycle", name: "Component Lifecycle", component: TestComponentLifecycle}
 	,{id: "nesting-routing", name: "Nesting Routing", component: TestNestingRouting}
 	,{id: "react-data-grid", name: "Data Grid", component: TestReactDataGrid}
