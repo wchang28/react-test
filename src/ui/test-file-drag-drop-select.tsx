@@ -33,16 +33,18 @@ export default () => {
                 {getCheckbox("Allow Muitiple", multiple, setMultiple)}
                 {getFontSizeSelector(fontSize, setFontSize)}
             </ConfigurationPane>
-            <FontSizeColorTestingWrapper fontSize={fontSize}>
-                <FileDragDropSelect
-                    accept={accept}
-                    multiple={multiple}
-                    onFileSelect={(files) => {
-                        const names = files.map(({name})=> name);
-                        console.log(`names=${names}`);
-                    }}
-                />
-            </FontSizeColorTestingWrapper>
+            <div className="w3-container" style={{width:"50%"}}>
+                <FontSizeColorTestingWrapper fontSize={fontSize}>
+                    <FileDragDropSelect
+                        accept={accept}
+                        multiple={multiple}
+                        onFileSelect={(files) => {
+                            const names = files.map(({name})=> name);
+                            console.log(`names=${names}`);
+                        }}
+                    />
+                </FontSizeColorTestingWrapper>
+            </div>
         </TestingPane>
     )
 }

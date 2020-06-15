@@ -31,7 +31,7 @@ export default () => {
     }
     return (
         <TestingPane testingClassName={this_class}>
-            <div style={{width:"50%"}}>
+            <div className="w3-container" style={{width:"50%"}}>
                 <FontSizeColorTestingWrapper fontSize={"small"}>
                     <FileDragDropSelect
                         accept=".xlsx"
