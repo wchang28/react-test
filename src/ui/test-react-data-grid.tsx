@@ -7,8 +7,8 @@ import shortid from "shortid";
 import {injectCSS} from "./utils";
 
 const { DropDownEditor} = Editors;
-const { CheckboxEditor, DateInputEditor, NumericInputEditor} = EditorsExt;
-const { CheckboxFormatter } = FormattersExt;
+const { CheckboxEditor, DateInputEditor, NumericInputEditor, TextInputEditor} = EditorsExt;
+const { CheckboxFormatter, SimpleCellFormatter } = FormattersExt;
 
 const issueTypes: Editors.DropDown.OptionItem[] = [
     { id: "bug", value: "Bug" },
@@ -26,7 +26,8 @@ const defaultColumnProperties = {
 
 const columns = [
     { key: "id", name: "ID" },
-    { key: "title", name: "Title", editable: true},
+    //{ key: "title", name: "Title", editable: true},
+    { key: "title", name: "Title", formatter: SimpleCellFormatter, editor: TextInputEditor},
     { key: "complete", name: "Complete", editor: completeEditor},
     { key: "enabled", name: "Enabled", formatter: CheckboxFormatter, editor: CheckboxEditor},
     { key: "issueType", name: "Task Type", editor: IssueTypeEditor},
