@@ -124,7 +124,7 @@ export function TestingPane(props: ReactProps<TestPaneProps>) {
         !props.children[1]
         ?
         <div className={props.testingClassName}>
-            {props.children[0]}
+            {props.children}
         </div>
         :
         <CollapsibleLeftPaneView

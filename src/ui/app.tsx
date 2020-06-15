@@ -19,6 +19,7 @@ import {default as TestComponentLifecycle} from "./test-component-lifecycle";	//
 import TestFunctionalHooks from "./test-functional-hooks";						// import a default export (with tsconfig.json with compilerOptions.esModuleInterop=true)
 import TestCollapsibleLeftPaneView from "./test-collapsible-left-pane-view";
 import TestFileDragDropSelect from "./test-file-drag-drop-select";
+import TestXLSX2JSON from "./test-xlsx-to-json";
 
 interface TestItem {
 	id: string;
@@ -27,7 +28,8 @@ interface TestItem {
 }
 
 const testConfig: TestItem[] = [
-	{id: "component-lifecycle", name: "Component Lifecycle", component: TestComponentLifecycle}
+	{id: "xlsx-to-json", name: "XLSX to JSON", component: TestXLSX2JSON}
+	,{id: "component-lifecycle", name: "Component Lifecycle", component: TestComponentLifecycle}
 	,{id: "nesting-routing", name: "Nesting Routing", component: TestNestingRouting}
 	,{id: "react-data-grid", name: "Data Grid", component: TestReactDataGrid}
 	,{id: "name-entry", name: "Name Entry", component: TestNameEntry}
