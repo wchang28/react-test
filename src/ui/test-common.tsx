@@ -130,6 +130,7 @@ export function TestingPane(props: ReactProps<TestPaneProps>) {
         <CollapsibleLeftPaneView
             collapsed={collapsed}
             onCollapseChanged={setCollapsed}
+            leftPaneWidth="200px"
         >
             {props.children[0]}
             <div className={props.testingClassName}>
@@ -141,7 +142,10 @@ export function TestingPane(props: ReactProps<TestPaneProps>) {
 
 export function ConfigurationPane(props: ReactProps<unknown>) {
     return (
-        <div className="test-configuration w3-container w3-small">
+        <div className="test-configuration w3-container w3-tiny">
+            <div className="w3-light-blue w3-border w3-small" style={{fontWeight:"bold"}}>
+                Configuration
+            </div>
             {props.children}
         </div>
     );
