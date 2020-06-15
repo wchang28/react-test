@@ -1,8 +1,9 @@
-import React from "react";
-import {TestingPane, FontSizeColorTestingWrapper} from "./test-common";
+import React, {useState} from "react";
+import {TestingPane} from "./test-common";
 import FileDragDropSelect, {CLASS_PREFIX as CTRL_CLASS_PREFIX} from "./file-drag-drop-select";
 import {uuid, injectCSS} from "./utils";
 import XLSX2JSON from "./browser-xlsx-to-json";
+import JSONTree from 'react-json-tree';
 
 const this_class = `test-xlsx-to-json-${uuid()}`;
 
@@ -23,23 +24,26 @@ injectCSS(`
 `);
 
 export default () => {
+    const [data, setData] = useState<any>(null);
     const onFileSelect = async (files: File[]) => {
         if (files.length === 1) {
             const o = await XLSX2JSON(files[0]);
             console.log(JSON.stringify(o, null, 2));
+            setData(o);
         }
     }
     return (
         <TestingPane testingClassName={this_class}>
-            <div className="w3-container" style={{width:"50%"}}>
-                <FontSizeColorTestingWrapper fontSize={"small"}>
-                    <FileDragDropSelect
-                        accept=".xlsx"
-                        multiple={false}
-                        onFileSelect={onFileSelect}
-                    />
-                </FontSizeColorTestingWrapper>
-            </div>
+            <div className="w3-container w3-small" style={{width:"50%"}}>
+                <FileDragDropSelect
+                    accept=".xlsx"
+                    multiple={false}
+                    onFileSelect={onFileSelect}
+                />
+                <div className="w3-margin-top">
+                    <JSONTree data={data} />
+                </div>
+             </div>
         </TestingPane>
     );
 }
