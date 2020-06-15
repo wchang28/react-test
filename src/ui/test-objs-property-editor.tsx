@@ -1,9 +1,22 @@
 import React, {useState} from "react";
 import {TestingPane} from "./test-common";
-import {RowPropAttributes, PropertyBasedEditor} from "./PropertyBasedEditor";
+import {RowPropAttributes, PropertyCustomEditor, PropertyBasedEditor} from "./PropertyBasedEditor";
+import { Editors} from "react-data-grid-addons";
+import {Editors as EditorsExt} from "react-data-grid-addons-extension";
 import JSONTree from 'react-json-tree';
 const ReactDataGrid = require("react-data-grid");
 import {uuid, injectCSS} from "./utils";
+
+const { DropDownEditor} = Editors;
+const { NumericInputEditor} = EditorsExt;
+
+const issueTypes: Editors.DropDown.OptionItem[] = [
+    { id: "bug", value: "Bug" },
+    { id: "epic", value: "Epic" },
+    { id: "story", value: "Story" }
+];
+const IssueTypeEditor = <DropDownEditor options={issueTypes} />;
+const completeEditor = <NumericInputEditor min={0} max={100} step={2}/>
 
 interface Row {
     id: number;
@@ -20,9 +33,9 @@ const objs: Row[] = [
     { id: 2, title: "Task 3", issueType: "Epic", complete: 60, enabled: true, settleDate: "2020-06-02" }
 ];
 
-const rowsPropAtrib: RowPropAttributes[] =[
+const rowsPropAtrib: RowPropAttributes[] = [
     {propId: "title", propType: "string"}
-    ,{propId: "issueType", propType: "string"}
+    ,{propId: "issueType", propType: "option"}
     ,{propId: "complete", propType: "number"}
     ,{propId: "enabled", propType: "boolean"}
     ,{propId: "settleDate", propType: "date"}
@@ -40,12 +53,19 @@ const rows = rowsPropAtrib.map(({propId, propName, propType}) => {  // for each 
     return {...propAtrib, ...o};
 });
 
+const customEditors: PropertyCustomEditor[] = [
+    {propId: "issueType", editor: IssueTypeEditor}
+    ,{propId: "complete", editor: completeEditor}
+];
+
+const editor = <PropertyBasedEditor customEditors={customEditors}/>
+
 const defaultColumnProperties = {
     resizable: true
 };
 
 const objColumns: any[] = objs.map((obj, index) => {  // for each object
-    return {key: `object_${index}`, name: obj.id, editor: PropertyBasedEditor} as any;
+    return {key: `object_${index}`, name: obj.id, editor} as any;
 })
 
 const columns: any[] = [
