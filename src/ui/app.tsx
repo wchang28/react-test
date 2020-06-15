@@ -67,9 +67,9 @@ export default () => {
 				collapsed={collapsed}
 				onCollapseChanged={setCollapsed}
 			>
-				<div className="w3-container">
-					<div>
-						<h6 style={{fontWeight: "bold"}}>Test Selection:</h6>
+				<div className="w3-container w3-small">
+					<div className="w3-medium w3-teal w3-border" style={{fontWeight: "bold"}}>
+						Test Selection
 					</div>
 					<div>
 						{links}
