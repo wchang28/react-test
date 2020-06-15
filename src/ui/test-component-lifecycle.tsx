@@ -77,47 +77,6 @@ class TestComponent extends React.Component<TestProps, TestComponentState> {
     }
 }
 
-/*
-export default () => {
-    const [testMethod, setTestMethod] = useState<TestMethod>("Component Class");
-    const [fontSize, setFontSize] = useState<FontSize>("medium");
-    const testMethodOptions = allTestMethods.map((item, index) => {
-        return (<option key={index} value={item}>{item}</option>);
-    });
-    const fontSizeOptions = allFontSizes.map((item, index) => {
-        return (<option key={index} value={item}>{item}</option>);
-    });
-    const ComponentUnderTest = (testMethod === "Component Class" ? TestComponent : TestFunctional);
-    const onTestMethodChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setTestMethod(event.target.value as TestMethod);
-    }
-    const onFontSizeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setFontSize(event.target.value as FontSize);
-    }
-    return (
-        <div>
-            <div className="w3-container w3-border" style={{padding: "0 8px", marginTop: "8px"}}>
-                <p>
-                    <label>Test Method: </label>
-                    <select className="w3-select w3-border" name="testMethod" value={testMethod} onChange={onTestMethodChange} style={{padding: "4px", width: "30%"}}>
-                        {testMethodOptions}
-                    </select>
-                </p>
-                <p>
-                    <label>Font Size: </label>
-                    <select className="w3-select w3-border" name="fontSize" value={fontSize} onChange={onFontSizeChange} style={{padding: "4px", width: "30%"}}>
-                        {fontSizeOptions}
-                    </select>
-                </p>
-            </div>
-            <div className="w3-container w3-border" style={{paddingTop: "8px", paddingBottom: "8px", marginTop: "8px"}}>
-                <ComponentUnderTest fontSize={fontSize}/>
-            </div>
-        </div>
-    );
-}
-*/
-
 export default () => {
     const [testMethod, setTestMethod] = useState<TestMethod>("Component Class");
     const [fontSize, setFontSize] = useState<FontSize>("medium");
