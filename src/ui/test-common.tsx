@@ -115,7 +115,7 @@ export const getTextInput = (label: string, value: string, onChange: (value: str
 }
 
 export interface TestPaneProps {
-    className?: string;
+    testingClassName?: string;
 }
 
 export function TestingPane(props: ReactProps<TestPaneProps>) {
@@ -123,7 +123,7 @@ export function TestingPane(props: ReactProps<TestPaneProps>) {
     return (
         !props.children[1]
         ?
-        <div className={props.className}>
+        <div className={props.testingClassName}>
             {props.children[0]}
         </div>
         :
@@ -132,10 +132,18 @@ export function TestingPane(props: ReactProps<TestPaneProps>) {
             onCollapseChanged={setCollapsed}
         >
             {props.children[0]}
-            <div className={props.className}>
+            <div className={props.testingClassName}>
                 {props.children[1]}
             </div>
         </CollapsibleLeftPaneView>
+    );
+}
+
+export function ConfigurationPane(props: ReactProps<unknown>) {
+    return (
+        <div className="test-configuration w3-container w3-small">
+            {props.children}
+        </div>
     );
 }
 

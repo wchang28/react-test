@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {FontSize, getFontSizeSelector, getNumberInput, getCheckbox, TestingPane, FontSizeColorTestingWrapper} from "./test-common";
+import {FontSize, getFontSizeSelector, getNumberInput, getCheckbox, TestingPane, ConfigurationPane, FontSizeColorTestingWrapper} from "./test-common";
 import CollapsibleLeftPaneView, {CLASS_PREFIX as CTRL_CLASS_PREFIX} from "./collapsible-left-pane-view";
 import {uuid, injectCSS} from "./utils";
 
@@ -44,12 +44,12 @@ export default () => {
     const [leftPaneWidthPx, setLeftPaneWidthPx] = useState(200);
     const [fontSize, setFontSize] = useState<FontSize>("medium");
     return (
-        <TestingPane className={this_class}>
-            <div>
+        <TestingPane testingClassName={this_class}>
+            <ConfigurationPane>
                 {getCheckbox("Collapsed", collapsed, setCollapsed)}
                 {getNumberInput("Left Pane Width px:", leftPaneWidthPx, setLeftPaneWidthPx)}
                 {getFontSizeSelector(fontSize, setFontSize)}
-            </div>
+            </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
                 <CollapsibleLeftPaneView
                     collapsed={collapsed}

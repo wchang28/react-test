@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {FontSize, getFontSizeSelector, getCheckbox, TestingPane, FontSizeColorTestingWrapper} from "./test-common";
+import {FontSize, getFontSizeSelector, getCheckbox, TestingPane, ConfigurationPane, FontSizeColorTestingWrapper} from "./test-common";
 import FileDragDropSelect, {CLASS_PREFIX as CTRL_CLASS_PREFIX} from "./file-drag-drop-select";
 import {uuid, injectCSS} from "./utils";
 
@@ -28,11 +28,11 @@ export default () => {
     const [fontSize, setFontSize] = useState<FontSize>("medium");
     const [multiple, setMultiple] = useState(true);
     return (
-        <TestingPane className={this_class}>
-            <div>
+        <TestingPane testingClassName={this_class}>
+            <ConfigurationPane>
                 {getCheckbox("Allow Muitiple", multiple, setMultiple)}
                 {getFontSizeSelector(fontSize, setFontSize)}
-            </div>
+            </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
                 <FileDragDropSelect
                     accept={accept}
