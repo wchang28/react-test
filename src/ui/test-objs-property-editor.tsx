@@ -53,7 +53,7 @@ const columns: any[] = [
 ].concat(objColumns)
 .map(c => ({...c, ...defaultColumnProperties}));
 
-const this_class = `test-react-data-grid-${uuid()}`;
+const this_class = `test-objs-property-editor-${uuid()}`;
 
 injectCSS(`
 .${this_class} .react-grid-HeaderCell {
@@ -81,7 +81,7 @@ export default () => {
         setData(rows);
     }
     return (
-        <TestingPane>
+        <TestingPane testingClassName={this_class}>
             <div className="w3-container w3-tiny w3-margin-top">
                 <div style={{width:"75%"}}>
                     <ReactDataGrid
