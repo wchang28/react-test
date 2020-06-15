@@ -1,4 +1,5 @@
-import React, {ReactNode} from "react";
+import React, {ReactNode, useState} from "react";
+import CollapsibleLeftPaneView from "./collapsible-left-pane-view";
 
 type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
@@ -78,7 +79,7 @@ export function getOptionSelector<VT = string>(allOptions: VT[], label: string, 
     return (
         <p>
             <label>{label}</label>
-            <select className="w3-select w3-border" value={(value as any) as string} onChange={(event) => {onChange((event.target.value) as any as VT);}} style={{padding: "4px"}}>
+            <select className="w3-select w3-border" value={(value as any) as string} onChange={(event) => {onChange((event.target.value) as any as VT);}} style={{display:"block", padding: "4px"}}>
                 {options}
             </select>
         </p>
@@ -117,6 +118,7 @@ export interface TestPaneProps {
     className?: string;
 }
 
+/*
 export function TestingPane(props: ReactProps<TestPaneProps>) {
     const cofigurationPane = props.children[0];
     const displayPane = props.children[1];
@@ -131,9 +133,31 @@ export function TestingPane(props: ReactProps<TestPaneProps>) {
         </div>
     )
 }
+*/
+
+export function TestingPane(props: ReactProps<TestPaneProps>) {
+    const [collapsed, setCollapsed] = useState(false);
+    return (
+        !props.children[1]
+        ?
+        <div className={props.className}>
+            {props.children[0]}
+        </div>
+        :
+        <CollapsibleLeftPaneView
+            collapsed={collapsed}
+            onCollapseChanged={setCollapsed}
+        >
+            {props.children[0]}
+            <div className={props.className}>
+                {props.children[1]}
+            </div>
+        </CollapsibleLeftPaneView>
+    );
+}
 
 export function FontSizeColorTestingWrapper(props: ReactProps<{fontSize: FontSize, color?: Color}>) {
-    let className = `w3-${props.fontSize}`;
+    let className = `font-size-color-testing-wrapper w3-${props.fontSize}`;
     if (props.color) {
         className += ` w3-${props.color}`;
     }

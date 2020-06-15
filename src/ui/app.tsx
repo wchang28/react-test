@@ -59,33 +59,6 @@ const routes = testConfig.map(({id, component}, index) => {
 	);
 });
 
-/*
-export default () => {
-	return (
-		<div className="w3-row-padding">
-			<div className="w3-half">
-				<Router>
-					<div>
-						<label>Test Selection:</label>
-						<div>
-							{links}
-						</div>
-					</div>
-					<div className="w3-container w3-card-4 w3-border w3-margin-top">
-						<Switch>
-							<Route key={0} exact path="/">
-								<h3>Please select a test.</h3>
-							</Route>
-							{routes}
-						</Switch>
-					</div>
-				</Router>
-			</div>
-		</div>
-	);
-}
-*/
-
 export default () => {
 	const [collapsed, setCollapsed] = useState(false);
 	return (
@@ -94,8 +67,10 @@ export default () => {
 				collapsed={collapsed}
 				onCollapseChanged={setCollapsed}
 			>
-				<div>
-					<label>Test Selection:</label>
+				<div className="w3-container">
+					<div>
+						<h6 style={{fontWeight: "bold"}}>Test Selection:</h6>
+					</div>
 					<div>
 						{links}
 					</div>
@@ -103,8 +78,8 @@ export default () => {
 				<div>
 					<Switch>
 						<Route key={0} exact path="/">
-							<div>
-								<h4>Please select a test.</h4>
+							<div className="w3-container" style={{fontWeight: "bold"}}>
+								Please select a test from the left.
 							</div>
 						</Route>
 						{routes}
