@@ -34,6 +34,7 @@ const testConfig: TestItem[] = [
 	,{id: "csv-to-json", name: "CSV to JSON", component: TestCSV2JSON}
 	,{id: "component-lifecycle", name: "Component Lifecycle", component: TestComponentLifecycle}
 	,{id: "nesting-routing", name: "Nesting Routing", component: TestNestingRouting}
+	,{id: "jump-to-route", name: "Jump to Route", component: TestJumpToRoute}
 	,{id: "react-data-grid", name: "Data Grid", component: TestReactDataGrid}
 	,{id: "name-entry", name: "Name Entry", component: TestNameEntry}
 	,{id: "dialog", name: "Dialog", component: TestDialog}
@@ -49,7 +50,6 @@ const testConfig: TestItem[] = [
 	,{id: "functional-hooks", name: "Functional Hooks", component: TestFunctionalHooks}
 	,{id: "collapsible-left-pane-view", name: "Collapsible Left Pane View", component: TestCollapsibleLeftPaneView}
 	,{id: "file-drag-drop-select", name: "File Drag Drop Select", component: TestFileDragDropSelect}
-	,{id: "jump-to-route", name: "Jump to Route", component: TestJumpToRoute}
 	// TODO: add more test cases here
 ];
 
