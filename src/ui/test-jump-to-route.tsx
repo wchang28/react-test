@@ -1,26 +1,20 @@
 import React, {useState} from "react";
 import {TestingPane, ConfigurationPane, getTextInput} from "./test-common";
 import {Link, Redirect} from "react-router-dom";
-
-function simulateDoingSomeWork() {
-    return new Promise<void>((resolve: () => void) => {
-        window.setTimeout(() => {
-            resolve();
-        }, 500);
-    })
-}
+import {simulateDoingSomeWork} from "./utils";
+import {indicateBusyWork} from "./jquery-utils";
 
 export default () => {
     const [routeUrl, setRouteUrl] = useState("/nesting-routing/topics/props-v-state");
     const [jumpViaRedirect, setJumpViaRedirect] = useState(false);
-    const onJumpProgramaticallyClick = async () => {
-        await simulateDoingSomeWork();
-        window.location.href = routeUrl;
-    }
     const onJumpViaRedirectClick = async () => {
-        await simulateDoingSomeWork();
+        await indicateBusyWork(simulateDoingSomeWork());
         setJumpViaRedirect(true);
-    }
+    };
+    const onJumpProgramaticallyClick = async () => {
+        await indicateBusyWork(simulateDoingSomeWork());
+        window.location.href = routeUrl;
+    };
     const redirect = (jumpViaRedirect ? <Redirect push={true} to={routeUrl}/> : null);
     return (
         <TestingPane configWidth="250px">

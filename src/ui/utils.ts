@@ -19,3 +19,11 @@ export function injectCSS(css: string, uglify: boolean = false) {
     style.appendChild(document.createTextNode(css));
     document.getElementsByTagName("head")[0].appendChild(style); 
 }
+
+export function simulateDoingSomeWork(durationMS: number = 2000) {
+    return new Promise<void>((resolve: () => void) => {
+        window.setTimeout(() => {
+            resolve();
+        }, durationMS);
+    })
+}
