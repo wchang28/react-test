@@ -67,18 +67,20 @@ export default () => {
     const [objs, setObjs] = useState<any[]>(rows);
     const [patches, setPatches] = useState<PatchItem[]>([]);
     const [heading, setHeading] = useState("Property");
-    const [minHeight, setMinHeight] = useState(350);
+    const [minHeight, setMinHeight] = useState(300);
     const [fontSize, setFontSize] = useState<FontSize>("medium");
+    const [width, setWidth] = useState("75%");
     return (
         <TestingPane testingClassName={this_class}>
             <ConfigurationPane>
+                {getTextInput("width", width, setWidth)}
                 {getTextInput("heading", heading, setHeading)}
                 {getNumberInput("minHeight", minHeight, setMinHeight)}
                 {getFontSizeSelector(fontSize, setFontSize)}
             </ConfigurationPane>
             <div className="w3-container">
                 <FontSizeColorTestingWrapper fontSize={fontSize}>
-                    <div className="w3-margin-top" style={{width:"75%"}}>
+                    <div className="w3-margin-top" style={{width: width}}>
                         <PropertyGridEditor
                             objs={objs}
                             propertyDefs={propertyDefs}
