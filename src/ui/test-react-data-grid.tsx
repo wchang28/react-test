@@ -29,7 +29,7 @@ const columns = [
     { key: "title", name: "Title", formatter: SimpleCellFormatter, editor: TextInputEditor},
     { key: "complete", name: "Complete", editor: completeEditor},
     { key: "enabled", name: "Enabled", formatter: CheckboxFormatter, editor: CheckboxEditor},
-    { key: "issueType", name: "Task Type", editor: IssueTypeEditor},
+    { key: "issueType", name: "Issue Type", editor: IssueTypeEditor},
     { key: "settleDate", name: "Settle Date", editor: DateInputEditor}
 ].map(c => ({...c, ...defaultColumnProperties}));
 

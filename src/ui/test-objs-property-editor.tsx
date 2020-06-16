@@ -18,7 +18,7 @@ const issueTypes: Editors.DropDown.OptionItem[] = [
 const IssueTypeEditor = <DropDownEditor options={issueTypes} />;
 const completeEditor = <NumericInputEditor min={0} max={100} step={2}/>
 
-interface Row {
+interface Item {
     id: number;
     title: string | null;
     issueType?: "Bug" | "Epic" | "Story" | null;
@@ -27,7 +27,7 @@ interface Row {
     settleDate?: string | null;
 }
 
-const objs: Row[] = [
+const objs: Item[] = [
     { id: 0, title: "Task 1", issueType: "Bug", complete: 20, enabled: true, settleDate: "2020-04-26" },
     { id: 1, title: "Task 2", issueType: "Story", complete: 40 , enabled: false, settleDate: null },
     { id: 2, title: "Task 3", issueType: "Epic", complete: 60, enabled: true, settleDate: "2020-06-02" }
@@ -36,7 +36,7 @@ const objs: Row[] = [
 const propertyDefs: PropertyDef[] = [
     {propId: "id", propName: "ID", propType: "string", propReadOnly: true}
     ,{propId: "title", propName: "Title", propType: "string"}
-    ,{propId: "issueType", propName: "Task Type", propType: "string"}
+    ,{propId: "issueType", propName: "Issue Type", propType: "string"}
     ,{propId: "complete", propName: "Complete", propType: "number"}
     ,{propId: "enabled", propName: "Enabled", propType: "boolean"}
     ,{propId: "settleDate", propName: "Settle Date", propType: "date"}
