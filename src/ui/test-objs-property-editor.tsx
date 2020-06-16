@@ -1,16 +1,14 @@
 import React, {useState} from "react";
 import {TestingPane} from "./test-common";
-import {PropertyDef, PropertyCustomEditor, Editors as EditorsTest, Formatters as FormattersTest} from "./rdg-addons";
-import { Editors} from "react-data-grid-addons";
-import {Editors as EditorsExt} from "react-data-grid-addons-extension";
+import {Editors} from "react-data-grid-addons";
+import {PropertyDef, PropertyCustomEditor, Editors as EditorsExt, Formatters as FormattersExt} from "react-data-grid-addons-extension";
 import JSONTree from 'react-json-tree';
 const ReactDataGrid = require("react-data-grid");
 import {uuid, injectCSS} from "./utils";
 
 const {DropDownEditor} = Editors;
-const {NumericInputEditor} = EditorsExt;
-const {PropertyBasedEditor} = EditorsTest;
-const {PropertyBasedFormatter} = FormattersTest;
+const {NumericInputEditor, PropertyBasedEditor} = EditorsExt;
+const {PropertyBasedFormatter} = FormattersExt;
 
 const issueTypes: Editors.DropDown.OptionItem[] = [
     { id: "bug", value: "Bug" },
