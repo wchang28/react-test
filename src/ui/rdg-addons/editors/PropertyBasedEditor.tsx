@@ -4,6 +4,29 @@ import {EditorProps, EditorComponent, Editors} from "react-data-grid-addons-exte
 
 const {TextInputEditor, NumericInputEditor, CheckboxEditor, DateInputEditor} = Editors;
 
+class ReadOnlyEditor extends React.Component<EditorProps<any>> {
+    private input: React.RefObject<HTMLInputElement>;
+    constructor(props: any) {
+        super(props);
+        this.input = React.createRef<HTMLInputElement>();
+    }
+    getValue() {
+        const value: any = {};
+        if (this.props.column) {
+            value[this.props.column.key] = this.props.value;
+        }
+        return value;
+    }
+    getInputNode() {
+        return this.input.current;
+    }
+    render() {
+        return (
+            <input type="text" ref={this.input} readOnly={true} value={"(readonly)"}/>
+        );
+    }
+}
+
 interface Props extends EditorProps<any, PropertyDef> {
     customEditors?: PropertyCustomEditor[];
 }
@@ -16,6 +39,9 @@ export class PropertyBasedEditor extends React.Component<Props> {
     }
     get InternalEditor() {
         return (this.refInternalEditor.current as any) as EditorComponent;
+    }
+    get ReadOnly() {
+        return (typeof this.props.rowData.propReadOnly === "boolean" ? this.props.rowData.propReadOnly : false);
     }
     getValue() {
         return this.InternalEditor.getValue();
@@ -35,7 +61,8 @@ export class PropertyBasedEditor extends React.Component<Props> {
     }
     render() {
         const {propId, propType} = this.props.rowData;
-        let internalEditor = this.findCustomEditorByPropId(this.props.customEditors, propId);
+        const readOnly = this.ReadOnly;
+        let internalEditor = (readOnly ? <ReadOnlyEditor/> : this.findCustomEditorByPropId(this.props.customEditors, propId));
         const internalEditorProps = {...{ref: this.refInternalEditor as any}, ...this.props};
         if (internalEditorProps.customEditors) {
             delete internalEditorProps.customEditors;

@@ -4,6 +4,7 @@ export interface PropertyDef {
     propId: string;
     propType: PropertyType;
     propName?: string;
+    propReadOnly?: boolean;
 }
 
 export interface PropertyCustomEditor {

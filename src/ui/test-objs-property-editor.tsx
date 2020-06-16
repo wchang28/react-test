@@ -36,7 +36,8 @@ const objs: Row[] = [
 ];
 
 const propertyDefs: PropertyDef[] = [
-    {propId: "title", propName: "Title", propType: "string"}
+    {propId: "id", propName: "ID", propType: "string", propReadOnly: true}
+    ,{propId: "title", propName: "Title", propType: "string"}
     ,{propId: "issueType", propName: "Task Type", propType: "option"}
     ,{propId: "complete", propName: "Complete", propType: "number"}
     ,{propId: "enabled", propName: "Enabled", propType: "boolean"}
@@ -51,9 +52,9 @@ const customEditors: PropertyCustomEditor[] = [
 const editor = <PropertyBasedEditor customEditors={customEditors}/>
 const formatter = <PropertyBasedFormatter/>
 
-const rows = propertyDefs.map(({propId, propName, propType}) => {  // for each property
+const rows = propertyDefs.map(({propId, propName, propType, propReadOnly}) => {  // for each property
     if (!propName) propName = propId;
-    const propAtrib = {propId, propName, propType};
+    const propAtrib = {propId, propName, propType, propReadOnly};
     const o: any = {};
     objs.forEach((obj, index) => {   // for each object
         const column = `object_${index}`;
