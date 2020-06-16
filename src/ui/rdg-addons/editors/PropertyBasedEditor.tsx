@@ -22,7 +22,7 @@ class ReadOnlyEditor extends React.Component<EditorProps<any>> {
     }
     render() {
         return (
-            <input type="text" ref={this.input} readOnly={true} value={"(readonly)"}/>
+            <input type="text" ref={this.input} readOnly={true} value={"(readonly)"} style={{textAlign: "center"}}/>
         );
     }
 }
