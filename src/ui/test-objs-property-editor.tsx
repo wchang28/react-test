@@ -36,11 +36,11 @@ const objs: Row[] = [
 ];
 
 const propertyDefs: PropertyDef[] = [
-    {propId: "title", propType: "string"}
-    ,{propId: "issueType", propType: "option"}
-    ,{propId: "complete", propType: "number"}
-    ,{propId: "enabled", propType: "boolean"}
-    ,{propId: "settleDate", propType: "date"}
+    {propId: "title", propName: "Title", propType: "string"}
+    ,{propId: "issueType", propName: "Task Type", propType: "option"}
+    ,{propId: "complete", propName: "Complete", propType: "number"}
+    ,{propId: "enabled", propName: "Enabled", propType: "boolean"}
+    ,{propId: "settleDate", propName: "Settle Date", propType: "date"}
 ];
 
 const customEditors: PropertyCustomEditor[] = [
