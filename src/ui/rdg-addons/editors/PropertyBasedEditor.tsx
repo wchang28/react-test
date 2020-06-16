@@ -21,8 +21,9 @@ class ReadOnlyEditor extends React.Component<EditorProps<any>> {
         return this.input.current;
     }
     render() {
+        const value = (this.props.value === null || this.props.value === undefined ? undefined : String(this.props.value));
         return (
-            <input type="text" ref={this.input} readOnly={true} value={"(readonly)"} style={{textAlign: "center"}}/>
+            <input type="text" ref={this.input} title={"readonly"} readOnly={true} value={value}/>
         );
     }
 }
