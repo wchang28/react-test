@@ -1,4 +1,4 @@
-export type PropertyType = "string" | "number" | "boolean" | "date" | "option";
+export type PropertyType = "string" | "number" | "boolean" | "date";
 
 export interface PropertyDef {
     propId: string;

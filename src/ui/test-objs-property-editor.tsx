@@ -38,7 +38,7 @@ const objs: Row[] = [
 const propertyDefs: PropertyDef[] = [
     {propId: "id", propName: "ID", propType: "string", propReadOnly: true}
     ,{propId: "title", propName: "Title", propType: "string"}
-    ,{propId: "issueType", propName: "Task Type", propType: "option"}
+    ,{propId: "issueType", propName: "Task Type", propType: "string"}
     ,{propId: "complete", propName: "Complete", propType: "number"}
     ,{propId: "enabled", propName: "Enabled", propType: "boolean"}
     ,{propId: "settleDate", propName: "Settle Date", propType: "date"}
