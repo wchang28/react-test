@@ -69,16 +69,18 @@ export default () => {
     const [heading, setHeading] = useState("Property");
     const [minHeight, setMinHeight] = useState(300);
     const [fontSize, setFontSize] = useState<FontSize>("medium");
+    const [widthPx, setWidthPx] = useState(500);
     return (
         <TestingPane testingClassName={this_class}>
             <ConfigurationPane>
+                {getNumberInput("width (px)", widthPx, setWidthPx)}
                 {getTextInput("heading", heading, setHeading)}
                 {getNumberInput("minHeight", minHeight, setMinHeight)}
                 {getFontSizeSelector(fontSize, setFontSize)}
             </ConfigurationPane>
             <div className="w3-container">
                 <FontSizeColorTestingWrapper fontSize={fontSize}>
-                    <div className="w3-margin-top" style={{width: "75%"}}>
+                    <div className="w3-margin-top" style={{width: `${widthPx}px`}}>
                         <PropertyGridEditor
                             objs={objs}
                             propertyDefs={propertyDefs}
