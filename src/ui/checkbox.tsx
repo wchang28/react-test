@@ -21,7 +21,7 @@ export default (props: ReactProps<Props>) => {
         props.onChange(props.checked ? false: true);
     };
     const handleKeyPress = (event: KeyboardEvent<HTMLSpanElement>) => {
-        if(event.key === 'Space') {
+        if(event.key === ' ') {
             onChange();
         }
     };
