@@ -7,6 +7,7 @@ function getCheckboxUI(value?: boolean | null) {
     return {
         unicodeChar: (value ? '\u2611' : '\u2610')
         ,fontSize: "1.5em"
+        ,top: "0.125em"
     };
 }
 
@@ -16,7 +17,7 @@ export interface Props {
 }
 
 export default (props: ReactProps<Props>) => {
-    const {unicodeChar, fontSize} = getCheckboxUI(props.checked);
+    const {unicodeChar, fontSize, top} = getCheckboxUI(props.checked);
     const onChange = () => {
         props.onChange(props.checked ? false: true);
     };
@@ -26,6 +27,6 @@ export default (props: ReactProps<Props>) => {
         }
     };
     return (
-        <span tabIndex={0} onClick={onChange} onKeyPress={handleKeyPress} style={{fontSize, cursor: "pointer"}}>{unicodeChar}</span>
+        <span tabIndex={0} onClick={onChange} onKeyPress={handleKeyPress} style={{position: "relative", top, fontSize, cursor: "pointer", padding: "0"}}>{unicodeChar}</span>
     );
 }

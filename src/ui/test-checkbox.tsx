@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {FontSize, getFontSizeSelector, getCheckbox, TestingPane, ConfigurationPane, FontSizeColorTestingWrapper} from "./test-common";
+import {FontSize, getFontSizeSelector, TestingPane, ConfigurationPane, FontSizeColorTestingWrapper} from "./test-common";
 import Checkbox from "./checkbox";
 
 export default () => {
@@ -16,7 +16,7 @@ export default () => {
                         <Checkbox checked={checked} onChange={setChecked}/>{' '}<label>New checkbox</label>
                     </div>
                     <div>
-                        <input className="w3-check" type="checkbox" checked={checked} onClick={() => setChecked(!checked)} />{' '}<label>Old checkbox</label>
+                        <input className="w3-check" type="checkbox" checked={checked} onChange={(e) => setChecked(e.target.checked)}/>{' '}<label>Old checkbox</label>
                     </div>
                 </FontSizeColorTestingWrapper>
             </div>
