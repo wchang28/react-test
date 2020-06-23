@@ -24,6 +24,7 @@ export default (props: ReactProps<Props>) => {
     const handleKeyPress = (event: KeyboardEvent<HTMLSpanElement>) => {
         if(event.key === ' ') {
             onChange();
+            event.preventDefault();
         }
     };
     return (
