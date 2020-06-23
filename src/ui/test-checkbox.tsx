@@ -12,7 +12,12 @@ export default () => {
             </ConfigurationPane>
             <div className="w3-container" style={{width:"50%"}}>
                 <FontSizeColorTestingWrapper fontSize={fontSize}>
-                    <Checkbox checked={checked} onChange={setChecked}/>{' '}<label>Please check/un-check me</label>
+                    <div>
+                        <Checkbox checked={checked} onChange={setChecked}/>{' '}<label>New checkbox</label>
+                    </div>
+                    <div>
+                        <input className="w3-check" type="checkbox" checked={checked} onClick={() => setChecked(!checked)} />{' '}<label>Old checkbox</label>
+                    </div>
                 </FontSizeColorTestingWrapper>
             </div>
         </TestingPane>
