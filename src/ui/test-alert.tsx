@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Alert, Importance, HorzontalLocation, VerticalLocation} from "./alert";
+import Alert, {Importance, HorzontalLocation, VerticalLocation} from "./alert";
 
 export type FontSize = "tiny" | "small" | "medium" | "large" | "xlarge" | "xxlarge" | "xxxlarge" | "jumbo";
 

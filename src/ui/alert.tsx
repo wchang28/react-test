@@ -1,4 +1,7 @@
 import * as React from 'react';
+import {ReactNode} from "react";
+
+type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
 export type Importance = "error" | "success" | "warning" | "info";
 export type HorzontalLocation = "left" | "center" | "right";
@@ -19,135 +22,89 @@ export interface Props {
     onClose: () => void;
 }
 
-export interface State {
-    message?: string;
-    importance?: Importance;
-    strong?: boolean;
-    horizontalLocation?: HorzontalLocation;
-    verticalLocation?: VerticalLocation;
+function getColor(strong: boolean, importance: Importance) {
+    let color = (strong ? "" : "pale-");
+    switch(importance) {
+        case "error":
+            color += "red";
+            break;
+        case "success":
+            color += "green";
+            break;
+        case "warning":
+            color += "yellow";
+            break;
+        case "info":
+        default:
+            color += "blue";
+    }
+    return color;
 }
 
-export class Alert extends React.Component<Props, State> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            message: null
-            ,importance: null
-            ,strong: null
-            ,horizontalLocation: null
-            ,verticalLocation: null
-        };
+function textMessageContent(message: string) {
+    message = message || "";
+    const lines = message.split("\n");
+    return lines.map((line, index) => (<span key={index}>{line}<br/></span>));
+};
+
+export default (props: ReactProps<Props>) => {
+    const message = (props.message ? props.message : DEFAULT_MESSAGE);
+    const importance = (props.importance ? props.importance : DEFAULT_IMPORTANCE);
+    const strong = (typeof props.strong === "boolean" ?  props.strong : DEFAULT_STRONG);
+    const color = getColor(strong, importance);
+    const horizontalLocation = (props.horizontalLocation ? props.horizontalLocation : DEFAULT_HORIZONTAL_LOCATION);
+    const verticalLocation = (props.verticalLocation ? props.verticalLocation : DEFAULT_VERTICAL_LOCATION);
+    const styleOuterDiv: React.CSSProperties = {
+        position: "fixed"
+        ,zIndex: 3
+        ,padding: "0"
+    };
+    if (verticalLocation === "top" && horizontalLocation === "left") {
+        styleOuterDiv.top = "0";
+        styleOuterDiv.left = "0";
+    } else if (verticalLocation === "top" && horizontalLocation === "center") {
+        styleOuterDiv.top = "0";
+        styleOuterDiv.left = "50%";
+        styleOuterDiv.transform = "translate(-50%)";
+    } else if (verticalLocation === "top" && horizontalLocation === "right") {
+        styleOuterDiv.top = "0";
+        styleOuterDiv.right = "0";
+    } else if (verticalLocation === "middle" && horizontalLocation === "left") {
+        styleOuterDiv.top = "50%";
+        styleOuterDiv.left = "0";
+        styleOuterDiv.transform = "translate(0, -50%)";
+    } else if (verticalLocation === "middle" && horizontalLocation === "center") {
+        styleOuterDiv.top = "50%";
+        styleOuterDiv.left = "50%";
+        styleOuterDiv.transform = "translate(-50%, -50%)";
+    } else if (verticalLocation === "middle" && horizontalLocation === "right") {
+        styleOuterDiv.top = "50%";
+        styleOuterDiv.right = "0";
+        styleOuterDiv.transform = "translate(0, -50%)";
+    } else if (verticalLocation === "bottom" && horizontalLocation === "left") {
+        styleOuterDiv.bottom = "0";
+        styleOuterDiv.left = "0";
+    } else if (verticalLocation === "bottom" && horizontalLocation === "center") {
+        styleOuterDiv.bottom = "0";
+        styleOuterDiv.left = "50%";
+        styleOuterDiv.transform = "translate(-50%)";
+    } else if (verticalLocation === "bottom" && horizontalLocation === "right") {
+        styleOuterDiv.bottom = "0";
+        styleOuterDiv.right = "0";
+    } else {
+        styleOuterDiv.top = "50%";
+        styleOuterDiv.left = "50%";
+        styleOuterDiv.transform = "translate(-50%, -50%)";            
     }
-    static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-        const ret: State = {};
-        if (nextProps.message != undefined && nextProps.message !== prevState.message) {
-            ret.message = nextProps.message;
-        }
-        if (nextProps.importance != undefined && nextProps.importance !== prevState.importance) {
-            ret.importance = nextProps.importance;
-        }
-        if (nextProps.strong != undefined && nextProps.strong !== prevState.strong) {
-            ret.strong = nextProps.strong;
-        }
-        if (nextProps.horizontalLocation != undefined && nextProps.horizontalLocation !== prevState.horizontalLocation) {
-            ret.horizontalLocation = nextProps.horizontalLocation;
-        }
-        if (nextProps.verticalLocation != undefined && nextProps.verticalLocation !== prevState.verticalLocation) {
-            ret.verticalLocation = nextProps.verticalLocation;
-        }
-        return (JSON.stringify(ret) === '{}' ? null : ret);
-    }
-    get Message() {
-        return (this.state.message ? this.state.message : DEFAULT_MESSAGE);
-    }
-    get Importance() {
-        return (this.state.importance ? this.state.importance : DEFAULT_IMPORTANCE);
-    }
-    get Strong() {
-        return (typeof this.state.strong === "boolean" ? this.state.strong : DEFAULT_STRONG);
-    }
-    get Color() {
-        let color = (this.Strong ? "" : "pale-");
-        switch(this.Importance) {
-            case "error":
-                color += "red";
-                break;
-            case "success":
-                color += "green";
-                break;
-            case "warning":
-                color += "yellow";
-                break;
-            case "info":
-            default:
-                color += "blue";
-        }
-        return color;
-    }
-    get HorizontalLocation() {
-        return (this.state.horizontalLocation ? this.state.horizontalLocation : DEFAULT_HORIZONTAL_LOCATION);
-    }
-    get VerticalLocation() {
-        return (this.state.verticalLocation ? this.state.verticalLocation : DEFAULT_VERTICAL_LOCATION);
-    }
-    textMessageContent(message: string) {
-        message = message || "";
-        const lines = message.split("\n");
-        return lines.map((line, index) => (<span key={index}>{line}<br/></span>));
-    }
-    render() {
-        const styleOuterDiv: React.CSSProperties = {
-            position: "fixed"
-            ,zIndex: 3
-            ,padding: "0"
-        };
-        if (this.VerticalLocation === "top" && this.HorizontalLocation === "left") {
-            styleOuterDiv.top = "0";
-            styleOuterDiv.left = "0";
-        } else if (this.VerticalLocation === "top" && this.HorizontalLocation === "center") {
-            styleOuterDiv.top = "0";
-            styleOuterDiv.left = "50%";
-            styleOuterDiv.transform = "translate(-50%)";
-        } else if (this.VerticalLocation === "top" && this.HorizontalLocation === "right") {
-            styleOuterDiv.top = "0";
-            styleOuterDiv.right = "0";
-        } else if (this.VerticalLocation === "middle" && this.HorizontalLocation === "left") {
-            styleOuterDiv.top = "50%";
-            styleOuterDiv.left = "0";
-            styleOuterDiv.transform = "translate(0, -50%)";
-        } else if (this.VerticalLocation === "middle" && this.HorizontalLocation === "center") {
-            styleOuterDiv.top = "50%";
-            styleOuterDiv.left = "50%";
-            styleOuterDiv.transform = "translate(-50%, -50%)";
-        } else if (this.VerticalLocation === "middle" && this.HorizontalLocation === "right") {
-            styleOuterDiv.top = "50%";
-            styleOuterDiv.right = "0";
-            styleOuterDiv.transform = "translate(0, -50%)";
-        } else if (this.VerticalLocation === "bottom" && this.HorizontalLocation === "left") {
-            styleOuterDiv.bottom = "0";
-            styleOuterDiv.left = "0";
-        } else if (this.VerticalLocation === "bottom" && this.HorizontalLocation === "center") {
-            styleOuterDiv.bottom = "0";
-            styleOuterDiv.left = "50%";
-            styleOuterDiv.transform = "translate(-50%)";
-        } else if (this.VerticalLocation === "bottom" && this.HorizontalLocation === "right") {
-            styleOuterDiv.bottom = "0";
-            styleOuterDiv.right = "0";
-        } else {
-            styleOuterDiv.top = "50%";
-            styleOuterDiv.left = "50%";
-            styleOuterDiv.transform = "translate(-50%, -50%)";            
-        }
-        const animateDirection = (this.VerticalLocation === "bottom" ? "bottom" : "top");
-        return (
-            <div className={`w3-container w3-border w3-${this.Color} w3-animate-${animateDirection}`} style={styleOuterDiv}>
-                <div className="w3-bar">
-                    <span className="w3-bar-item w3-right w3-button w3-small" style={{padding: "2px 6px"}} onClick={this.props.onClose}>x</span>
-                </div>
-                <div className="w3-container" style={{marginBottom: "16px"}}>
-                    {this.textMessageContent(this.Message)}
-                </div>
+    const animateDirection = (verticalLocation === "bottom" ? "bottom" : "top");
+    return (
+        <div className={`w3-container w3-border w3-${color} w3-animate-${animateDirection}`} style={styleOuterDiv}>
+            <div className="w3-bar">
+                <span className="w3-bar-item w3-right w3-button w3-small" style={{padding: "2px 6px"}} onClick={props.onClose}>x</span>
             </div>
-        );
-    }
+            <div className="w3-container" style={{marginBottom: "16px"}}>
+                {textMessageContent(message)}
+            </div>
+        </div>
+    );
 }
