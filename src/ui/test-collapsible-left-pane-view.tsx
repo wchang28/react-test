@@ -4,7 +4,7 @@ import CollapsibleLeftPaneView, {CLASS_PREFIX as CTRL_CLASS_PREFIX} from "./coll
 import {uuid, injectCSS} from "./utils";
 
 const leftPaneContent = (
-    <div className="left-content w3-container">
+    <div className="left-content w3-container w3-khaki">
         Hello,---------World!<br/>
         Hello,---------World!<br/>
         Hello,---------World!<br/>
@@ -17,7 +17,7 @@ const leftPaneContent = (
 );
     
 const rightPaneContent = (
-    <div className="right-content w3-container">
+    <div className="right-content w3-container w3-light-green">
         Hawdy, World!<br/>
         Hawdy, World!<br/>
         Hawdy, World!<br/>
