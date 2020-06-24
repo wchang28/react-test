@@ -28,6 +28,6 @@ export default (props: ReactProps<Props>) => {
         }
     };
     return (
-        <span tabIndex={0} onClick={onChange} onKeyPress={handleKeyPress} style={{position: "relative", top, fontSize, cursor: "pointer", padding: "0", outline:"0" }}>{unicodeChar}</span>
+        <span tabIndex={0} onClick={onChange} onKeyPress={handleKeyPress} style={{position: "relative", top, fontSize, cursor: "pointer", padding: "0", outline: "0"}}>{unicodeChar}</span>
     );
 }
