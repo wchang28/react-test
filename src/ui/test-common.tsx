@@ -1,4 +1,5 @@
 import React, {ReactNode, useState} from "react";
+import Checkbox from "./checkbox";
 import CollapsibleLeftPaneView from "./collapsible-left-pane-view";
 
 type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
@@ -91,8 +92,7 @@ export const getColorSelector = (color: Color, onChange: (value: Color) => void)
 export const getCheckbox = (label: string, checked: boolean, onChange: (checked: boolean) => void) => {
     return (
         <p>
-            <input className="w3-check" type="checkbox" checked={checked} onChange={(event) => {onChange(event.target.checked);}}/>
-            <label> {label}</label>
+            <Checkbox checked={checked} onChange={onChange}/>{'  '}<label>{label}</label>
         </p>
     );
 }
