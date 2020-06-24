@@ -12,7 +12,7 @@ import {Test as TestCodeMirrorEditor} from "./test-codemirror";
 import {Test as TestPagination} from "./test-pagination";
 import {Test as TestSplitterView} from "./test-splitter-view";
 import {Test as TestButtonPadding} from "./test-button-padding";
-import {Test as TestAlert} from "./test-alert";
+import TestAlert from "./test-alert";
 import {Test as TestReactDataGrid} from "./test-react-data-grid";
 import {Test as TestNestingRouting} from "./test-nesting-routing";
 import {default as TestComponentLifecycle} from "./test-component-lifecycle";	// import a default export (old method)

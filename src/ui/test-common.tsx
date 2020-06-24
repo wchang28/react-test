@@ -95,7 +95,7 @@ export const getCheckbox = (label: string, checked: boolean, onChange: (checked:
             <Checkbox checked={checked} onChange={onChange}/>{'  '}<label>{label}</label>
         </p>
     );
-}
+};
 export const getNumberInput = (label: string, value: number, onChange: (value: number) => void) => {
     return (
         <p>
@@ -103,8 +103,7 @@ export const getNumberInput = (label: string, value: number, onChange: (value: n
             <input className="w3-input w3-border" type="number" value={value} onChange={(event) => {onChange(event.target.valueAsNumber);}}/>
         </p>
     );
-}
-
+};
 export const getTextInput = (label: string, value: string, onChange: (value: string) => void) => {
     return (
         <p>
@@ -112,7 +111,14 @@ export const getTextInput = (label: string, value: string, onChange: (value: str
             <input className="w3-input w3-border" type="text" value={value} onChange={(event) => {onChange(event.target.value);}}/>
         </p>
     );
-}
+};
+export const getButton = (label: string, onClick: () => void) => {
+    return (
+        <p>
+            <button className="w3-button w3-border" onClick={onClick}>{label}</button>
+        </p>
+    );
+};
 
 export interface TestPaneProps {
     testingClassName?: string;
@@ -124,7 +130,7 @@ export function TestingPane(props: ReactProps<TestPaneProps>) {
     return (
         !props.children[1]
         ?
-        <div className={props.testingClassName}>
+        <div className={props.testingClassName} style={{width:"33%"}}>
             {props.children}
         </div>
         :
