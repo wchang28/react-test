@@ -125,19 +125,21 @@ export interface TestPaneProps {
     configWidth?: string;
 }
 
+const DEFAULT_CONFIG_WIDTH = "250px";
+
 export function TestingPane(props: ReactProps<TestPaneProps>) {
     const [collapsed, setCollapsed] = useState(false);
     return (
         !props.children[1]
         ?
-        <div className={props.testingClassName} style={{width:"33%"}}>
+        <div className={props.testingClassName} style={{width: DEFAULT_CONFIG_WIDTH}}>
             {props.children}
         </div>
         :
         <CollapsibleLeftPaneView
             collapsed={collapsed}
             onCollapseChanged={setCollapsed}
-            leftPaneWidth={props.configWidth ? props.configWidth : "250px"}
+            leftPaneWidth={props.configWidth ? props.configWidth : DEFAULT_CONFIG_WIDTH}
         >
             {props.children[0]}
             <div className={props.testingClassName}>
