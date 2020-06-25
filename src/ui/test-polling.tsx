@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {TestingPane, ConfigurationPane, getOptionSelector} from "./test-common";
-import {usePolling, ReactProps} from "./react-utils";
+import {usePolling, useComponentDidMount, ReactProps} from "./react-utils";
 
 type MaterialIconTheme = "Material+Icons" | "Material+Icons+Outlined" | "Material+Icons+Sharp" | "Material+Icons+Round" | "Material+Icons+Two+Tone"
 const allMaterialIconThemes: MaterialIconTheme[] = ["Material+Icons", "Material+Icons+Outlined", "Material+Icons+Sharp", "Material+Icons+Round", "Material+Icons+Two+Tone"];
@@ -8,15 +8,27 @@ const allMaterialIconThemes: MaterialIconTheme[] = ["Material+Icons", "Material+
 type FontawesomeVersion = "4.7.0" | "5.13.1";
 const allFontawesomeVersions: FontawesomeVersion[] = ["4.7.0", "5.13.1"];
 
+function ContentDisplay(props: ReactProps<{contentName: string, content: string}>) {
+    const {contentName, content} = props;
+    return (
+        <div className="w3-margin-top w3-border">
+            <div className="w3-green">{contentName}</div>
+            <div>{content}</div>
+        </div>
+    );
+}
+
 interface Props {
     materialIconTheme: MaterialIconTheme;
     fontawesomeVersion: FontawesomeVersion;
 }
 
-function TestContent(props: ReactProps<Props>) {
+function TestUI(props: ReactProps<Props>) {
     const {materialIconTheme, fontawesomeVersion} = props;
+    
     const [materialIconCSS, setMaterialIconCSS] = useState("");
     const [fontawesomeCSS, setFontawesomeCSS] = useState("");
+    const [w3CSS, setW3CSS] = useState("");
 
     const getMaterialIconCSSPollingFunction = (theme: MaterialIconTheme) => {
         return async () => {
@@ -27,7 +39,7 @@ function TestContent(props: ReactProps<Props>) {
             return css;
         }
     };
-    usePolling(TestContent, materialIconTheme, getMaterialIconCSSPollingFunction, setMaterialIconCSS, 5);
+    usePolling(TestUI, materialIconTheme, getMaterialIconCSSPollingFunction, setMaterialIconCSS, 5);
 
     const getFontawesomeCSSPollingFunction = (version: FontawesomeVersion) => {
         return async () => {
@@ -38,7 +50,17 @@ function TestContent(props: ReactProps<Props>) {
             return css;
         }
     };
-    usePolling(TestContent, fontawesomeVersion, getFontawesomeCSSPollingFunction, setFontawesomeCSS, 8);
+    usePolling(TestUI, fontawesomeVersion, getFontawesomeCSSPollingFunction, setFontawesomeCSS, 8);
+
+    useComponentDidMount(async () => {
+        console.log(`getting W3.css...`);
+        const url = "https://cdnjs.cloudflare.com/ajax/libs/w3-css/4.1.0/3/w3.css";
+        const res = await fetch(url, {mode: "cors"});
+        const css =  await res.text();
+        return css;
+    }, setW3CSS, (err: any) => {
+        console.error(`!!! Error getting W3.CSS: ${err}`);
+    });
 
     const [isActive] = useState(true);
     useEffect(() => {
@@ -50,18 +72,9 @@ function TestContent(props: ReactProps<Props>) {
 
     return (
         <div className="w3-container w3-tiny">
-            <div className="w3-margin-top w3-border">
-                <label>Material Icon CSS</label>
-                <div>
-                    {materialIconCSS}
-                </div>
-            </div>
-            <div className="w3-margin-top w3-border">
-                <label>Fontawesome CSS</label>
-                <div>
-                    {fontawesomeCSS}
-                </div>
-            </div>
+            <ContentDisplay contentName="Material Icon CSS" content={materialIconCSS}/>
+            <ContentDisplay contentName="Fontawesome CSS" content={fontawesomeCSS}/>
+            <ContentDisplay contentName="W3.CSS" content={w3CSS}/>
         </div>
     );
 }
@@ -75,7 +88,7 @@ export default () => {
                  {getOptionSelector(allMaterialIconThemes, "Material Icon Theme", materialIconTheme, setMaterialIconTheme)}
                  {getOptionSelector(allFontawesomeVersions, "Fontawesome Version", fontawesomeVersion, setFontawesomeVersion)}
             </ConfigurationPane>
-            <TestContent  materialIconTheme={materialIconTheme} fontawesomeVersion={fontawesomeVersion}/>
+            <TestUI materialIconTheme={materialIconTheme} fontawesomeVersion={fontawesomeVersion}/>
         </TestingPane>
     );
 }
