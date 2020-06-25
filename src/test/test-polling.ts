@@ -10,8 +10,10 @@ function getTestParams(testMode: TestMode) {
     }
 }
 
-const testMode = "LongWorkTime_ShortPollingInterval";
-//const testMode = "ShortWorkTime_LongPollingInterval";
+const TEST_DURATION_SEC = 30;
+
+//const testMode = "LongWorkTime_ShortPollingInterval";
+const testMode = "ShortWorkTime_LongPollingInterval";
 
 const {workDurationMS, pollingIntervalSec} = getTestParams(testMode);
 
@@ -46,6 +48,9 @@ const polling = pl.Polling.get(async () => {
 polling.start();
 
 setTimeout(() => {
-    console.log(`\nSTOPPING the polling...`);
-    polling.stop();
-}, 60000);
+    console.log(`\nSTOPPING the polling... (current state=${polling.state})`);
+    polling.stop()
+    .then(() => {
+        console.log(`polling STOPPED. (current state=${polling.state})`);
+    });
+}, TEST_DURATION_SEC * 1000);

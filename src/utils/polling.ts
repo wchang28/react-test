@@ -10,7 +10,7 @@ export interface IPolling<T = any> {
     intervalSeconds: number;
     pollingFunction: PollingFunction<T>;
     start(): void;
-    stop(): void;
+    stop(): Promise<void>;
     on(event: "before-poll", listner: () => void): this;
     on(event: "after-poll", listner: (err?: any, value?: T) => void): this;
     on(event: "state-change", listener: (state: State) => void): this;
@@ -20,13 +20,13 @@ const DEFAULT_INTERVAL_SECONDS = 1;
 
 class PollingClass<T> extends events.EventEmitter {
     private __stopSignaled: boolean;
-    private __polling: boolean;
+    private __pollingPromise: Promise<T>;
     private __timer: any;
     constructor(private __pollingFunction: PollingFunction<T>, private __intervalSeconds: number) {
         super();
         this.__stopSignaled = false;
 
-        this.__polling = false;
+        this.__pollingPromise = null;
         this.__timer = null;
         // state === 'idle'
     }
@@ -45,7 +45,7 @@ class PollingClass<T> extends events.EventEmitter {
         this.__pollingFunction = value;
     }
     get state(): State {
-        if (this.__polling) {
+        if (this.__pollingPromise) {
             return "polling";
         } else if (this.__timer) {
             return "ticking";
@@ -63,7 +63,7 @@ class PollingClass<T> extends events.EventEmitter {
         }
     }
     private handleAfterPolling(err: any, value: T) {
-        this.__polling = false;
+        this.__pollingPromise = null;
         if (this.__stopSignaled) {
             this.__stopSignaled = false;
             this.__timer = null;
@@ -76,13 +76,13 @@ class PollingClass<T> extends events.EventEmitter {
         this.emit("after-poll", err, value);
     }
     private pollingProc() {
-        this.__polling = true;
+        this.emit("before-poll");
+        const pollingFunction = this.__pollingFunction;
+        this.__pollingPromise = pollingFunction();
         this.__timer = null;
         // state === 'polling'
         this.emit("state-change", this.state);
-        this.emit("before-poll");
-        const pollingFunction = this.__pollingFunction;
-        pollingFunction()
+        this.__pollingPromise
         .then((value: T) => {
             this.handleAfterPolling(null, value);
         }).catch((err: any) => {
@@ -97,7 +97,7 @@ class PollingClass<T> extends events.EventEmitter {
             this.pollingProc();
         }
     }
-    public stop() {
+    public async stop() {
         if (this.state === "ticking") {
             clearTimeout(this.__timer);
             this.__timer = null;
@@ -105,6 +105,9 @@ class PollingClass<T> extends events.EventEmitter {
             this.emit("state-change", this.state);
         } else if (this.state === "polling") {
             this.__stopSignaled = true; // signaling the stop
+            try {
+                await this.__pollingPromise;
+            } catch (e) {}
         }
     }
 }
