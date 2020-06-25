@@ -24,6 +24,7 @@ import TestCSV2JSON from "./test-csv-to-json";
 import TestJumpToRoute from "./test-jump-to-route";
 import TestObjsPropertyEditor from "./test-objs-property-editor";
 import TestCheckbox from "./test-checkbox";
+import TestPolling from "./test-polling";
 
 interface TestItem {
 	id: string;
@@ -54,6 +55,7 @@ const testConfig: TestItem[] = [
 	,{id: "collapsible-left-pane-view", name: "Collapsible Left Pane View", component: TestCollapsibleLeftPaneView}
 	,{id: "file-drag-drop-select", name: "File Drag Drop Select", component: TestFileDragDropSelect}
 	,{id: "checkbox", name: "Checkbox", component: TestCheckbox}
+	,{id: "polling", name: "Polling", component: TestPolling}
 	// TODO: add more test cases here
 ];
 
