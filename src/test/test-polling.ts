@@ -10,8 +10,8 @@ function getTestParams(testMode: TestMode) {
     }
 }
 
-//const testMode = "LongWorkTime_ShortPollingInterval";
-const testMode = "ShortWorkTime_LongPollingInterval";
+const testMode = "LongWorkTime_ShortPollingInterval";
+//const testMode = "ShortWorkTime_LongPollingInterval";
 
 const {workDurationMS, pollingIntervalSec} = getTestParams(testMode);
 
@@ -23,7 +23,7 @@ function simulateDoingSomeWork(durationMS: number) {
     });
 }
 
-const pooling = pl.Polling.get(async () => {
+const polling = pl.Polling.get(async () => {
     console.log(`doing some work...`);
     await simulateDoingSomeWork(workDurationMS);
     console.log(`done working :-)`);
@@ -43,9 +43,9 @@ const pooling = pl.Polling.get(async () => {
     */
 });
 
-pooling.start();
+polling.start();
 
 setTimeout(() => {
     console.log(`\nSTOPPING the polling...`);
-    pooling.stop();
+    polling.stop();
 }, 60000);
