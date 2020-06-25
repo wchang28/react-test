@@ -3,16 +3,18 @@ import * as pl from "../utils/polling";
 
 export type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
-export function useComponentDidMount<D = any>(
-    fetchData: () => Promise<D>
-    ,setData: React.Dispatch<React.SetStateAction<D>>
+export type FetchFunction<FD = any> = () => Promise<FD>;
+
+export function useComponentDidMount<FD = any>(
+    fetch: FetchFunction<FD>
+    ,setFetchData: React.Dispatch<React.SetStateAction<FD>>
     ,onerror?: (err: any) => void
 ) {
     const [isActive] = useState(true);
     useEffect(() => {
-        fetchData()
+        fetch()
         .then((data) => {
-            setData(data);
+            setFetchData(data);
         }).catch((err: any) => {
             if (onerror) {
                 onerror(err);
@@ -31,11 +33,11 @@ function uuid() {
     return uuid;
 }
 
-export function usePolling<P = any, PP = any, PR = any>(
+export function usePolling<P = any, FP = any, FD = any>(
     functionalComponent: (props: ReactProps<P>) => JSX.Element
-    ,pollingParams: PP
-    ,getPollingFunction: (pollingParams: PP) => () => Promise<PR>
-    ,setPollingResult: React.Dispatch<React.SetStateAction<PR>>
+    ,fetchParams: FP
+    ,fetchGetter: (fetchParams: FP) => FetchFunction<FD>
+    ,setFetchData: React.Dispatch<React.SetStateAction<FD>>
     ,intervalSec: number
     ,onerror?: (err: any) => void
 ) {
@@ -43,16 +45,16 @@ export function usePolling<P = any, PP = any, PR = any>(
     if (!funcComp.__pollingInfo__) funcComp.__pollingInfo__ = {};
     const [pollingIdentifier] = useState(uuid());
     const [isActive] = useState(true);
-    const getPollingFunc = (pp: PP) => {
+    const getPollingFunc = (fp: FP) => {
         return async () => {
-            const pf = getPollingFunction(pp);
-            const result = await pf();
+            const fetch = fetchGetter(fp);
+            const data = await fetch();
             if (funcComp.__pollingInfo__[pollingIdentifier]) {
-                setPollingResult(result);
+                setFetchData(data);
             }
         };
     };
-    const [polling] = useState(pl.Polling.get(getPollingFunc(pollingParams), intervalSec)
+    const [polling] = useState(pl.Polling.get(getPollingFunc(fetchParams), intervalSec)
     .on("after-poll", (err) => {
         if (onerror) {
             onerror(err);
@@ -68,7 +70,7 @@ export function usePolling<P = any, PP = any, PR = any>(
     }, [isActive]);
 
     useEffect(() => {
-        const pollingFunc = getPollingFunc(pollingParams);
+        const pollingFunc = getPollingFunc(fetchParams);
         polling.pollingFunction = pollingFunc;
         if (funcComp.__pollingInfo__[pollingIdentifier].firstCall) {
             funcComp.__pollingInfo__[pollingIdentifier].firstCall = false;
@@ -81,5 +83,5 @@ export function usePolling<P = any, PP = any, PR = any>(
                 }
             });
         }
-    }, [pollingParams]);
+    }, [fetchParams]);
 }
