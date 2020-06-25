@@ -10,7 +10,8 @@
     "postinstall": "npm run transpile && npm run package-ui",
     "browserify-dev": "browserify -o ./public/js/bundle.min.js ./dist/ui/main.js",
     "build-dev": "npm run transpile && npm run browserify-dev",
-    "start": "node ./dist/server/app.js"
+    "start": "node ./dist/server/app.js",
+    "test-polling": "node ./dist/test/test-polling.js"
   },
   "keywords": [
     "React"

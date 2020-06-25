@@ -18,6 +18,7 @@
   },
   "files": [
     "./src/server/app.ts",
-    "./src/ui/main.tsx"
+    "./src/ui/main.tsx",
+    "./src/test/test-polling.ts"
   ]
 }
