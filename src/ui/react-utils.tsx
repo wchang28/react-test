@@ -33,35 +33,49 @@ function uuid() {
     return uuid;
 }
 
-export function usePolling<P = any, FP = any, FD = any>(
+export interface DynamicFetch<FD = any> {
+    params: any;
+    getter: (fetchParams: any) => FetchFunction<FD>;
+}
+
+export function usePolling<P = any, FD = any>(
     functionalComponent: (props: ReactProps<P>) => JSX.Element
-    ,fetchParams: FP
-    ,fetchGetter: (fetchParams: FP) => FetchFunction<FD>
+    ,fetch: DynamicFetch<FD> | FetchFunction<FD>
     ,setFetchData: React.Dispatch<React.SetStateAction<FD>>
     ,intervalSec: number
     ,onerror?: (err: any) => void
 ) {
-    const funcComp = (functionalComponent as any) as {__pollingInfo__: {[id: string]: {firstCall: boolean}}};
+    const funcComp = (functionalComponent as any) as {__pollingInfo__: {[id: string]: {firstCall?: boolean}}};
     if (!funcComp.__pollingInfo__) funcComp.__pollingInfo__ = {};
+    const staticFetching = (typeof fetch === "function");
+    const dynamicFetch = (staticFetching ? undefined : fetch as DynamicFetch<FD>);
+    const staticFetcher = (staticFetching ? fetch as FetchFunction<FD> : undefined);
     const [pollingIdentifier] = useState(uuid());
     const [isActive] = useState(true);
-    const getPollingFunc = (fp: FP) => {
+    const handleFetchData = (data: FD) => {
+        if (funcComp.__pollingInfo__[pollingIdentifier]) {
+            setFetchData(data);
+        }
+    };
+    const getDynamicPollingFunc = (fetchParams: any) => {
         return async () => {
-            const fetch = fetchGetter(fp);
-            const data = await fetch();
-            if (funcComp.__pollingInfo__[pollingIdentifier]) {
-                setFetchData(data);
-            }
+            const fetcher = dynamicFetch.getter(fetchParams);
+            const data = await fetcher();
+            handleFetchData(data);
         };
     };
-    const [polling] = useState(pl.Polling.get(getPollingFunc(fetchParams), intervalSec)
+    const staticPollingFunction = async () => {
+        const data = await staticFetcher();
+        handleFetchData(data);
+    }
+    const [polling] = useState(pl.Polling.get(staticFetching ? staticPollingFunction : getDynamicPollingFunc(dynamicFetch.params), intervalSec)
     .on("after-poll", (err) => {
         if (onerror) {
             onerror(err);
         }
     }));
     useEffect(() => {
-        funcComp.__pollingInfo__[pollingIdentifier] = {firstCall: true};
+        funcComp.__pollingInfo__[pollingIdentifier] = {firstCall: (staticFetching ? undefined : true)};
         polling.start();
         return () => {
             polling.stop();
@@ -69,19 +83,24 @@ export function usePolling<P = any, FP = any, FD = any>(
         }
     }, [isActive]);
 
-    useEffect(() => {
-        const pollingFunc = getPollingFunc(fetchParams);
-        polling.pollingFunction = pollingFunc;
-        if (funcComp.__pollingInfo__[pollingIdentifier].firstCall) {
-            funcComp.__pollingInfo__[pollingIdentifier].firstCall = false;
-        } else {
-            pollingFunc()
-            .then(() => {})
-            .catch((err) => {
-                if (onerror) {
-                    onerror(err);
-                }
-            });
-        }
-    }, [fetchParams]);
+    // for dynamic fetching only
+    ////////////////////////////////////////////////////////////////////////////////
+    if (!staticFetching) {
+        useEffect(() => {
+            const pollingFunc = getDynamicPollingFunc(dynamicFetch.params);
+            polling.pollingFunction = pollingFunc;
+            if (funcComp.__pollingInfo__[pollingIdentifier].firstCall) {
+                funcComp.__pollingInfo__[pollingIdentifier].firstCall = false;
+            } else {
+                pollingFunc()
+                .then(() => {})
+                .catch((err) => {
+                    if (onerror) {
+                        onerror(err);
+                    }
+                });
+            }
+        }, [dynamicFetch.params]);
+    }
+    ////////////////////////////////////////////////////////////////////////////////
 }

@@ -29,38 +29,47 @@ function TestUI(props: ReactProps<Props>) {
     const [materialIconCSS, setMaterialIconCSS] = useState("");
     const [fontawesomeCSS, setFontawesomeCSS] = useState("");
     const [w3CSS, setW3CSS] = useState("");
+    const [bootstrapCSS, setBootstrapCSS] = useState("");
 
-    const getMaterialIconCSSPollingFunction = (theme: MaterialIconTheme) => {
+    const getMaterialIconCSSFetcher = (theme: MaterialIconTheme) => {
         return async () => {
-            console.log(`getting icon theme ${theme} from Google...`);
+            console.log(`getting icon theme <<${theme}>> from Google...`);
             const url = `https://fonts.googleapis.com/css?family=${theme}`;
             const res = await fetch(url, {mode: "cors"});
             const css =  await res.text();
             return css;
         }
     };
-    usePolling(TestUI, materialIconTheme, getMaterialIconCSSPollingFunction, setMaterialIconCSS, 5);
+    usePolling(TestUI, {params: materialIconTheme, getter: getMaterialIconCSSFetcher}, setMaterialIconCSS, 5);
 
-    const getFontawesomeCSSPollingFunction = (version: FontawesomeVersion) => {
+    const getFontawesomeCSSFetcher = (version: FontawesomeVersion) => {
         return async () => {
-            console.log(`getting fontawesome ${version} from cdnjs.com...`);
+            console.log(`getting fontawesome <<${version}>> from cdnjs.com...`);
             const url = `https://cdnjs.cloudflare.com/ajax/libs/font-awesome/${version}/css/font${(version === "4.7.0" ? "-" : "")}awesome.min.css`;
             const res = await fetch(url, {mode: "cors"});
             const css =  await res.text();
             return css;
         }
     };
-    usePolling(TestUI, fontawesomeVersion, getFontawesomeCSSPollingFunction, setFontawesomeCSS, 8);
+    usePolling(TestUI, {params: fontawesomeVersion, getter: getFontawesomeCSSFetcher}, setFontawesomeCSS, 8);
 
-    useComponentDidMount(async () => {
+    const w3CSSFetcher = async () => {
         console.log(`getting W3.css...`);
         const url = "https://cdnjs.cloudflare.com/ajax/libs/w3-css/4.1.0/3/w3.css";
         const res = await fetch(url, {mode: "cors"});
         const css =  await res.text();
         return css;
-    }, setW3CSS, (err: any) => {
-        console.error(`!!! Error getting W3.CSS: ${err}`);
-    });
+    };
+    usePolling(TestUI, w3CSSFetcher, setW3CSS, 10);
+
+    const bootstrapCSSFetcher = async () => {
+        console.log(`getting Bootstrap css...`);
+        const url = "https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css";
+        const res = await fetch(url, {mode: "cors"});
+        const css =  await res.text();
+        return css;
+    };
+    useComponentDidMount(bootstrapCSSFetcher, setBootstrapCSS);
 
     const [isActive] = useState(true);
     useEffect(() => {
@@ -75,6 +84,7 @@ function TestUI(props: ReactProps<Props>) {
             <ContentDisplay contentName="Material Icon CSS" content={materialIconCSS}/>
             <ContentDisplay contentName="Fontawesome CSS" content={fontawesomeCSS}/>
             <ContentDisplay contentName="W3.CSS" content={w3CSS}/>
+            <ContentDisplay contentName="Bootstrap CSS" content={bootstrapCSS}/>
         </div>
     );
 }
