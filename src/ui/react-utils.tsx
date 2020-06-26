@@ -81,7 +81,7 @@ export function useIntervalPolling<P = any, FD = any>(
     }
     const [polling] = useState(pl.Polling.get(staticFetching ? staticPollingFunction : getDynamicPollingFunc(dynamicFetch.params), intervalSec)
     .on("after-poll", (err) => {
-        if (onerror) {
+        if (onerror && err) {
             onerror(err);
         }
     }));
