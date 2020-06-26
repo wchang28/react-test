@@ -3,8 +3,8 @@ import {useState, useEffect} from 'react';
 
 export default () => {
     console.log(`calling render()...`);
-    const [isActive] = useState<boolean>(true);
-    const [currentTime, setCurrentTime] = useState<number>(new Date().getTime());
+    const [isActive] = useState(true);
+    const [currentTime, setCurrentTime] = useState(new Date().getTime());
     useEffect(() => {
         console.log(`useEffect Hook called`);
         const interval = window.setInterval(() => {
