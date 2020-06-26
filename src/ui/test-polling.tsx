@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {TestingPane, ConfigurationPane, getOptionSelector} from "./test-common";
-import {usePolling, useComponentDidMount, ReactProps} from "./react-utils";
+import {useIntervalPolling, useComponentDidMount, ReactProps} from "./react-utils";
 
 type MaterialIconTheme = "Material+Icons" | "Material+Icons+Outlined" | "Material+Icons+Sharp" | "Material+Icons+Round" | "Material+Icons+Two+Tone"
 const allMaterialIconThemes: MaterialIconTheme[] = ["Material+Icons", "Material+Icons+Outlined", "Material+Icons+Sharp", "Material+Icons+Round", "Material+Icons+Two+Tone"];
@@ -40,7 +40,7 @@ function TestUI(props: ReactProps<Props>) {
             return css;
         }
     };
-    usePolling(TestUI, {params: materialIconTheme, getter: getMaterialIconCSSFetcher}, setMaterialIconCSS, 5);
+    useIntervalPolling(TestUI, {params: materialIconTheme, getter: getMaterialIconCSSFetcher}, setMaterialIconCSS, 5);
 
     const getFontawesomeCSSFetcher = (version: FontawesomeVersion) => {
         return async () => {
@@ -51,7 +51,7 @@ function TestUI(props: ReactProps<Props>) {
             return css;
         }
     };
-    usePolling(TestUI, {params: fontawesomeVersion, getter: getFontawesomeCSSFetcher}, setFontawesomeCSS, 8);
+    useIntervalPolling(TestUI, {params: fontawesomeVersion, getter: getFontawesomeCSSFetcher}, setFontawesomeCSS, 8);
 
     const w3CSSFetcher = async () => {
         console.log(`getting W3.css...`);
@@ -60,7 +60,7 @@ function TestUI(props: ReactProps<Props>) {
         const css =  await res.text();
         return css;
     };
-    usePolling(TestUI, w3CSSFetcher, setW3CSS, 10);
+    useIntervalPolling(TestUI, w3CSSFetcher, setW3CSS, 10);
 
     const bootstrapCSSFetcher = async () => {
         console.log(`getting Bootstrap css...`);
