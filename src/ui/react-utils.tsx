@@ -1,4 +1,5 @@
-import React, {useState, useEffect, ReactNode} from "react";
+import * as React from "react";
+import {useState, useEffect, ReactNode} from "react";
 import * as pl from "interval-polling";
 
 export type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
