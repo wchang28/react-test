@@ -1,8 +1,7 @@
-import React, {ReactNode, useState} from "react";
+import React, {useState} from "react";
 import Checkbox from "./checkbox";
 import CollapsibleLeftPaneView from "./collapsible-left-pane-view";
-
-type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
+import {ReactProps} from "./react-utils";
 
 export type FontSize = "tiny" | "small" | "medium" | "large" | "xlarge" | "xxlarge" | "xxxlarge" | "jumbo";
 export const allFontSizes: FontSize[] = ["tiny","small","medium","large","xlarge","xxlarge","xxxlarge","jumbo"];
@@ -128,21 +127,22 @@ export interface TestPaneProps {
 const DEFAULT_CONFIG_WIDTH = "250px";
 
 export function TestingPane(props: ReactProps<TestPaneProps>) {
+    const {testingClassName, configWidth} = props;
     const [collapsed, setCollapsed] = useState(false);
     return (
         !props.children[1]
         ?
-        <div className={props.testingClassName} style={{width: DEFAULT_CONFIG_WIDTH}}>
+        <div className={testingClassName}>
             {props.children}
         </div>
         :
         <CollapsibleLeftPaneView
             collapsed={collapsed}
             onCollapseChanged={setCollapsed}
-            leftPaneWidth={props.configWidth ? props.configWidth : DEFAULT_CONFIG_WIDTH}
+            leftPaneWidth={configWidth ? configWidth : DEFAULT_CONFIG_WIDTH}
         >
             {props.children[0]}
-            <div className={props.testingClassName}>
+            <div className={testingClassName}>
                 {props.children[1]}
             </div>
         </CollapsibleLeftPaneView>

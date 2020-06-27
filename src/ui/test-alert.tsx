@@ -30,15 +30,17 @@ export default () => {
         : null);
     return (
         <TestingPane>
-            <ConfigurationPane>
-                {getOptionSelector(allImportances, "Importance", importance, setImportance)}
-                {getCheckbox("Strong", strong, setStrong)}
-                {getOptionSelector(allHorizontalLocations, "Horizontal Location", horizontalLocation, setHorizontalLocation)}
-                {getOptionSelector(allVerticalLocations, "Vertical Location", verticalLocation, setVerticalLocation)}
-                {getFontSizeSelector(fontSize, setFontSize)}
-                {getButton("Show Alert", () => {setMessage(TEXT_MESSAGE);})}
-                {alert}
-            </ConfigurationPane>
+            <div style={{width: "250px"}}>
+                <ConfigurationPane>
+                    {getOptionSelector(allImportances, "Importance", importance, setImportance)}
+                    {getCheckbox("Strong", strong, setStrong)}
+                    {getOptionSelector(allHorizontalLocations, "Horizontal Location", horizontalLocation, setHorizontalLocation)}
+                    {getOptionSelector(allVerticalLocations, "Vertical Location", verticalLocation, setVerticalLocation)}
+                    {getFontSizeSelector(fontSize, setFontSize)}
+                    {getButton("Show Alert", () => {setMessage(TEXT_MESSAGE);})}
+                    {alert}
+                </ConfigurationPane>
+            </div>
         </TestingPane>
     );
 }
