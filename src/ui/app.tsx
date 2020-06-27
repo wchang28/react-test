@@ -25,6 +25,7 @@ import TestJumpToRoute from "./test-jump-to-route";
 import TestObjsPropertyEditor from "./test-objs-property-editor";
 import TestCheckbox from "./test-checkbox";
 import TestPolling from "./test-polling";
+import TestReactHTMLParser from "./test-react-html-parser";
 
 interface TestItem {
 	id: string;
@@ -56,6 +57,7 @@ const testConfig: TestItem[] = [
 	,{id: "file-drag-drop-select", name: "File Drag Drop Select", component: TestFileDragDropSelect}
 	,{id: "checkbox", name: "Checkbox", component: TestCheckbox}
 	,{id: "polling", name: "Polling", component: TestPolling}
+	,{id: "react-html-parser", name: "React HTML Parser", component: TestReactHTMLParser}
 	// TODO: add more test cases here
 ];
 
