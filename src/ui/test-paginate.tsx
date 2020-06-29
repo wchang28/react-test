@@ -20,7 +20,7 @@ export default () => {
     const [pageIndex, setPageIndex] = useState(0);
     const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
     const [marginPagesDisplayed, setMarginPagesDisplayed] = useState(2);
-    const [fontSize, setFontSize] = useState<FontSize>("medium");
+    const [fontSize, setFontSize] = useState<FontSize>("small");
     const [horizontalAlignment, setHorizontalAlignment] = useState<HorzontalAlignment>("left");
     const [pageSelectedColor, setPageSelectedColor] = useState<Color>("green");
     return (
@@ -35,15 +35,17 @@ export default () => {
                 {getFontSizeSelector(fontSize, setFontSize)}
             </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
-                <Paginate
-                    pageCount={pageCount}
-                    pageRangeDisplayed={pageRangeDisplayed}
-                    marginPagesDisplayed={marginPagesDisplayed}
-                    pageIndex={pageIndex}
-                    activeClassName={`selected w3-${pageSelectedColor}`}
-                    onPageChange={setPageIndex}
-                    horizontalAlignment={horizontalAlignment}
-                />
+                <div className="w3-container" style={{marginTop: "8px"}}>
+                    <Paginate
+                        pageCount={pageCount}
+                        pageRangeDisplayed={pageRangeDisplayed}
+                        marginPagesDisplayed={marginPagesDisplayed}
+                        pageIndex={pageIndex}
+                        activeClassName={`selected w3-${pageSelectedColor}`}
+                        onPageChange={setPageIndex}
+                        horizontalAlignment={horizontalAlignment}
+                    />
+                </div>
             </FontSizeColorTestingWrapper>)
         </TestingPane>
     );
