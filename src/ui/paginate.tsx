@@ -83,7 +83,8 @@ type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
 export default (props: ReactProps<Props>) => {
     const {pageCount, pageIndex, pageRangeDisplayed, marginPagesDisplayed, onPageChange, activeClassName, horizontalAlignment} = props;
-    return (
+    const content = (pageCount < 2
+        ? null :
         <div className={getW3CSSHorizontalAlignmentClass(horizontalAlignment)}>
             <ReactPaginate
                 pageCount={pageCount}
@@ -97,5 +98,6 @@ export default (props: ReactProps<Props>) => {
                 onPageChange={({selected}) => {onPageChange(selected)}}
             />
         </div>
-    );
+        )
+    return content;
 }
