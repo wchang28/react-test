@@ -26,6 +26,7 @@ import TestObjsPropertyEditor from "./test-objs-property-editor";
 import TestCheckbox from "./test-checkbox";
 import TestPolling from "./test-polling";
 import TestReactHTMLParser from "./test-react-html-parser";
+import TestReactPaginate from "./test-react-paginate";
 
 interface TestItem {
 	id: string;
@@ -34,7 +35,8 @@ interface TestItem {
 }
 
 const testConfig: TestItem[] = [
-	{id: "xlsx-to-json", name: "XLSX to JSON", component: TestXLSX2JSON}
+	{id: "react-paginate", name: "React Paginate", component: TestReactPaginate}
+	,{id: "xlsx-to-json", name: "XLSX to JSON", component: TestXLSX2JSON}
 	,{id: "csv-to-json", name: "CSV to JSON", component: TestCSV2JSON}
 	,{id: "component-lifecycle", name: "Component Lifecycle", component: TestComponentLifecycle}
 	,{id: "nesting-routing", name: "Nesting Routing", component: TestNestingRouting}

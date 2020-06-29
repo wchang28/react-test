@@ -72,6 +72,9 @@ export const allColors: Color[] = [
     ,"yellow"
 ];
 
+export type HorzontalAlignment = "left" | "center" | "right";
+export const allHorzontalAlignments: HorzontalAlignment[] = ["left", "center", "right"];
+
 export function getOptionSelector<VT = string>(allOptions: VT[], label: string, value: VT, onChange: (value: VT) => void) {
     const options = allOptions.map((item, index) => {
         return (<option key={index} value={(item as any) as string}>{item}</option>);
@@ -88,6 +91,7 @@ export function getOptionSelector<VT = string>(allOptions: VT[], label: string, 
 
 export const getFontSizeSelector = (fontSize: FontSize, onChange: (value: FontSize) => void) => getOptionSelector<FontSize>(allFontSizes, "Font Size:", fontSize, onChange);
 export const getColorSelector = (color: Color, onChange: (value: Color) => void) => getOptionSelector<Color>(allColors, "Color:", color, onChange);
+export const getHorizontalAlignmentSelector = (horizontalAlignment: HorzontalAlignment, onChange: (value: HorzontalAlignment) => void) => getOptionSelector<HorzontalAlignment>(allHorzontalAlignments, "Horizontal Alignment:", horizontalAlignment, onChange);
 export const getCheckbox = (label: string, checked: boolean, onChange: (checked: boolean) => void) => {
     return (
         <p>
@@ -118,6 +122,18 @@ export const getButton = (label: string, onClick: () => void) => {
         </p>
     );
 };
+
+export function getW3CSSHorizontalAlignmentClass(horizontalAlignment: HorzontalAlignment) {
+    switch(horizontalAlignment) {
+        case "center":
+            return "w3-center";
+        case "right":
+            return "w3-right-align";
+        case "left":
+        default:
+            return "w3-left-align";
+    }
+}
 
 export interface TestPaneProps {
     testingClassName?: string;
