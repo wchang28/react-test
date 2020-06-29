@@ -16,15 +16,18 @@ import {
 } from "./test-common";
 import {injectCSS} from "./utils";
 
+const ROOT_CLASS_NAME = "react-paginate-ul";
+
 injectCSS(`
-.paginate-ul {
+.${ROOT_CLASS_NAME} {
     width:auto;
     display:inline-block;
     list-style-type:none;
     padding:0;
     margin:0;
+    border:1px solid #ccc!important;
 }
-.paginate-ul li {
+.${ROOT_CLASS_NAME} li {
     padding:0;
     float:left;
     width:auto;
@@ -32,12 +35,26 @@ injectCSS(`
     display:block;
     outline:0;
 }
-.paginate-ul li:last-child {
+.${ROOT_CLASS_NAME} li:last-child {
     border-right:none;
 }
-.paginate-ul a {
+.${ROOT_CLASS_NAME} a {
     outline:0;
     padding:0.53em 1.06em;
+    border:none;
+    display:inline-block;
+    vertical-align:middle;
+    overflow:hidden;
+    text-decoration:none;
+    color:inherit;
+    background-color:inherit;
+    text-align:center;
+    cursor:pointer;
+    white-space:nowrap;
+}
+.${ROOT_CLASS_NAME} a:hover {
+    color:#000!important;
+    background-color:#ccc!important;
 }
 `);
 
@@ -70,13 +87,8 @@ export default () => {
                         forcePage={pageIndex}
                         previousLabel="<"
                         nextLabel=">"
-                        containerClassName="paginate-ul w3-border w3-light-grey"
+                        containerClassName={ROOT_CLASS_NAME}
                         activeClassName={`selected w3-${pageSelectedColor}`}
-                        pageLinkClassName="w3-button"
-                        activeLinkClassName="selected"
-                        breakLinkClassName="w3-button break"
-                        previousLinkClassName="w3-button previous"
-                        nextLinkClassName="w3-button next"
                         onPageChange={({selected}) => {setPageIndex(selected)}}
                     />
                 </div>
