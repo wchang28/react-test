@@ -1,11 +1,9 @@
 import React, {useState} from "react";
-import ReactPaginate from 'react-paginate';
 import {
     TestingPane
     ,ConfigurationPane
     ,getHorizontalAlignmentSelector
     ,HorzontalAlignment
-    ,getW3CSSHorizontalAlignmentClass
     ,getNumberInput
     ,Color
     ,allColors
@@ -14,49 +12,8 @@ import {
     ,getFontSizeSelector
     ,FontSizeColorTestingWrapper
 } from "./test-common";
-import {injectCSS} from "./utils";
 
-const ROOT_CLASS_NAME = "react-paginate-ul";
-
-injectCSS(`
-.${ROOT_CLASS_NAME} {
-    width:auto;
-    display:inline-block;
-    list-style-type:none;
-    padding:0;
-    margin:0;
-    border:1px solid #ccc!important;
-}
-.${ROOT_CLASS_NAME} li {
-    padding:0;
-    float:left;
-    width:auto;
-    border-right:1px solid #ddd;
-    display:block;
-    outline:0;
-}
-.${ROOT_CLASS_NAME} li:last-child {
-    border-right:none;
-}
-.${ROOT_CLASS_NAME} a {
-    outline:0;
-    padding:0.53em 1.06em;
-    border:none;
-    display:inline-block;
-    vertical-align:middle;
-    overflow:hidden;
-    text-decoration:none;
-    color:inherit;
-    background-color:inherit;
-    text-align:center;
-    cursor:pointer;
-    white-space:nowrap;
-}
-.${ROOT_CLASS_NAME} a:hover {
-    color:#000!important;
-    background-color:#ccc!important;
-}
-`);
+import Paginate from "./paginate";
 
 export default () => {
     const [pageCount, setPageCount] = useState(100);
@@ -66,7 +23,6 @@ export default () => {
     const [fontSize, setFontSize] = useState<FontSize>("medium");
     const [horizontalAlignment, setHorizontalAlignment] = useState<HorzontalAlignment>("left");
     const [pageSelectedColor, setPageSelectedColor] = useState<Color>("green");
-    const w3AlignmentClass = getW3CSSHorizontalAlignmentClass(horizontalAlignment);
     return (
         <TestingPane>
             <ConfigurationPane>
@@ -79,19 +35,15 @@ export default () => {
                 {getFontSizeSelector(fontSize, setFontSize)}
             </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
-                <div className={w3AlignmentClass}>
-                    <ReactPaginate
-                        pageCount={pageCount}
-                        pageRangeDisplayed={pageRangeDisplayed}
-                        marginPagesDisplayed={marginPagesDisplayed}
-                        forcePage={pageIndex}
-                        previousLabel="<"
-                        nextLabel=">"
-                        containerClassName={ROOT_CLASS_NAME}
-                        activeClassName={`selected w3-${pageSelectedColor}`}
-                        onPageChange={({selected}) => {setPageIndex(selected)}}
-                    />
-                </div>
+                <Paginate
+                    pageCount={pageCount}
+                    pageRangeDisplayed={pageRangeDisplayed}
+                    marginPagesDisplayed={marginPagesDisplayed}
+                    pageIndex={pageIndex}
+                    activeClassName={`selected w3-${pageSelectedColor}`}
+                    onPageChange={setPageIndex}
+                    horizontalAlignment={horizontalAlignment}
+                />
             </FontSizeColorTestingWrapper>)
         </TestingPane>
     );

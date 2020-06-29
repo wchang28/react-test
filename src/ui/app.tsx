@@ -9,7 +9,6 @@ import {Test as TestTestNoConfirm} from "./test-yes-no-confirm";
 import {Test as TestTestNoConfirmPromise} from "./test-yes-no-confirm-promise";
 import {Test as TestCodeMirrorEditor} from "./test-codemirror";
 //import {Test as TestDatePicker} from "./test-date-picker";
-import {Test as TestPagination} from "./test-pagination";
 import {Test as TestSplitterView} from "./test-splitter-view";
 import {Test as TestButtonPadding} from "./test-button-padding";
 import TestAlert from "./test-alert";
@@ -26,7 +25,7 @@ import TestObjsPropertyEditor from "./test-objs-property-editor";
 import TestCheckbox from "./test-checkbox";
 import TestPolling from "./test-polling";
 import TestReactHTMLParser from "./test-react-html-parser";
-import TestReactPaginate from "./test-react-paginate";
+import TestPaginate from "./test-paginate";
 
 interface TestItem {
 	id: string;
@@ -35,7 +34,7 @@ interface TestItem {
 }
 
 const testConfig: TestItem[] = [
-	{id: "react-paginate", name: "React Paginate", component: TestReactPaginate}
+	{id: "paginate", name: "Paginate", component: TestPaginate}
 	,{id: "xlsx-to-json", name: "XLSX to JSON", component: TestXLSX2JSON}
 	,{id: "csv-to-json", name: "CSV to JSON", component: TestCSV2JSON}
 	,{id: "component-lifecycle", name: "Component Lifecycle", component: TestComponentLifecycle}
@@ -50,7 +49,6 @@ const testConfig: TestItem[] = [
 	,{id: "yes-no-confirm-promise", name: "Yes/No Confirmation (Promise)", component: TestTestNoConfirmPromise}
 	,{id: "codemirror", name: "CodeMirror Editor", component: TestCodeMirrorEditor}
 	//,{id: "date-picker", name: "Date Picker", component: TestDatePicker}
-	,{id: "pagination", name: "Pagination", component: TestPagination}
 	,{id: "splitter-view", name: "Splitter View", component: TestSplitterView}
 	,{id: "button-padding", name: "Button Padding", component: TestButtonPadding}
 	,{id: "alert", name: "Alert", component: TestAlert}
