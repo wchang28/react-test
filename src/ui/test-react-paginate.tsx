@@ -7,6 +7,9 @@ import {
     ,HorzontalAlignment
     ,getW3CSSHorizontalAlignmentClass
     ,getNumberInput
+    ,Color
+    ,allColors
+    ,getOptionSelector
     ,FontSize
     ,getFontSizeSelector
     ,FontSizeColorTestingWrapper
@@ -39,6 +42,7 @@ export default () => {
     const [marginPagesDisplayed, setMarginPagesDisplayed] = useState(2);
     const [fontSize, setFontSize] = useState<FontSize>("medium");
     const [horizontalAlignment, setHorizontalAlignment] = useState<HorzontalAlignment>("left");
+    const [pageSelectedColor, setPageSelectedColor] = useState<Color>("green");
     const w3AlignmentClass = getW3CSSHorizontalAlignmentClass(horizontalAlignment);
     return (
         <TestingPane>
@@ -48,6 +52,7 @@ export default () => {
                 {getNumberInput("Page Range Displayed", pageRangeDisplayed, setPageRangeDisplayed)}
                 {getNumberInput("Margin Pages Displayed", marginPagesDisplayed, setMarginPagesDisplayed)}
                 {getHorizontalAlignmentSelector(horizontalAlignment, setHorizontalAlignment)}
+                {getOptionSelector(allColors, "Page Selected Color:", pageSelectedColor, setPageSelectedColor)}
                 {getFontSizeSelector(fontSize, setFontSize)}
             </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
@@ -61,7 +66,7 @@ export default () => {
                         nextLabel=">"
                         containerClassName="paginate-ul w3-ul w3-border w3-light-grey"
                         pageClassName="paginate-li w3-border-right"
-                        activeClassName="selected w3-green"
+                        activeClassName={`selected w3-${pageSelectedColor}`}
                         breakClassName="paginate-li break w3-border-right"
                         previousClassName="paginate-li previous w3-border-right"
                         nextClassName="paginate-li next"
