@@ -20,18 +20,24 @@ injectCSS(`
 .paginate-ul {
     width:auto;
     display:inline-block;
+    list-style-type:none;
+    padding:0;
+    margin:0;
 }
-.paginate-li {
-    padding:0!important;
+.paginate-ul li {
+    padding:0;
     float:left;
     width:auto;
-    border:none;
+    border-right:1px solid #ddd;
     display:block;
     outline:0;
 }
-.paginate-a {
-    outline:0!important;
-    padding:0.53em 1.06em!important;
+.paginate-ul li:last-child {
+    border-right:none;
+}
+.paginate-ul a {
+    outline:0;
+    padding:0.53em 1.06em;
 }
 `);
 
@@ -64,17 +70,13 @@ export default () => {
                         forcePage={pageIndex}
                         previousLabel="<"
                         nextLabel=">"
-                        containerClassName="paginate-ul w3-ul w3-border w3-light-grey"
-                        pageClassName="paginate-li w3-border-right"
+                        containerClassName="paginate-ul w3-border w3-light-grey"
                         activeClassName={`selected w3-${pageSelectedColor}`}
-                        breakClassName="paginate-li break w3-border-right"
-                        previousClassName="paginate-li previous w3-border-right"
-                        nextClassName="paginate-li next"
-                        pageLinkClassName="paginate-a w3-button"
+                        pageLinkClassName="w3-button"
                         activeLinkClassName="selected"
-                        breakLinkClassName="paginate-a w3-button break"
-                        previousLinkClassName="paginate-a w3-button previous"
-                        nextLinkClassName="paginate-a w3-button next"
+                        breakLinkClassName="w3-button break"
+                        previousLinkClassName="w3-button previous"
+                        nextLinkClassName="w3-button next"
                         onPageChange={({selected}) => {setPageIndex(selected)}}
                     />
                 </div>
