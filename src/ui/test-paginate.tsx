@@ -12,7 +12,6 @@ import {
     ,getFontSizeSelector
     ,FontSizeColorTestingWrapper
 } from "./test-common";
-
 import Paginate from "./paginate";
 
 export default () => {
