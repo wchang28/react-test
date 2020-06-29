@@ -25,18 +25,25 @@ function getW3CSSHorizontalAlignmentClass(horizontalAlignment?: HorzontalAlignme
     }
 }
 
-const ROOT_CLASS_NAME = "paginate-ul";
+export const ROOT_CLASS_NAME = "paginate-root";
+const UL_CLASS_NAME = `react-paginate-ul`;
 
+// !!! Need to set the container line-height to "0" in order to get rid of the extra padding on the bottom due to <ul> being an inline-block eleemnt
+// also need to set <ul>'s line-height back to "normal" to undo the "0" being set on the container
 injectCSS(`
 .${ROOT_CLASS_NAME} {
+    line-height:0;
+}
+.${UL_CLASS_NAME} {
     width:auto;
     display:inline-block;
+    line-height:normal;
     list-style-type:none;
     padding:0;
     margin:0;
     border:1px solid #ccc!important;
 }
-.${ROOT_CLASS_NAME} li {
+.${UL_CLASS_NAME} li {
     padding:0;
     float:left;
     width:auto;
@@ -44,12 +51,12 @@ injectCSS(`
     display:block;
     outline:0;
 }
-.${ROOT_CLASS_NAME} li:last-child {
+.${UL_CLASS_NAME} li:last-child {
     border-right:none;
 }
-.${ROOT_CLASS_NAME} a {
+.${UL_CLASS_NAME} a {
     outline:0;
-    padding:0.53em 1.06em;
+    padding:0.53em 0.8em;
     border:none;
     display:inline-block;
     vertical-align:middle;
@@ -61,7 +68,7 @@ injectCSS(`
     cursor:pointer;
     white-space:nowrap;
 }
-.${ROOT_CLASS_NAME} a:hover {
+.${UL_CLASS_NAME} a:hover {
     color:#000!important;
     background-color:#ccc!important;
 }
@@ -85,7 +92,7 @@ export default (props: ReactProps<Props>) => {
     const {pageCount, pageIndex, pageRangeDisplayed, marginPagesDisplayed, onPageChange, activeClassName, horizontalAlignment} = props;
     const content = (pageCount < 2
         ? null :
-        <div className={getW3CSSHorizontalAlignmentClass(horizontalAlignment)}>
+        <div className={`${ROOT_CLASS_NAME} ${getW3CSSHorizontalAlignmentClass(horizontalAlignment)}`}>
             <ReactPaginate
                 pageCount={pageCount}
                 pageRangeDisplayed={pageRangeDisplayed}
@@ -93,7 +100,7 @@ export default (props: ReactProps<Props>) => {
                 forcePage={pageIndex}
                 previousLabel="<"
                 nextLabel=">"
-                containerClassName={ROOT_CLASS_NAME}
+                containerClassName={UL_CLASS_NAME}
                 activeClassName={activeClassName}
                 onPageChange={({selected}) => {onPageChange(selected)}}
             />
