@@ -13,7 +13,7 @@ function injectCSS(css: string, uglify: boolean = false) {
     document.getElementsByTagName("head")[0].appendChild(style); 
 }
 
-export function getW3CSSHorizontalAlignmentClass(horizontalAlignment?: HorzontalAlignment) {
+function getW3CSSHorizontalAlignmentClass(horizontalAlignment?: HorzontalAlignment) {
     switch(horizontalAlignment) {
         case "center":
             return "w3-center";
@@ -25,7 +25,7 @@ export function getW3CSSHorizontalAlignmentClass(horizontalAlignment?: Horzontal
     }
 }
 
-const ROOT_CLASS_NAME = "react-paginate-ul";
+const ROOT_CLASS_NAME = "paginate-ul";
 
 injectCSS(`
 .${ROOT_CLASS_NAME} {
