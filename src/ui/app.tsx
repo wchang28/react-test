@@ -6,7 +6,7 @@ import {Test as TestNameEntry} from "./test-name-entry";
 import {Test as TestDialog} from "./test-dialog";
 import {Test as TestInformationModal} from "./test-information-modal";
 import {Test as TestTestNoConfirm} from "./test-yes-no-confirm";
-import {Test as TestTestNoConfirmPromise} from "./test-yes-no-confirm-promise";
+import TestTestNoConfirmPromise from "./test-yes-no-confirm-promise";
 import {Test as TestCodeMirrorEditor} from "./test-codemirror";
 //import {Test as TestDatePicker} from "./test-date-picker";
 import {Test as TestSplitterView} from "./test-splitter-view";

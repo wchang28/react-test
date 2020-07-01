@@ -153,3 +153,21 @@ export class Confirm {
         });
     }
 }
+
+export function YesOrNo(setElement:(element: JSX.Element) => void, message: string, widthPx?: number, caption?: string, captionColor?: Color) {
+    return new Promise((resolve: (value: boolean) => void, reject: (err: any) => void) => {
+        const confirmBox = (
+            <YesNoConfirm
+                caption={caption}
+                captionColor={captionColor}
+                message={message}
+                onClose={(confirm) => {
+                    setElement(null);
+                    resolve(confirm);
+                }}
+                widthPx={widthPx}
+            />
+        );
+        setElement(confirmBox);
+    });  
+}
