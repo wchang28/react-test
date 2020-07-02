@@ -26,7 +26,6 @@ import TestCheckbox from "./test-checkbox";
 import TestPolling from "./test-polling";
 import TestReactHTMLParser from "./test-react-html-parser";
 import TestPaginate from "./test-paginate";
-import TestReactModal from "./test-react-modal";
 
 interface TestItem {
 	id: string;
@@ -35,8 +34,7 @@ interface TestItem {
 }
 
 const testConfig: TestItem[] = [
-	{id: "react-modal", name: "React Modal", component: TestReactModal}
-	,{id: "paginate", name: "Paginate", component: TestPaginate}
+	{id: "paginate", name: "Paginate", component: TestPaginate}
 	,{id: "xlsx-to-json", name: "XLSX to JSON", component: TestXLSX2JSON}
 	,{id: "csv-to-json", name: "CSV to JSON", component: TestCSV2JSON}
 	,{id: "component-lifecycle", name: "Component Lifecycle", component: TestComponentLifecycle}
