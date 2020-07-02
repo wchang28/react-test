@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 export type FieldErrors = {[field: string]: string};
-export type ContentComponentConstructor = new (props: any) => any;
+export type ContentComponentConstructor = any;
 // edit content must implement the following props
 export interface ContentProps<T> {
     value: T;
