@@ -31,10 +31,10 @@ export class Test extends React.Component<any, State> {
 		const verifyData = async (data: Name) => {
 			const ret: FieldErrors = {};
 			if (!data || !data.firstName) {
-				ret["first-name"] = "Frist name cannot be blank"
+				ret["firstName"] = "Frist name cannot be blank"
 			}
 			if (!data || !data.lastName) {
-				ret["last-name"] = "Last name cannot be blank"
+				ret["lastName"] = "Last name cannot be blank"
 			}
 			return ret;
 		};
