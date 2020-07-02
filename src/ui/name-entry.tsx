@@ -37,10 +37,11 @@ export function NameEntry(props: ReactProps<Props>) {
         }
     };
     const fieldsUI = fields.map(({field, label}, index) => {
+        const fieldValue = (value && value[field] ? value[field] : "");
         return (
             <p key={index}>
                 <label>{label}</label>{' '}{getFieldErrorHintUI(fieldErrors[field])}
-                <input className={`w3-input w3-text-${textColor}`} type="text" value={value[field]} name={field} onChange={onFieldChange}/>
+                <input className={`w3-input w3-text-${textColor}`} type="text" value={fieldValue} name={field} onChange={onFieldChange}/>
             </p>
         );
     });
