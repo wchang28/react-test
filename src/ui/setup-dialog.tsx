@@ -2,6 +2,13 @@ import * as React from 'react';
 
 export type FieldErrors = {[field: string]: string};
 export type ContentComponentConstructor = new (props: any) => any;
+// edit content must implement the following props
+export interface ContentProps<T> {
+    value: T;
+    onChange?: (value: T) => void;
+    fieldErrors?: FieldErrors;
+    onFieldErrorsChange?: (fieldErrors: FieldErrors) => void;
+}
 
 const deepCopy = (src: any) => (JSON.parse(JSON.stringify(src)));
 

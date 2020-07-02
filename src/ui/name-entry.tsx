@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FieldErrors} from "./setup-dialog";
+import {FieldErrors, ContentProps} from "./setup-dialog";
 
 const deepCopy = (src: any) => (JSON.parse(JSON.stringify(src)));
 
@@ -10,11 +10,7 @@ export interface Name {
 
 export type TextColor = "black" | "green";
 
-export interface Props {
-    value?: Name
-    fieldErrors?: FieldErrors;
-    onChange?: (value: Name) => void;
-    onFieldErrorsChange?: (fieldErrors: FieldErrors) => void;
+export interface Props extends ContentProps<Name> {
     textColor?: TextColor;
 }
 
