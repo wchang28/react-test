@@ -92,7 +92,7 @@ export class Dialog extends React.Component<Props, State> {
         }, (this.props.contentProps ? this.props.contentProps : {})
         );
         const contentElement = React.createElement(ContentComponentClass, contentProperties);
-        const buttonBarStyle: React.CSSProperties = {paddingTop: "1em", paddingBottom: "1em"};
+        const buttonBarStyle: React.CSSProperties = {paddingTop: "0.8em", paddingBottom: "0.8em"};
         const buttonClass = "w3-btn w3-border w3-round";
         const buttonStyle: React.CSSProperties = {padding: "0.3em 0.8em"};
         return (
