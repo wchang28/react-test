@@ -1,38 +1,8 @@
 import * as React from 'react';
 import {useState} from "react";
 import {NameEntry, Name} from "./name-entry";
-import {Dialog, FieldErrors} from "./setup-dialog";
+import {Dialog, FieldErrors, prompt as prompModal} from "./setup-dialog";
 import {FontSize, TestingPane, ConfigurationPane, getButton, getFontSizeSelector, getLabel, getColorSelector, Color} from './test-common';
-
-function promptModalDialog<VT = any>(
-	setModalDisplay: React.Dispatch<React.SetStateAction<JSX.Element>>
-	,contentComponentClass: any
-	,captions?: string
-	,defaultData?: VT
-	,maxWidthPx?: number
-	,contentClassName?: string
-	,titleBarColor?: string
-	,verifyData?: (data: VT) => Promise<FieldErrors>
-	,contentProps?: any
-) {
-	return new Promise<VT>((resolve, reject) => {
-		const dialog = <Dialog
-			contentComponentClass={contentComponentClass}
-			data={defaultData}
-			verifyData={(verifyData ? verifyData : async (data: VT) => {return null;})}
-			captions={captions}
-			titleBarColor={titleBarColor}
-			onClose={(data: VT) => {
-				setModalDisplay(null);
-				resolve(data ? data: null);
-			}}
-			contentProps={contentProps}
-			maxWidthPx={maxWidthPx}
-			contentClassName={contentClassName}
-		/>
-		setModalDisplay(dialog);
-	});
-}
 
 export default () => {
 	const [name, setName] = useState<Name>({firstName: "Wen", lastName: "Chang"});
@@ -62,7 +32,7 @@ export default () => {
 		}
 	};
 	const onTestModalPromise = async () => {
-		const name = await promptModalDialog<Name>(setModal, NameEntry, "Edit Your Name (Promise)", null, maxWidthPx, contentClassName, color, verifyData);
+		const name = await prompModal<Name>(setModal, NameEntry, "Edit Your Name (Promise)", null, maxWidthPx, contentClassName, color, verifyData);
 		if (name) {
 			setName(name);
 		}

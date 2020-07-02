@@ -126,3 +126,33 @@ export class Dialog extends React.Component<Props, State> {
         document.removeEventListener("keyup", this._documentKeyUpListner);
     }
 }
+
+export function prompt<VT = any>(
+	setModalDisplay: React.Dispatch<React.SetStateAction<JSX.Element>>
+	,contentComponentClass: any
+	,captions?: string
+	,defaultData?: VT
+	,maxWidthPx?: number
+	,contentClassName?: string
+	,titleBarColor?: string
+	,verifyData?: (data: VT) => Promise<FieldErrors>
+	,contentProps?: any
+) {
+	return new Promise<VT>((resolve, reject) => {
+		const dialog = <Dialog
+			contentComponentClass={contentComponentClass}
+			data={defaultData}
+			verifyData={(verifyData ? verifyData : async (data: VT) => {return null;})}
+			captions={captions}
+			titleBarColor={titleBarColor}
+			onClose={(data: VT) => {
+				setModalDisplay(null);
+				resolve(data ? data: null);
+			}}
+			contentProps={contentProps}
+			maxWidthPx={maxWidthPx}
+			contentClassName={contentClassName}
+		/>
+		setModalDisplay(dialog);
+	});
+}
