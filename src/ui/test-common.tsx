@@ -115,7 +115,7 @@ export const getTextInput = (label: string, value: string, onChange: (value: str
         </p>
     );
 };
-export const getLebel = (label: string) => {
+export const getLabel = (label: string) => {
     return (
         <p>
             <label>{label}</label>

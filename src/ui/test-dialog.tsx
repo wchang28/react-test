@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useState} from "react";
 import {NameEntry, Name} from "./name-entry";
 import {Dialog, FieldErrors} from "./setup-dialog";
-import {FontSize, TestingPane, ConfigurationPane, getButton, getFontSizeSelector, getLebel} from './test-common';
+import {FontSize, TestingPane, ConfigurationPane, getButton, getFontSizeSelector, getLabel} from './test-common';
 
 export default () => {
 	const [name, setName] = useState<Name>({firstName: "Wen", lastName: "Chang"});
@@ -45,7 +45,7 @@ export default () => {
 		<TestingPane>
 			<div style={{width: "250px"}}>
 				<ConfigurationPane>
-					{getLebel(`Hi ${name.firstName} ${name.lastName}`)}
+					{getLabel(`Hi ${name.firstName} ${name.lastName}`)}
 					{getFontSizeSelector(fontSize, setFontSize)}
 					{getButton("Edit name", onEditNameClick)}
 					{dialog}
