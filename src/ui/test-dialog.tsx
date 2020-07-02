@@ -49,6 +49,7 @@ export class Test extends React.Component<any, State> {
 			onClose={this.onDialogClose.bind(this)}
 			contentProps={{textColor: "green"}}
 			maxWidthPx={400}
+			contentClassName={"w3-small"}
 			/>
 		) : null);
 		return (

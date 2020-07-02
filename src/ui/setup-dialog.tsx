@@ -22,6 +22,7 @@ export interface Props {
     onClose: (data?: any, hint?: any) => void;
     contentProps?: any;
     maxWidthPx?: number;
+    contentClassName?: string;
 }
 
 interface State {
@@ -79,6 +80,8 @@ export class Dialog extends React.Component<Props, State> {
         const caption = (this.props.captions ? this.props.captions : "");
         const titleBarColor = (this.props.titleBarColor ? this.props.titleBarColor : "blue");
         const titleBarClassName = `w3-container w3-${titleBarColor}`;
+        const titleBarStyle: React.CSSProperties = {paddingTop: "0.5em", paddingBottom: "0.5em", fontWeight: "bold"};
+        const crossButtonStyle: React.CSSProperties = {padding: "0.3em 0.8em", fontWeight: "bold"};
         const maxWidthPx = (this.props.maxWidthPx ? this.props.maxWidthPx : 600);
         const ContentComponentClass = this.props.contentComponentClass;
         const contentProperties = Object.assign({
@@ -89,21 +92,24 @@ export class Dialog extends React.Component<Props, State> {
         }, (this.props.contentProps ? this.props.contentProps : {})
         );
         const contentElement = React.createElement(ContentComponentClass, contentProperties);
+        const buttonBarStyle: React.CSSProperties = {paddingTop: "1em", paddingBottom: "1em"};
+        const buttonClass = "w3-btn w3-border w3-round";
+        const buttonStyle: React.CSSProperties = {padding: "0.3em 0.8em"};
         return (
             <div className="w3-modal" style={{display: "block"}}>
-                <div className="w3-modal-content" style={{maxWidth:`${maxWidthPx}px`}}>
-                    <header className={titleBarClassName}> 
-                        <span onClick={() => this.onClose()} className="w3-button w3-display-topright">x</span>
-                        <h6>{caption}</h6>
+                <div className={`w3-modal-content${this.props.contentClassName ? ` ${this.props.contentClassName}`: ""}`} style={{maxWidth:`${maxWidthPx}px`}}>
+                    <header className={titleBarClassName} style={titleBarStyle}> 
+                        <span onClick={() => this.onClose()} className="w3-button w3-display-topright" style={crossButtonStyle}>x</span>
+                        {caption}
                     </header>
                     <div className="w3-container">
                         {contentElement}
-                        <div className="w3-bar w3-padding-16">
+                        <div className="w3-bar" style={buttonBarStyle}>
                             <div className="w3-right">
-                                <button className="w3-btn w3-white w3-border w3-border-blue w3-round" onClick={() => this.onOK()}>OK</button>
+                                <button className={buttonClass} style={buttonStyle} onClick={() => this.onOK()}>OK</button>
                                 {' '}
-                                <button className="w3-btn w3-white w3-border w3-border-blue w3-round" onClick={() => this.onClose()}>Cancel</button>
-                            </div>                        
+                                <button className={buttonClass} style={buttonStyle} onClick={() => this.onClose()}>Cancel</button>
+                            </div>
                         </div>
                     </div>
                 </div>
