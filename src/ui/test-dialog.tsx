@@ -2,12 +2,13 @@ import * as React from 'react';
 import {useState} from "react";
 import {NameEntry, Name} from "./name-entry";
 import {Dialog, FieldErrors} from "./setup-dialog";
-import {FontSize, TestingPane, ConfigurationPane, getButton, getFontSizeSelector, getLabel} from './test-common';
+import {FontSize, TestingPane, ConfigurationPane, getButton, getFontSizeSelector, getLabel, getColorSelector, Color} from './test-common';
 
 export default () => {
 	const [name, setName] = useState<Name>({firstName: "Wen", lastName: "Chang"});
 	const [dialogVisible, setDialogVisible] = useState(false);
 	const [fontSize, setFontSize] = useState<FontSize>("small");
+	const [color, setColor] = useState<Color>("black");
 	const verifyData = async (data: Name) => {
 		const ret: FieldErrors = {};
 		if (!data || !data.firstName) {
@@ -33,7 +34,7 @@ export default () => {
 			data={name}
 			verifyData={verifyData}
 			captions="Edit Your Name"
-			titleBarColor="black"
+			titleBarColor={color}
 			hint={null}
 			onClose={onDialogClose}
 			contentProps={{textColor: "green"}}
@@ -47,6 +48,7 @@ export default () => {
 				<ConfigurationPane>
 					{getLabel(`Hi ${name.firstName} ${name.lastName}`)}
 					{getFontSizeSelector(fontSize, setFontSize)}
+					{getColorSelector(color, setColor)}
 					{getButton("Edit name", onEditNameClick)}
 					{dialog}
 				</ConfigurationPane>
