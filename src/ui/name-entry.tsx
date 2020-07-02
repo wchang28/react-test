@@ -8,6 +8,13 @@ export interface Name {
     lastName?: string;    
 }
 
+const fields: {field: string, label: string}[] = [
+    {field: "firstName", label: "First Name"}
+    ,{field: "lastName", label: "Last Name"}
+];
+
+const getFieldErrorHintUI = (errorHint: string) => (errorHint ? (<span className="w3-text-red"><i className="fa fa-times"/> {errorHint}</span>) : null);
+
 export type TextColor = "black" | "green";
 
 export interface Props extends ContentProps<Name> {
@@ -16,42 +23,26 @@ export interface Props extends ContentProps<Name> {
 
 export function NameEntry(props: ReactProps<Props>) {
     const {value, onChange, fieldErrors, onFieldErrorsChange, textColor} = props;
-    const onFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const field = (event.target.name);
         if (onChange) {
-            const firstName = event.target.value;
-            const newValue = {...value, firstName};
+            const newFieldValue = event.target.value;
+            const newValue = {...value, ...{[field]: newFieldValue}};
             onChange(newValue);
         }
         if (onFieldErrorsChange) {
             const newFieldErrors = {...fieldErrors};
-            delete newFieldErrors["firstName"];
+            delete newFieldErrors[field];
             onFieldErrorsChange(newFieldErrors);
         }
     };
-    const onLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (onChange) {
-            const lastName = event.target.value;
-            const newValue = {...value, lastName};
-            onChange(newValue);
-        }
-        if (onFieldErrorsChange) {
-            const newFieldErrors = {...fieldErrors};
-            delete newFieldErrors["lastName"];
-            onFieldErrorsChange(newFieldErrors);
-        }
-    };
-    const getFieldErrorHintUI = (errorHint: string) => (errorHint ? (<span className="w3-text-red"><i className="fa fa-times"/> {errorHint}</span>) : null)
-    const inputClassName = `w3-input w3-text-${textColor}`;
-    return (
-        <div>
-            <p>
-                <label>First Name</label>{' '}{getFieldErrorHintUI(fieldErrors["firstName"])}
-                <input className={inputClassName} type="text" value={value.firstName} onChange={onFirstNameChange}/>
+    const fieldsUI = fields.map(({field, label}, index) => {
+        return (
+            <p key={index}>
+                <label>{label}</label>{' '}{getFieldErrorHintUI(fieldErrors[field])}
+                <input className={`w3-input w3-text-${textColor}`} type="text" value={value[field]} name={field} onChange={onFieldChange}/>
             </p>
-            <p>
-                <label>Last Name</label>{' '}{getFieldErrorHintUI(fieldErrors["lastName"])}
-                <input className={inputClassName} type="text" value={value.lastName} onChange={onLastNameChange}/>
-            </p>
-        </div>
-    );
+        );
+    });
+    return (<div>{fieldsUI}</div>);
 }
