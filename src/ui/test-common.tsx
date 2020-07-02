@@ -115,6 +115,13 @@ export const getTextInput = (label: string, value: string, onChange: (value: str
         </p>
     );
 };
+export const getLebel = (label: string) => {
+    return (
+        <p>
+            <label>{label}</label>
+        </p>
+    );
+};
 export const getButton = (label: string, onClick: () => void) => {
     return (
         <p>
