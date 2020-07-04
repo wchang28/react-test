@@ -25,6 +25,9 @@ export interface Props {
     contentClassName?: string;
 }
 
+const DEFAULT_WIDTH_PX = 600;
+const DEFAULT_TITLEBAR_COLOR = "blue";
+
 interface State {
     data?: any;
     fieldErrors?: FieldErrors;
@@ -77,12 +80,12 @@ export class Dialog extends React.Component<Props, State> {
     }
 
     render() {
-        const caption = (this.props.captions ? this.props.captions : "");
-        const titleBarColor = (this.props.titleBarColor ? this.props.titleBarColor : "blue");
+        const caption = (this.props.captions || "");
+        const titleBarColor = (this.props.titleBarColor || DEFAULT_TITLEBAR_COLOR);
         const titleBarClassName = `w3-container w3-${titleBarColor}`;
         const titleBarStyle: React.CSSProperties = {paddingTop: "0.5em", paddingBottom: "0.5em", fontWeight: "bold"};
         const crossButtonStyle: React.CSSProperties = {padding: "0.3em 0.8em", fontWeight: "bold"};
-        const maxWidthPx = (this.props.maxWidthPx ? this.props.maxWidthPx : 600);
+        const maxWidthPx = (this.props.maxWidthPx || DEFAULT_WIDTH_PX);
         const ContentComponentClass = this.props.contentComponentClass;
         const contentProperties = Object.assign({
             value: this.state.data
