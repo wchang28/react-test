@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {useState} from "react";
 import {NameEntry, Name} from "./name-entry";
-import {Dialog, FieldErrors, prompt as prompModal} from "./setup-dialog";
-import PrompeEdit from "./prompt-edit";
+import {Dialog, FieldErrors, prompt as promptDlgModal} from "./setup-dialog";
+import prompt from "./prompt";
 import {FontSize, TestingPane, ConfigurationPane, getNumberInput, getButton, getFontSizeSelector, getLabel, getColorSelector, Color, getCheckbox} from './test-common';
 
 export default () => {
@@ -10,10 +10,10 @@ export default () => {
 	const [dialogVisible, setDialogVisible] = useState(false);
 	const [fontSize, setFontSize] = useState<FontSize>("small");
 	const [titleBarColor, setTitleBarColor] = useState<Color>("blue");
-	const [maxWidthPx, setMaxWidthPx] = useState(400);
+	const [maxWidthPx, setMaxWidthPx] = useState(300);
 	const [modal, setModal] = useState<JSX.Element>(null);
-	const [inputValue, setInputValue] = useState("");
-	const [testLongMessage, setTestLongMessage] = useState(false);
+	const [inputValue, setInputValue] = useState("tttt");
+	const [testLongMessage, setTestLongMessage] = useState(true);
 	const [promptModal, setPromptModal] = useState<JSX.Element>(null);
 	const contentClassName = `w3-${fontSize}`;
 	const verifyData = async (data: Name) => {
@@ -36,7 +36,7 @@ export default () => {
 		}
 	};
 	const onTestModalPromise = async () => {
-		const name = await prompModal<Name>(setModal, NameEntry, "Edit Your Name (Promise)", null, maxWidthPx, contentClassName, titleBarColor, verifyData);
+		const name = await promptDlgModal<Name>(setModal, NameEntry, "Edit Your Name (Promise)", null, maxWidthPx, contentClassName, titleBarColor, verifyData);
 		if (name) {
 			setName(name);
 		}
@@ -45,7 +45,7 @@ export default () => {
 		const message = (testLongMessage ?
 		 `This article is light grey and the text is brown. This article is light grey and the text is brown. This article is light grey and the text is brown. This article is light grey and the text is brown.\nThis article is light grey and the text is brown`
 		:"This is a test");
-		const value = await prompModal<string>(setPromptModal, PrompeEdit, "Testing prompt()", inputValue, maxWidthPx, contentClassName, titleBarColor, null, {message});
+		const value = await prompt(setPromptModal, message, inputValue, "Test prompt()", contentClassName, maxWidthPx, titleBarColor);
 		console.log(`value=${value}`);
 		if (value) {
 			setInputValue(value);

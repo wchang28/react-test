@@ -1,13 +1,15 @@
+
 import * as React from 'react';
 import {ContentProps} from "./setup-dialog";
+import {prompt as promptDlgModal} from "./setup-dialog";
 
 export type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: React.ReactNode }>;
 
-export interface Props extends ContentProps<string> {
+export interface EditProps extends ContentProps<string> {
     message: string;
 }
 
-export default (props: ReactProps<Props>) => {
+export function Edit(props: ReactProps<EditProps>) {
     const {value, onChange, message} = props;
     const onFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
@@ -27,3 +29,16 @@ export default (props: ReactProps<Props>) => {
         </div>
     );
 }
+
+export default async (
+    setPromptModal: React.Dispatch<React.SetStateAction<JSX.Element>>
+    ,message: string
+    ,_default?: string
+    ,title?: string
+    ,contentClassName?: string
+    ,maxWidthPx?: number
+    ,titleBarColor?: string
+) => {
+    maxWidthPx = (maxWidthPx || 300);
+    return await promptDlgModal<string>(setPromptModal, Edit, title, _default, maxWidthPx, contentClassName, titleBarColor, null, {message});
+};
