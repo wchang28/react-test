@@ -133,10 +133,10 @@ export function prompt<VT = any>(
 	,captions?: string
 	,defaultData?: VT
 	,maxWidthPx?: number
-	,contentClassName?: string
 	,titleBarColor?: string
 	,verifyData?: (data: VT) => Promise<FieldErrors>
-	,contentProps?: any
+    ,contentProps?: any
+    ,contentClassName?: string
 ) {
 	return new Promise<VT>((resolve, reject) => {
 		const dialog = <Dialog

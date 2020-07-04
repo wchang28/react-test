@@ -35,10 +35,10 @@ export default async (
     ,message: string
     ,_default?: string
     ,title?: string
-    ,contentClassName?: string
     ,maxWidthPx?: number
     ,titleBarColor?: string
+    ,contentClassName?: string
 ) => {
-    maxWidthPx = (maxWidthPx || 300);
-    return await promptDlgModal<string>(setPromptModal, Edit, title, _default, maxWidthPx, contentClassName, titleBarColor, null, {message});
+    maxWidthPx = (maxWidthPx || 400);
+    return await promptDlgModal<string>(setPromptModal, Edit, title, _default, maxWidthPx, titleBarColor, null, {message}, contentClassName);
 };

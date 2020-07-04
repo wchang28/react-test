@@ -10,7 +10,7 @@ export default () => {
 	const [dialogVisible, setDialogVisible] = useState(false);
 	const [fontSize, setFontSize] = useState<FontSize>("small");
 	const [titleBarColor, setTitleBarColor] = useState<Color>("blue");
-	const [maxWidthPx, setMaxWidthPx] = useState(300);
+	const [maxWidthPx, setMaxWidthPx] = useState(400);
 	const [modal, setModal] = useState<JSX.Element>(null);
 	const [inputValue, setInputValue] = useState("tttt");
 	const [testLongMessage, setTestLongMessage] = useState(true);
@@ -36,7 +36,7 @@ export default () => {
 		}
 	};
 	const onTestModalPromise = async () => {
-		const name = await promptDlgModal<Name>(setModal, NameEntry, "Edit Your Name (Promise)", null, maxWidthPx, contentClassName, titleBarColor, verifyData);
+		const name = await promptDlgModal<Name>(setModal, NameEntry, "Edit Your Name (Promise)", null, maxWidthPx, titleBarColor, verifyData, null, contentClassName);
 		if (name) {
 			setName(name);
 		}
@@ -45,7 +45,7 @@ export default () => {
 		const message = (testLongMessage ?
 		 `This article is light grey and the text is brown. This article is light grey and the text is brown. This article is light grey and the text is brown. This article is light grey and the text is brown.\nThis article is light grey and the text is brown`
 		:"This is a test");
-		const value = await prompt(setPromptModal, message, inputValue, "Test prompt()", contentClassName, maxWidthPx, titleBarColor);
+		const value = await prompt(setPromptModal, message, inputValue, "Test prompt()", maxWidthPx, titleBarColor, contentClassName);
 		console.log(`value=${value}`);
 		if (value) {
 			setInputValue(value);
@@ -75,9 +75,11 @@ export default () => {
 					{getNumberInput("Max Width (px)", maxWidthPx, setMaxWidthPx)}
 					{getButton("Edit name", onEditName)}
 					{getButton("Test Modal Promise", onTestModalPromise)}
-					{getLabel(`inputValue=${inputValue}`)}
-					{getCheckbox("Test Long Message", testLongMessage, setTestLongMessage)}
-					{getButton("Test Prompt", onTestPrompt)}
+					<div className="w3-border w3-padding-small">
+						{getLabel(`inputValue=${inputValue}`)}
+						{getCheckbox("Test Long Message", testLongMessage, setTestLongMessage)}
+						{getButton("Test Prompt", onTestPrompt)}
+					</div>
 					{dialog}
 					{modal}
 					{promptModal}
