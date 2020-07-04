@@ -141,7 +141,7 @@ export function prompt<VT = any>(
     ,contentProps?: any
     ,contentClassName?: string
 ) {
-	return new Promise<VT>((resolve, reject) => {
+	return new Promise<VT>((resolve) => {
 		const dialog = <Dialog
 			contentComponentClass={contentComponentClass}
 			data={defaultData}

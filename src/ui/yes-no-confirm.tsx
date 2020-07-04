@@ -155,7 +155,7 @@ export class Confirm {
 }
 
 export function YesOrNo(setElement:(element: JSX.Element) => void, message: string, widthPx?: number, caption?: string, captionColor?: Color) {
-    return new Promise((resolve: (value: boolean) => void, reject: (err: any) => void) => {
+    return new Promise<boolean>((resolve) => {
         const confirmBox = (
             <YesNoConfirm
                 caption={caption}
