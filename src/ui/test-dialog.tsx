@@ -43,7 +43,7 @@ export default () => {
 	};
 	const onTestPrompt = async () => {
 		const message = (testLongMessage ?
-		 `This article is light grey and the text is brown. This article is light grey and the text is brown. This article is light grey and the text is brown. This article is light grey and the text is brown. This article is light grey and the text is brown`
+		 `This article is light grey and the text is brown. This article is light grey and the text is brown. This article is light grey and the text is brown. This article is light grey and the text is brown.\nThis article is light grey and the text is brown`
 		:"This is a test");
 		const value = await prompModal<string>(setPromptModal, PrompeEdit, "Testing prompt()", inputValue, maxWidthPx, contentClassName, titleBarColor, null, {message});
 		console.log(`value=${value}`);
