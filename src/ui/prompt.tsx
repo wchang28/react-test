@@ -25,7 +25,7 @@ export function Edit(props: ReactProps<EditProps>) {
     return (
         <div style={{paddingTop: "0.8em"}}>
             {textMessageContent(message)}
-            <input className={`w3-input`} type="text" value={value} style={{padding: "0.4em 0.4em", border: "1px solid #ccc", marginTop: "0.4em"}} onChange={onFieldChange}/>
+            <input className={`w3-input`} type="text" value={value || ""} style={{padding: "0.4em 0.4em", border: "1px solid #ccc", marginTop: "0.4em"}} onChange={onFieldChange}/>
         </div>
     );
 }
@@ -39,6 +39,8 @@ export default async (
     ,titleBarColor?: string
     ,contentClassName?: string
 ) => {
+    _default = (_default ? _default : null);
     maxWidthPx = (maxWidthPx || 400);
+    titleBarColor = (titleBarColor || "blue");
     return await promptDlgModal<string>(setPromptModal, Edit, title, _default, maxWidthPx, titleBarColor, null, {message}, contentClassName);
 };
