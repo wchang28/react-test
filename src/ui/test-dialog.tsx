@@ -3,15 +3,16 @@ import {useState} from "react";
 import {NameEntry, Name} from "./name-entry";
 import {Dialog, FieldErrors, prompt as prompModal} from "./setup-dialog";
 import PrompeEdit from "./prompt-edit";
-import {FontSize, TestingPane, ConfigurationPane, getButton, getFontSizeSelector, getLabel, getColorSelector, Color} from './test-common';
+import {FontSize, TestingPane, ConfigurationPane, getButton, getFontSizeSelector, getLabel, getColorSelector, Color, getCheckbox} from './test-common';
 
 export default () => {
 	const [name, setName] = useState<Name>({firstName: "Wen", lastName: "Chang"});
 	const [dialogVisible, setDialogVisible] = useState(false);
 	const [fontSize, setFontSize] = useState<FontSize>("small");
-	const [titleBarColor, setTitleBarColor] = useState<Color>("black");
+	const [titleBarColor, setTitleBarColor] = useState<Color>("blue");
 	const [modal, setModal] = useState<JSX.Element>(null);
 	const [inputValue, setInputValue] = useState("");
+	const [testLongMessage, setTestLongMessage] = useState(false);
 	const [promptModal, setPromptModal] = useState<JSX.Element>(null);
 	const contentClassName = `w3-${fontSize}`;
 	const maxWidthPx = 400;
@@ -72,6 +73,7 @@ export default () => {
 					{getButton("Edit name", onEditName)}
 					{getButton("Test Modal Promise", onTestModalPromise)}
 					{getLabel(`inputValue=${inputValue}`)}
+					{getCheckbox("Test Long Message", testLongMessage, setTestLongMessage)}
 					{getButton("Test Prompt", onTestPrompt)}
 					{dialog}
 					{modal}
