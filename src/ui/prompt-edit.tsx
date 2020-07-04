@@ -15,9 +15,9 @@ export default (props: ReactProps<Props>) => {
         }
     };
     return (
-        <div>
+        <div style={{paddingTop: "0.8em"}}>
             {message}
-            <input className={`w3-input`} type="text" value={value} onChange={onFieldChange}/>
+            <input className={`w3-input`} type="text" value={value} style={{padding: "0.5em 0.5em"}} onChange={onFieldChange}/>
         </div>
     );
 }
