@@ -3,19 +3,19 @@ import {useState} from "react";
 import {NameEntry, Name} from "./name-entry";
 import {Dialog, FieldErrors, prompt as prompModal} from "./setup-dialog";
 import PrompeEdit from "./prompt-edit";
-import {FontSize, TestingPane, ConfigurationPane, getButton, getFontSizeSelector, getLabel, getColorSelector, Color, getCheckbox} from './test-common';
+import {FontSize, TestingPane, ConfigurationPane, getNumberInput, getButton, getFontSizeSelector, getLabel, getColorSelector, Color, getCheckbox} from './test-common';
 
 export default () => {
 	const [name, setName] = useState<Name>({firstName: "Wen", lastName: "Chang"});
 	const [dialogVisible, setDialogVisible] = useState(false);
 	const [fontSize, setFontSize] = useState<FontSize>("small");
 	const [titleBarColor, setTitleBarColor] = useState<Color>("blue");
+	const [maxWidthPx, setMaxWidthPx] = useState(400);
 	const [modal, setModal] = useState<JSX.Element>(null);
 	const [inputValue, setInputValue] = useState("");
 	const [testLongMessage, setTestLongMessage] = useState(false);
 	const [promptModal, setPromptModal] = useState<JSX.Element>(null);
 	const contentClassName = `w3-${fontSize}`;
-	const maxWidthPx = 400;
 	const verifyData = async (data: Name) => {
 		const ret: FieldErrors = {};
 		if (!data || !data.firstName) {
@@ -72,6 +72,7 @@ export default () => {
 					{getLabel(`Hi ${name.firstName} ${name.lastName}`)}
 					{getFontSizeSelector(fontSize, setFontSize)}
 					{getColorSelector(titleBarColor, setTitleBarColor)}
+					{getNumberInput("Max Width (px)", maxWidthPx, setMaxWidthPx)}
 					{getButton("Edit name", onEditName)}
 					{getButton("Test Modal Promise", onTestModalPromise)}
 					{getLabel(`inputValue=${inputValue}`)}
