@@ -18,7 +18,7 @@ export interface PatchItem {
 export interface Props {
     objs: any[];
     propertyDefs: PropertyDef[];
-    onChange: (objs: any[]) => void;
+    onChange?: (objs: any[]) => void;
     onPatch?: (patches: PatchItem[]) => void;
     customEditors?: PropertyCustomEditor[];
     customFormatters?: PropertyCustomFormatter[];
@@ -78,7 +78,9 @@ export default (props: ReactProps<Props>) => {
             newObjs.push(newObj);
         }
         ////////////////////////////////////////////////////////////////////////////////////////
-        onChange(newObjs);
+        if (onChange) {
+            onChange(newObjs);
+        }
         // notifying object being patched
         ////////////////////////////////////////////////////////////////////////////////////////
         const patches: PatchItem[] = [];
@@ -95,7 +97,9 @@ export default (props: ReactProps<Props>) => {
                 patches.push({index, patch});
             }
         }
-        onPatch(patches);
+        if (onPatch) {
+            onPatch(patches);
+        }
         ////////////////////////////////////////////////////////////////////////////////////////
     };
     return (
