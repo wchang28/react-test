@@ -220,7 +220,15 @@ export default () => {
         const {rowIdx, idx} = data;
         console.log(`rowIdx=${rowIdx}, idx=${idx}, e=${e}`);
         setRows(deleteRow(rowIdx));
-    }
+    };
+    const onRowInsertAbove = (e: any, data: MenuItemData) => {
+        const {rowIdx} = data;
+        setRows(insertRow(rowIdx));
+    };
+    const onRowInsertBelow = (e: any, data: MenuItemData) => {
+        const {rowIdx} = data;
+        setRows(insertRow(rowIdx + 1));
+    };
     return (
         <div className={`${this_class} w3-tiny w3-card-4`}>
             <ReactDataGrid
@@ -231,13 +239,7 @@ export default () => {
                 onGridRowsUpdated={onGridRowsUpdated}
                 enableCellSelect={true}
                 onGridSort={onGridSort}
-                contextMenu={
-                    <EditContextMenu
-                      onRowDelete={onRowDelete}
-                      onRowInsertAbove={(e, { rowIdx }) => setRows(insertRow(rowIdx))}
-                      onRowInsertBelow={(e, { rowIdx }) => setRows(insertRow(rowIdx + 1))}
-                    />
-                }
+                contextMenu={<EditContextMenu onRowDelete={onRowDelete} onRowInsertAbove={onRowInsertAbove} onRowInsertBelow={onRowInsertBelow}/>}
                 RowsContainer={ContextMenuTrigger}
             />
         </div>
