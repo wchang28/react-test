@@ -205,12 +205,12 @@ export default () => {
         const data = orderBy<Row>(rows, [{ field: sortColumn, dir: sortDirection.toLowerCase() as any}]);
         setRows(data);
     };
-    const deleteRow = (rowIdx: number) => (rows: Row[]) => {
+    const deleteRow = (rowIdx: number) => {
         const nextRows = [...rows];
         nextRows.splice(rowIdx, 1);
         return nextRows;
     };
-    const insertRow = (rowIdx: number) => (rows: Row[]) => {
+    const insertRow = (rowIdx: number) => {
         const newRow = createFakeRow();
         const nextRows = [...rows];
         nextRows.splice(rowIdx, 0, newRow);
