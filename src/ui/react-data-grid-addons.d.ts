@@ -15,4 +15,8 @@ declare module 'react-data-grid-addons' {
             constructor(props: any);
         }
     }
+
+    export namespace Menu {
+        
+    }
 }
