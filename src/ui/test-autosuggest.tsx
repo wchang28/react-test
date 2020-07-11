@@ -149,7 +149,7 @@ export default () => {
         placeholder: 'Type a programming language',
         value,
         onChange: (event, {newValue, method}) => {
-            console.log(`onChange(): method=${method}, newValue=${newValue}`);
+            //console.log(`onChange(): method=${method}, newValue=${newValue}`);
             setValue(newValue);
         }
     };
@@ -166,6 +166,9 @@ export default () => {
                         onSuggestionsClearRequested={() => {setSuggestions([]);}}
                         getSuggestionValue={(suggestion: SuggestItem) => (suggestion.name)}
                         renderSuggestion={renderSuggestion}
+                        onSuggestionSelected={(event, {suggestion, method}) => {
+                            console.log(`onSuggestionSelected(): method=${method}, suggestion=${JSON.stringify(suggestion)}`);
+                        }}
                         inputProps={inputProps}
                     />
                     <div style={{marginTop: "8px"}}>
