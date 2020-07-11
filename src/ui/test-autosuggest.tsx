@@ -165,7 +165,7 @@ export default () => {
                         renderSuggestion={renderSuggestion}
                         inputProps={inputProps}
                     />
-                    <div>
+                    <div style={{marginTop: "4px"}}>
                         <table className="w3-table-all">
                             <thead>
                                 <tr>
