@@ -5,13 +5,15 @@ import {injectCSS, uuid} from "./utils";
 
 const this_class = `test-react-autosuggest-${uuid()}`;
 
+const AUTO_SUGGEST_WIDTH = "400px";
+
 injectCSS(`
 .${this_class} .react-autosuggest__container {
     position: relative;
 }
 
 .${this_class} .react-autosuggest__input {
-    width: 240px;
+    width: ${AUTO_SUGGEST_WIDTH};
     padding: 0.5em;
     border: 1px solid #aaa;
     border-radius: 4px;
@@ -34,7 +36,7 @@ injectCSS(`
     display: block;
     position: absolute;
     top: 2.52em;
-    width: 240px;
+    width: ${AUTO_SUGGEST_WIDTH};
     border: 1px solid #aaa;
     background-color: #fff;
     border-bottom-left-radius: 4px;
@@ -163,6 +165,39 @@ export default () => {
                         renderSuggestion={renderSuggestion}
                         inputProps={inputProps}
                     />
+                    <div>
+                        <table className="w3-table-all">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Points</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Jill</td>
+                                    <td>Smith</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td>Eve</td>
+                                    <td>Jackson</td>
+                                    <td>94</td>
+                                </tr>
+                                <tr>
+                                    <td>Adam</td>
+                                    <td>Johnson</td>
+                                    <td>67</td>
+                                </tr>
+                                <tr>
+                                    <td>Bo</td>
+                                    <td>Nilson</td>
+                                    <td>35</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </FontSizeColorTestingWrapper>
         </TestingPane>
