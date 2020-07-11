@@ -148,9 +148,9 @@ export default () => {
     const inputProps: InputProps<SuggestItem> = {
         placeholder: 'Type a programming language',
         value,
-        onChange: (event, ce) => {
-            console.log(`onChange(): ce=${ce}`);
-            setValue(ce.newValue);
+        onChange: (event, {newValue, method}) => {
+            console.log(`onChange(): method=${method}, newValue=${newValue}`);
+            setValue(newValue);
         }
     };
     return (
