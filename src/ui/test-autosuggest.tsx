@@ -148,7 +148,10 @@ export default () => {
     const inputProps: InputProps<SuggestItem> = {
         placeholder: 'Type a programming language',
         value,
-        onChange: (event, ce) => {setValue(ce.newValue)}
+        onChange: (event, ce) => {
+            console.log(`onChange(): ce=${ce}`);
+            setValue(ce.newValue);
+        }
     };
     return (
         <TestingPane testingClassName={this_class}>
@@ -156,7 +159,7 @@ export default () => {
                 {getFontSizeSelector(fontSize, setFontSize)}
             </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
-                <div className="w3-container" style={{height: "600px"}}>
+                <div className="w3-container" style={{height: "2000px"}}>
                     <Autosuggest
                         suggestions={suggestions}
                         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
@@ -165,7 +168,7 @@ export default () => {
                         renderSuggestion={renderSuggestion}
                         inputProps={inputProps}
                     />
-                    <div style={{marginTop: "4px"}}>
+                    <div style={{marginTop: "8px"}}>
                         <table className="w3-table-all">
                             <thead>
                                 <tr>
