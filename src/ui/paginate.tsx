@@ -28,7 +28,7 @@ function getW3CSSHorizontalAlignmentClass(horizontalAlignment?: HorzontalAlignme
 export const ROOT_CLASS_NAME = "paginate-root";
 const UL_CLASS_NAME = `react-paginate-ul`;
 
-// !!! Need to set the container line-height to "0" in order to get rid of the extra padding on the bottom due to <ul> being an inline-block eleemnt
+// !!! Need to set the container line-height to "0" in order to get rid of the extra padding on the bottom due to <ul> being an inline-block element
 // also need to set <ul>'s line-height back to "normal" to undo the "0" being set on the container
 injectCSS(`
 .${ROOT_CLASS_NAME} {

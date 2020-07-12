@@ -152,6 +152,7 @@ export default () => {
             //console.log(`onChange(): method=${method}, newValue=${newValue}`);
             setValue(newValue);
         }
+        ,type: "search"
     };
     return (
         <TestingPane testingClassName={this_class}>
