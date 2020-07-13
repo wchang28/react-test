@@ -5,15 +5,16 @@ import {injectCSS, uuid} from "./utils";
 
 const this_class = `test-react-autosuggest-${uuid()}`;
 
-const AUTO_SUGGEST_WIDTH = "400px";
+const AUTO_SUGGEST_WIDTH = "500px";
 
 injectCSS(`
 .${this_class} .react-autosuggest__container {
+    width: 100%;
     position: relative;
 }
 
 .${this_class} .react-autosuggest__input {
-    width: ${AUTO_SUGGEST_WIDTH};
+    width: 100%;
     padding: 0.5em;
     border: 1px solid #aaa;
     border-radius: 4px;
@@ -36,7 +37,7 @@ injectCSS(`
     display: block;
     position: absolute;
     top: 2.52em;
-    width: ${AUTO_SUGGEST_WIDTH};
+    width: 100%;
     border: 1px solid #aaa;
     background-color: #fff;
     border-bottom-left-radius: 4px;
@@ -166,7 +167,7 @@ export default () => {
                 {getFontSizeSelector(fontSize, setFontSize)}
             </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
-                <div className="w3-container" style={{height: "2000px"}}>
+                <div className="w3-container" style={{height: "2000px", width: AUTO_SUGGEST_WIDTH}}>
                     <Autosuggest
                         suggestions={suggestions}
                         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
