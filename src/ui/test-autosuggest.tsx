@@ -1,11 +1,9 @@
 import React, {useState} from "react";
-import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, FontSizeColorTestingWrapper} from "./test-common";
+import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, FontSizeColorTestingWrapper, getNumberInput} from "./test-common";
 import Autosuggest, {InputProps, SuggestionsFetchRequestedParams} from 'react-autosuggest';
 import {injectCSS, uuid} from "./utils";
 
 const this_class = `test-react-autosuggest-${uuid()}`;
-
-const AUTO_SUGGEST_WIDTH = "500px";
 
 injectCSS(`
 .${this_class} .react-autosuggest__container {
@@ -135,6 +133,7 @@ const fetchSuggestions = async (value: string) => {
 
 export default () => {
     const [fontSize, setFontSize] = useState<FontSize>("small");
+    const [widthPx, setWidthPx] = useState(400);
     const [value, setValue] = useState("");
     const [suggestions, setSuggestions] = useState<SuggestItem[]>([]);
     const renderSuggestion = (suggestion: SuggestItem) => (
@@ -165,9 +164,10 @@ export default () => {
         <TestingPane testingClassName={this_class}>
             <ConfigurationPane>
                 {getFontSizeSelector(fontSize, setFontSize)}
+                {getNumberInput("Width (px)", widthPx, setWidthPx)}
             </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
-                <div className="w3-container" style={{height: "2000px", width: AUTO_SUGGEST_WIDTH}}>
+                <div className="w3-container" style={{height: "2000px", width: `${widthPx}px`}}>
                     <Autosuggest
                         suggestions={suggestions}
                         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
