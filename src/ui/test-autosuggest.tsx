@@ -146,13 +146,19 @@ export default () => {
     };
     // Autosuggest will pass through all these props to the input.
     const inputProps: InputProps<SuggestItem> = {
-        placeholder: 'Type a programming language',
+        placeholder: "🔍", // or "\u{1f50d}"
         value,
         onChange: (event, {newValue, method}) => {
             //console.log(`onChange(): method=${method}, newValue=${newValue}`);
             setValue(newValue);
         }
         ,type: "search"
+        ,onKeyUp: (event: React.KeyboardEvent<HTMLInputElement>) => {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                console.log(`onKeyUp(keyCode === {enter})`);
+            }
+        }
     };
     return (
         <TestingPane testingClassName={this_class}>
