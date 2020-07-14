@@ -177,6 +177,47 @@ export default () => {
                         onSuggestionSelected={(event, {suggestion, method}) => {
                             console.log(`onSuggestionSelected(): method=${method}, suggestion=${JSON.stringify(suggestion)}`);
                         }}
+                        /*
+                        renderSuggestionsContainer={({ containerProps, children, query }) => {
+                            if (React.Children.count(children) === 1) {
+                                //console.log(children);
+                                const child = children as any as {props: {highlightedItemIndex: number | null, items: any[], onHighlightedItemChange:(highlightedItem: any) => void}};
+                                const {items, highlightedItemIndex, onHighlightedItemChange} = child.props;
+                                //console.log(`highlightedItemIndex=${highlightedItemIndex}`);
+                                const rows = items.map((suggestion: SuggestItem, index) => {
+                                    const className = `react-autosuggest__suggestion${index === highlightedItemIndex ? "--highlighted" :""}`
+                                    //console.log(`index=${index}, className=${className}`);
+                                    return (
+                                        <tr key={index} className={className} onMouseEnter={() => {onHighlightedItemChange(suggestion);}}>
+                                            <td>{suggestion.name}</td>
+                                            <td>{suggestion.year}</td>
+                                        </tr>
+                                    );
+                                });
+                                return (
+                                    <div {...containerProps}>
+                                        <table className="w3-table w3-hoverable react-autosuggest__suggestions-list">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Year</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {rows}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                );
+                            } else {
+                                return (
+                                    <div {...containerProps}>
+                                        {children}
+                                    </div>
+                                );
+                            }
+                        }}
+                        */
                         inputProps={inputProps}
                     />
                     <div style={{marginTop: "8px"}}>
