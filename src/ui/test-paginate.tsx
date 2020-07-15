@@ -34,7 +34,7 @@ export default () => {
                 {getFontSizeSelector(fontSize, setFontSize)}
             </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
-                <div className="w3-container" style={{marginTop: "8px"}}>
+                <div style={{marginTop: "8px"}}>
                     <Paginate
                         pageCount={pageCount}
                         pageRangeDisplayed={pageRangeDisplayed}
