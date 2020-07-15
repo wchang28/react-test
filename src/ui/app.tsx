@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useState} from 'react';
 import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
 import CollapsibleLeftPaneView from "./collapsible-left-pane-view";
-import {Test as TestNameEntry} from "./test-name-entry";
+import TestNameEntry from "./test-name-entry";
 import TestDialog from "./test-dialog";
 import {Test as TestInformationModal} from "./test-information-modal";
 import {Test as TestTestNoConfirm} from "./test-yes-no-confirm";
