@@ -1,35 +1,23 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import {SplitterView} from "./splitter-view";
+import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, getNumberInput, FontSizeColorTestingWrapper} from "./test-common";
 
-interface State {
-    splitterWidthPx?: number;
-}
-
-export class Test extends React.Component<any, State> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            splitterWidthPx: 5
-        };
-    }
-    get OnSplitterSizePxChangeHandler() {
-        return ((event: React.ChangeEvent<HTMLInputElement>) => {
-            this.setState({splitterWidthPx: event.target.valueAsNumber});
-        }).bind(this);
-    }
-    render() {
-        return (
-            <div>
-                <div className="w3-container w3-border" style={{padding: "8px", marginTop: "8px"}}>
-                    <label>Splitter Width (px)</label>
-                    <input className="w3-input w3-border" type="number" style={{padding:"4px", width: "20%"}} value={this.state.splitterWidthPx} onChange={this.OnSplitterSizePxChangeHandler}/>                        
-                </div>
-                <div className="w3-container" style={{padding: "0px", marginTop: "8px", marginBottom: "8px", height: "600px"}}>
-                    <SplitterView direction="vertical" splitterSizePx={this.state.splitterWidthPx} defaultFirstPaneSize="150px">
+export default () => {
+    const [splitterWidthPx, setSplitterWidthPx] = useState(5);
+    const [fontSize, setFontSize] = useState<FontSize>("small");
+    return (
+        <TestingPane>
+            <ConfigurationPane>
+                {getNumberInput("Splitter Width (px)", splitterWidthPx, setSplitterWidthPx)}
+                {getFontSizeSelector(fontSize, setFontSize)}
+            </ConfigurationPane>
+            <FontSizeColorTestingWrapper fontSize={fontSize}>
+                <div style={{padding: "0px", marginTop: "8px", marginBottom: "8px", height: "600px"}}>
+                    <SplitterView direction="vertical" splitterSizePx={splitterWidthPx} defaultFirstPaneSize="150px">
                         <div className="w3-khaki" style={{height: "2000px", width: "100%"}}>
                             First Pane
                         </div>
-                        <SplitterView direction="horizontal" defaultFirstPaneSize="75%">
+                        <SplitterView direction="horizontal" defaultFirstPaneSize="75%" splitterSizePx={splitterWidthPx}>
                             <div className="w3-pale-green" style={{height: "1500px", width: "1300px"}}>
                                 Second Pane
                             </div>
@@ -39,7 +27,7 @@ export class Test extends React.Component<any, State> {
                         </SplitterView>
                     </SplitterView>
                 </div>
-            </div>
-        );
-    }
+            </FontSizeColorTestingWrapper>
+        </TestingPane>
+    );
 }

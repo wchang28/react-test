@@ -9,7 +9,7 @@ import {Test as TestTestNoConfirm} from "./test-yes-no-confirm";
 import TestTestNoConfirmPromise from "./test-yes-no-confirm-promise";
 import {Test as TestCodeMirrorEditor} from "./test-codemirror";
 //import {Test as TestDatePicker} from "./test-date-picker";
-import {Test as TestSplitterView} from "./test-splitter-view";
+import TestSplitterView from "./test-splitter-view";
 import TestAlert from "./test-alert";
 import TestReactDataGrid from "./test-react-data-grid";
 import {Test as TestNestingRouting} from "./test-nesting-routing";

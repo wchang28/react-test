@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, FontSizeColorTestingWrapper, getNumberInput, getTestTable} from "./test-common";
+import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, FontSizeColorTestingWrapper, getNumberInput} from "./test-common";
 import Autosuggest, {InputProps, SuggestionsFetchRequestedParams} from 'react-autosuggest';
 import {createUseStyles} from 'react-jss';
 
@@ -167,9 +167,6 @@ export default () => {
         inputProps={inputProps}
         theme={classes}
     />;
-    //const autoSuggest = null;
-    //const content = (<div style={{marginTop: "8px"}}>{getTestTable()}</div>);
-    const content = null;
     return (
         <TestingPane>
             <ConfigurationPane>
@@ -179,7 +176,6 @@ export default () => {
             <FontSizeColorTestingWrapper fontSize={fontSize}>
                 <div style={{padding: "0.01em 16px"}}>
                     {autoSuggest}
-                    {content}
                 </div>
             </FontSizeColorTestingWrapper>
         </TestingPane>
