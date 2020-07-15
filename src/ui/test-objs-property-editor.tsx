@@ -78,30 +78,28 @@ export default () => {
                 {getNumberInput("minHeight", minHeight, setMinHeight)}
                 {getFontSizeSelector(fontSize, setFontSize)}
             </ConfigurationPane>
-            <div className="w3-container">
-                <FontSizeColorTestingWrapper fontSize={fontSize}>
-                    <div className="w3-margin-top" style={{width: `${widthPx}px`}}>
-                        <PropertyGridEditor
-                            objs={objs}
-                            propertyDefs={propertyDefs}
-                            customEditors={customEditors}
-                            onChange={setObjs}
-                            onPatch={setPatches}
-                            minHeight={minHeight}
-                            heading={heading}
-                            objColumnHeader={(obj: Row) => obj.id.toString()}
-                        />
-                    </div>
-                    <div className="w3-margin-top" style={{width:"50%"}}>
-                        <div>objs:</div>
-                        <JSONTree data={objs} />
-                    </div>
-                    <div className="w3-margin-top" style={{width:"50%"}}>
-                        <div>onPatch(patches):</div>
-                        <JSONTree data={patches} />
-                    </div>
-                </FontSizeColorTestingWrapper>
-            </div>
+            <FontSizeColorTestingWrapper fontSize={fontSize}>
+                <div className="w3-margin-top" style={{width: `${widthPx}px`}}>
+                    <PropertyGridEditor
+                        objs={objs}
+                        propertyDefs={propertyDefs}
+                        customEditors={customEditors}
+                        onChange={setObjs}
+                        onPatch={setPatches}
+                        minHeight={minHeight}
+                        heading={heading}
+                        objColumnHeader={(obj: Row) => obj.id.toString()}
+                    />
+                </div>
+                <div className="w3-margin-top" style={{width:"50%"}}>
+                    <div>objs:</div>
+                    <JSONTree data={objs} />
+                </div>
+                <div className="w3-margin-top" style={{width:"50%"}}>
+                    <div>onPatch(patches):</div>
+                    <JSONTree data={patches} />
+                </div>
+            </FontSizeColorTestingWrapper>
         </TestingPane>
     );
 }
