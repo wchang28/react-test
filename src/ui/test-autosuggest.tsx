@@ -176,7 +176,7 @@ export default () => {
                 {getNumberInput("Width (px)", widthPx, setWidthPx)}
                 {getCheckbox("Has Content Below", hasContentBelow, setHasContentBelow)}
             </ConfigurationPane>
-            <FontSizeColorTestingWrapper fontSize={fontSize}>
+            <FontSizeColorTestingWrapper fontSize={fontSize} color="light-grey">
                 <div style={{padding: "0.01em 16px"}}>
                     {autoSuggest}
                     {contentBelow}
