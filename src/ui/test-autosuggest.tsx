@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, FontSizeColorTestingWrapper, getNumberInput} from "./test-common";
+import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, FontSizeColorTestingWrapper, getNumberInput, getCheckbox, getTestTable} from "./test-common";
 import Autosuggest, {InputProps, SuggestionsFetchRequestedParams} from 'react-autosuggest';
 import {createUseStyles} from 'react-jss';
 
@@ -127,6 +127,7 @@ const fetchSuggestions = async (value: string) => {
 export default () => {
     const [fontSize, setFontSize] = useState<FontSize>("small");
     const [widthPx, setWidthPx] = useState(400);
+    const [hasContentBelow, setHasContentBelow] = useState(false);
     const [value, setValue] = useState("");
     const [suggestions, setSuggestions] = useState<SuggestItem[]>([]);
     const classes = useStyles({widthPx});
@@ -167,15 +168,18 @@ export default () => {
         inputProps={inputProps}
         theme={classes}
     />;
+    const contentBelow = (hasContentBelow ? <div style={{marginTop: "8px"}}>{getTestTable()}</div> : null);
     return (
         <TestingPane>
             <ConfigurationPane>
                 {getFontSizeSelector(fontSize, setFontSize)}
                 {getNumberInput("Width (px)", widthPx, setWidthPx)}
+                {getCheckbox("Has Content Below", hasContentBelow, setHasContentBelow)}
             </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
                 <div style={{padding: "0.01em 16px"}}>
                     {autoSuggest}
+                    {contentBelow}
                 </div>
             </FontSizeColorTestingWrapper>
         </TestingPane>
