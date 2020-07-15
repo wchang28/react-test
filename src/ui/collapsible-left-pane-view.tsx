@@ -81,7 +81,7 @@ export default (props: ReactProps<Props>) => {
                 {getLeftPane(collapsed, onToggleClicked, leftPaneContent, collapseButtonTitle)}
             </div>
             <div className={`${CLASS_PREFIX}-right`} style={{marginLeft: leftWidth}}>
-                <div className={`${CLASS_PREFIX}-right-content-container`} style={{overflow: "auto"}}>
+                <div className={`${CLASS_PREFIX}-right-content-container`} /*style={{overflow: "auto"}}*/>
                     {rightPaneContent}
                 </div>
             </div>

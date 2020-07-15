@@ -36,7 +36,7 @@ export class Test extends React.Component<any, State> {
             : null);
         return (
             <div>
-                <div className="w3-container" style={{padding: "8px 0px"}}>
+                <div style={{padding: "8px"}}>
                     <button className="w3-button w3-border w3-round" onClick={() => this.onShowConfirm()}>Show Confirm</button>
                 </div>
                 {confirmBox}

@@ -6,7 +6,7 @@ import {createUseStyles} from 'react-jss';
 const styles = {
     container: {
         width: ({widthPx}) => `${widthPx}px`,
-        position: "relative"
+        position: "relative",
     },
     input: {
         width: "100%",
@@ -154,7 +154,22 @@ export default () => {
             }
         }
     };
-    const content = <div style={{marginTop: "8px"}}>{getTestTable()}</div>
+    const autoSuggest =
+    <Autosuggest
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={() => {setSuggestions([]);}}
+        getSuggestionValue={(suggestion: SuggestItem) => (suggestion.name)}
+        renderSuggestion={renderSuggestion}
+        onSuggestionSelected={(event, {suggestion, method}) => {
+            console.log(`onSuggestionSelected(): method=${method}, suggestion=${JSON.stringify(suggestion)}`);
+        }}
+        inputProps={inputProps}
+        theme={classes}
+    />;
+    //const autoSuggest = null;
+    //const content = (<div style={{marginTop: "8px"}}>{getTestTable()}</div>);
+    const content = null;
     return (
         <TestingPane>
             <ConfigurationPane>
@@ -162,19 +177,8 @@ export default () => {
                 {getNumberInput("Width (px)", widthPx, setWidthPx)}
             </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
-                <div className="w3-container" style={{height: "2000px"}}>
-                    <Autosuggest
-                        suggestions={suggestions}
-                        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                        onSuggestionsClearRequested={() => {setSuggestions([]);}}
-                        getSuggestionValue={(suggestion: SuggestItem) => (suggestion.name)}
-                        renderSuggestion={renderSuggestion}
-                        onSuggestionSelected={(event, {suggestion, method}) => {
-                            console.log(`onSuggestionSelected(): method=${method}, suggestion=${JSON.stringify(suggestion)}`);
-                        }}
-                        inputProps={inputProps}
-                        theme={classes}
-                    />
+                <div style={{padding: "0.01em 16px"}}>
+                    {autoSuggest}
                     {content}
                 </div>
             </FontSizeColorTestingWrapper>
