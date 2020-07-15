@@ -10,7 +10,7 @@ export default () => {
             <ConfigurationPane>
                  {getFontSizeSelector(fontSize, setFontSize)}
             </ConfigurationPane>
-            <div className="w3-container" style={{width:"50%"}}>
+            <div style={{width:"50%"}}>
                 <FontSizeColorTestingWrapper fontSize={fontSize}>
                     <div>
                         <Checkbox checked={checked} onChange={setChecked}/>{' '}<label>New checkbox</label>

@@ -21,7 +21,7 @@ export default () => {
             <ConfigurationPane>
                 {getTextInput("Route to Jump to:", routeUrl, setRouteUrl)}
             </ConfigurationPane>
-            <div className="w3-container w3-small">
+            <div className="w3-small">
                 {redirect}
                 <p>
                     <Link to={routeUrl}>{"Jump using react-router-dom's <Link> tag"}</Link>

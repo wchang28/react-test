@@ -33,7 +33,7 @@ export default () => {
                 {getCheckbox("Allow Muitiple", multiple, setMultiple)}
                 {getFontSizeSelector(fontSize, setFontSize)}
             </ConfigurationPane>
-            <div className="w3-container" style={{width:"50%"}}>
+            <div style={{width:"50%"}}>
                 <FontSizeColorTestingWrapper fontSize={fontSize}>
                     <FileDragDropSelect
                         accept={accept}

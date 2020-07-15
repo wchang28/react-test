@@ -88,7 +88,7 @@ function TestUI(props: ReactProps<Props>) {
     }, [isActive]);
 
     return (
-        <div className="w3-container w3-tiny">
+        <div className="w3-tiny">
             <ContentDisplay contentName="Material Icon CSS" content={materialIconCSS}/>
             <ContentDisplay contentName="Fontawesome CSS" content={fontawesomeCSS}/>
             <ContentDisplay contentName="W3.CSS" content={w3CSS}/>
