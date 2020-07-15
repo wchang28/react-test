@@ -154,6 +154,7 @@ export default () => {
             }
         }
     };
+    const content = <div style={{marginTop: "8px"}}>{getTestTable()}</div>
     return (
         <TestingPane>
             <ConfigurationPane>
@@ -174,9 +175,7 @@ export default () => {
                         inputProps={inputProps}
                         theme={classes}
                     />
-                    <div style={{marginTop: "8px"}}>
-                        {getTestTable()}
-                    </div>
+                    {content}
                 </div>
             </FontSizeColorTestingWrapper>
         </TestingPane>
