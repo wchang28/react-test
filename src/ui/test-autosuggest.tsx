@@ -1,24 +1,25 @@
-import React, {useState, CSSProperties} from "react";
-import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, FontSizeColorTestingWrapper, getNumberInput} from "./test-common";
+import React, {useState} from "react";
+import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, FontSizeColorTestingWrapper, getNumberInput, getTestTable} from "./test-common";
 import Autosuggest, {InputProps, SuggestionsFetchRequestedParams} from 'react-autosuggest';
+import {createUseStyles} from 'react-jss';
 
-const theme: {[styleName: string]: CSSProperties} = {
+const styles = {
     container: {
-        width: "100%",
+        width: ({widthPx}) => `${widthPx}px`,
         position: "relative"
     },
     input: {
         width: "100%",
         padding: "0.5em",
         border: "1px solid #aaa",
-        borderRadius: "4px"        
+        "border-radius": "4px"        
     },
     inputFocused: {
         outline: "none"
     },
     inputOpen: {
-        borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0        
+        "border-bottom-left-radius": 0,
+        "border-bottom-right-radius": 0        
     },
     suggestionsContainer: {
         display: "none"
@@ -26,27 +27,30 @@ const theme: {[styleName: string]: CSSProperties} = {
     suggestionsContainerOpen: {
         display: "block",
         position: "absolute",
-        top: "2.52em",
-        width: "100%",
-        border: "1px solid #aaa",
-        backgroundColor: "#fff",
-        borderBottomLeftRadius: "4px",
-        borderBottomRightRadius: "4px",
-        zIndex: 2
+        width: ({widthPx}) => `${widthPx}px`,
+        "border-left": "1px solid #aaa",
+        "border-right": "1px solid #aaa",
+        "border-bottom": "1px solid #aaa",
+        "background-color": "#fff",
+        "border-bottom-left-radius": "4px",
+        "border-bottom-right-radius": "4px",
+        "z-index": 2
     },
     suggestionsList: {
         margin: 0,
         padding: 0,
-        listStyleType: "none"
+        "list-style-type": "none"
     },
     suggestion: {
         cursor: "pointer",
         padding: "0.5em"
     },
     suggestionHighlighted: {
-        backgroundColor: "#ddd"
+        "background-color": "#ddd"
     }
 };
+
+const useStyles = createUseStyles(styles);
 
 interface SuggestItem {
     name: string;
@@ -125,6 +129,7 @@ export default () => {
     const [widthPx, setWidthPx] = useState(400);
     const [value, setValue] = useState("");
     const [suggestions, setSuggestions] = useState<SuggestItem[]>([]);
+    const classes = useStyles({widthPx});
     const renderSuggestion = (suggestion: SuggestItem) => (
         <div>
             {suggestion.name}
@@ -156,7 +161,7 @@ export default () => {
                 {getNumberInput("Width (px)", widthPx, setWidthPx)}
             </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
-                <div className="w3-container" style={{height: "2000px", width: `${widthPx}px`}}>
+                <div className="w3-container" style={{height: "2000px"}}>
                     <Autosuggest
                         suggestions={suggestions}
                         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
@@ -167,40 +172,10 @@ export default () => {
                             console.log(`onSuggestionSelected(): method=${method}, suggestion=${JSON.stringify(suggestion)}`);
                         }}
                         inputProps={inputProps}
-                        theme={theme}
+                        theme={classes}
                     />
                     <div style={{marginTop: "8px"}}>
-                        <table className="w3-table-all">
-                            <thead>
-                                <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Points</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Jill</td>
-                                    <td>Smith</td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <td>Eve</td>
-                                    <td>Jackson</td>
-                                    <td>94</td>
-                                </tr>
-                                <tr>
-                                    <td>Adam</td>
-                                    <td>Johnson</td>
-                                    <td>67</td>
-                                </tr>
-                                <tr>
-                                    <td>Bo</td>
-                                    <td>Nilson</td>
-                                    <td>35</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        {getTestTable()}
                     </div>
                 </div>
             </FontSizeColorTestingWrapper>

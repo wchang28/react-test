@@ -130,6 +130,42 @@ export const getButton = (label: string, onClick: () => void) => {
     );
 };
 
+export const getTestTable = () => {
+    return (
+        <table className="w3-table-all">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Jill</td>
+                    <td>Smith</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>Eve</td>
+                    <td>Jackson</td>
+                    <td>94</td>
+                </tr>
+                <tr>
+                    <td>Adam</td>
+                    <td>Johnson</td>
+                    <td>67</td>
+                </tr>
+                <tr>
+                    <td>Bo</td>
+                    <td>Nilson</td>
+                    <td>35</td>
+                </tr>
+            </tbody>
+        </table>
+    );
+}
+
 export function getW3CSSHorizontalAlignmentClass(horizontalAlignment: HorzontalAlignment) {
     switch(horizontalAlignment) {
         case "center":
