@@ -81,8 +81,8 @@ export default () => {
 				collapsed={collapsed}
 				onCollapseChanged={setCollapsed}
 			>
-				<div className="w3-container w3-small">
-					<div className="w3-medium w3-teal w3-border" style={{fontWeight: "bold"}}>
+				<div className="w3-small" style={{padding:"0.01em 16px"}}>
+					<div className="w3-medium w3-blue w3-border" style={{fontWeight: "bold"}}>
 						Test Selection
 					</div>
 					<div>
@@ -92,7 +92,7 @@ export default () => {
 				<div>
 					<Switch>
 						<Route key={0} exact path="/">
-							<div className="w3-container" style={{fontWeight: "bold"}}>
+							<div style={{padding:"0.01em 16px", fontWeight: "bold"}}>
 								Please select a test from the left.
 							</div>
 						</Route>
