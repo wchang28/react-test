@@ -10,7 +10,6 @@ import TestTestNoConfirmPromise from "./test-yes-no-confirm-promise";
 import {Test as TestCodeMirrorEditor} from "./test-codemirror";
 //import {Test as TestDatePicker} from "./test-date-picker";
 import {Test as TestSplitterView} from "./test-splitter-view";
-import {Test as TestButtonPadding} from "./test-button-padding";
 import TestAlert from "./test-alert";
 import TestReactDataGrid from "./test-react-data-grid";
 import {Test as TestNestingRouting} from "./test-nesting-routing";
@@ -52,7 +51,6 @@ const testConfig: TestItem[] = [
 	,{id: "codemirror", name: "CodeMirror Editor", component: TestCodeMirrorEditor}
 	//,{id: "date-picker", name: "Date Picker", component: TestDatePicker}
 	,{id: "splitter-view", name: "Splitter View", component: TestSplitterView}
-	,{id: "button-padding", name: "Button Padding", component: TestButtonPadding}
 	,{id: "alert", name: "Alert", component: TestAlert}
 	,{id: "functional-hooks", name: "Functional Hooks", component: TestFunctionalHooks}
 	,{id: "collapsible-left-pane-view", name: "Collapsible Left Pane View", component: TestCollapsibleLeftPaneView}

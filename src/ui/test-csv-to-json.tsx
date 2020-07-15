@@ -24,7 +24,7 @@ injectCSS(`
 `);
 
 export default () => {
-    const [data, setData] = useState<any>(null);
+    const [data, setData] = useState<any>({});
     const onFileSelect = async (files: File[]) => {
         if (files.length === 1) {
             const o = await CSV2JSON(files[0]);
