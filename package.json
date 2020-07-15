@@ -56,6 +56,7 @@
     "react-modal": "^3.11.2",
     "react-paginate": "^6.3.2",
     "react-router-dom": "^5.2.0",
+    "react-themeable": "^1.1.0",
     "shortid": "^2.2.15",
     "uglify-css": "git+https://github.com/wchang28/uglify-css.git",
     "xlsx": "^0.16.2"

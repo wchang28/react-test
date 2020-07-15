@@ -1,63 +1,52 @@
-import React, {useState} from "react";
+import React, {useState, CSSProperties} from "react";
 import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, FontSizeColorTestingWrapper, getNumberInput} from "./test-common";
 import Autosuggest, {InputProps, SuggestionsFetchRequestedParams} from 'react-autosuggest';
-import {injectCSS, uuid} from "./utils";
 
-const this_class = `test-react-autosuggest-${uuid()}`;
-
-injectCSS(`
-.${this_class} .react-autosuggest__container {
-    width: 100%;
-    position: relative;
-}
-
-.${this_class} .react-autosuggest__input {
-    width: 100%;
-    padding: 0.5em;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-}
-
-.${this_class} .react-autosuggest__input--focused {
-    outline: none;
-}
-
-.${this_class} .react-autosuggest__input--open {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.${this_class} .react-autosuggest__suggestions-container {
-    display: none;
-}
-
-.${this_class} .react-autosuggest__suggestions-container--open {
-    display: block;
-    position: absolute;
-    top: 2.52em;
-    width: 100%;
-    border: 1px solid #aaa;
-    background-color: #fff;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    z-index: 2;
-}
-
-.${this_class} .react-autosuggest__suggestions-list {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
-.${this_class} .react-autosuggest__suggestion {
-    cursor: pointer;
-    padding: 0.5em;
-}
-  
-.${this_class} .react-autosuggest__suggestion--highlighted {
-    background-color: #ddd;
-}
-`);
+const theme: {[styleName: string]: CSSProperties} = {
+    container: {
+        width: "100%",
+        position: "relative"
+    },
+    input: {
+        width: "100%",
+        padding: "0.5em",
+        border: "1px solid #aaa",
+        borderRadius: "4px"        
+    },
+    inputFocused: {
+        outline: "none"
+    },
+    inputOpen: {
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0        
+    },
+    suggestionsContainer: {
+        display: "none"
+    },
+    suggestionsContainerOpen: {
+        display: "block",
+        position: "absolute",
+        top: "2.52em",
+        width: "100%",
+        border: "1px solid #aaa",
+        backgroundColor: "#fff",
+        borderBottomLeftRadius: "4px",
+        borderBottomRightRadius: "4px",
+        zIndex: 2
+    },
+    suggestionsList: {
+        margin: 0,
+        padding: 0,
+        listStyleType: "none"
+    },
+    suggestion: {
+        cursor: "pointer",
+        padding: "0.5em"
+    },
+    suggestionHighlighted: {
+        backgroundColor: "#ddd"
+    }
+};
 
 interface SuggestItem {
     name: string;
@@ -161,7 +150,7 @@ export default () => {
         }
     };
     return (
-        <TestingPane testingClassName={this_class}>
+        <TestingPane>
             <ConfigurationPane>
                 {getFontSizeSelector(fontSize, setFontSize)}
                 {getNumberInput("Width (px)", widthPx, setWidthPx)}
@@ -177,48 +166,8 @@ export default () => {
                         onSuggestionSelected={(event, {suggestion, method}) => {
                             console.log(`onSuggestionSelected(): method=${method}, suggestion=${JSON.stringify(suggestion)}`);
                         }}
-                        /*
-                        renderSuggestionsContainer={({ containerProps, children, query }) => {
-                            if (React.Children.count(children) === 1) {
-                                //console.log(children);
-                                const child = children as any as {props: {highlightedItemIndex: number | null, items: any[], onHighlightedItemChange:(highlightedItem: any) => void}};
-                                const {items, highlightedItemIndex, onHighlightedItemChange} = child.props;
-                                //console.log(`highlightedItemIndex=${highlightedItemIndex}`);
-                                const rows = items.map((suggestion: SuggestItem, index) => {
-                                    const className = `react-autosuggest__suggestion${index === highlightedItemIndex ? "--highlighted" :""}`
-                                    //console.log(`index=${index}, className=${className}`);
-                                    return (
-                                        <tr key={index} className={className} onMouseEnter={() => {onHighlightedItemChange(suggestion);}}>
-                                            <td>{suggestion.name}</td>
-                                            <td>{suggestion.year}</td>
-                                        </tr>
-                                    );
-                                });
-                                return (
-                                    <div {...containerProps}>
-                                        <table className="w3-table w3-hoverable react-autosuggest__suggestions-list">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Year</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {rows}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                );
-                            } else {
-                                return (
-                                    <div {...containerProps}>
-                                        {children}
-                                    </div>
-                                );
-                            }
-                        }}
-                        */
                         inputProps={inputProps}
+                        theme={theme}
                     />
                     <div style={{marginTop: "8px"}}>
                         <table className="w3-table-all">
