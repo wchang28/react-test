@@ -4,7 +4,7 @@ import CollapsibleLeftPaneView, {CLASS_PREFIX as CTRL_CLASS_PREFIX} from "./coll
 import {uuid, injectCSS} from "./utils";
 
 const leftPaneContent = (
-    <div className="left-content w3-container w3-khaki">
+    <div className="left-content w3-khaki">
         Hello,---------World!<br/>
         Hello,---------World!<br/>
         Hello,---------World!<br/>
@@ -17,7 +17,7 @@ const leftPaneContent = (
 );
     
 const rightPaneContent = (
-    <div className="right-content w3-container w3-light-green">
+    <div className="right-content w3-light-green">
         Hawdy, World!<br/>
         Hawdy, World!<br/>
         Hawdy, World!<br/>
@@ -42,7 +42,7 @@ injectCSS(`
 export default () => {
     const [collapsed, setCollapsed] = useState(false);
     const [leftPaneWidthPx, setLeftPaneWidthPx] = useState(200);
-    const [fontSize, setFontSize] = useState<FontSize>("medium");
+    const [fontSize, setFontSize] = useState<FontSize>("small");
     return (
         <TestingPane testingClassName={this_class}>
             <ConfigurationPane>
