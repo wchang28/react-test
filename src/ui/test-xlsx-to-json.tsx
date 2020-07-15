@@ -34,7 +34,7 @@ export default () => {
     }
     return (
         <TestingPane testingClassName={this_class}>
-            <div className="w3-container w3-small" style={{width:"50%"}}>
+            <div className="w3-small" style={{width:"50%"}}>
                 <FileDragDropSelect
                     accept=".xlsx"
                     multiple={false}
