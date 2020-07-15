@@ -230,7 +230,7 @@ export default () => {
         setRows(insertRow(rowIdx + 1));
     };
     return (
-        <div className={`${this_class} w3-tiny w3-card-4`}>
+        <div className={`${this_class} w3-tiny`} style={{overflow:"auto"}}>
             <ReactDataGrid
                 columns={columns}
                 rowGetter={(i: number) => rows[i]}
