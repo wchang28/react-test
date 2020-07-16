@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {FontSize, getFontSizeSelector, getNumberInput, getCheckbox, TestingPane, ConfigurationPane, FontSizeColorTestingWrapper} from "./test-common";
-import CollapsibleLeftPaneView from "./collapsible-left-pane-view-2";
+import CollapsibleLeftPaneView from "./collapsible-left-pane-view";
 
 const leftPaneContent = (
     <div className="w3-container left-content w3-khaki">
