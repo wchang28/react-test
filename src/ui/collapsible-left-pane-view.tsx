@@ -2,16 +2,8 @@ import * as React from "react";
 import {ReactNode} from "react";
 import {createUseStyles} from 'react-jss';
 
-const cf = {
-    content: '""',
-    display: "table",
-    clear: "both"  
-};
-
-const clearFloat = {
-    "&:before": cf,
-    "&:after": cf  
-};
+const cf = {content: '""', display: "table", clear: "both"};
+const clearFloat = {"&:before": cf, "&:after": cf};
 
 const useStyles = createUseStyles({
     toggleBar: {
@@ -44,22 +36,6 @@ const getToggleArea = (collapsed: boolean, onToggleClicked: () => void, collapse
     );
 };
 
-const getLeftPane = (classes: {[styleName: string]: string}, collapsed: boolean, onToggleClicked: () => void, content: JSX.Element, collapseButtonTitle: (collapsed: boolean) => string) => {
-    const toggleArea = getToggleArea(collapsed, onToggleClicked, collapseButtonTitle);
-    const toggleBar = (<div className={classes.toggleBar}>{toggleArea}</div>);
-    if (collapsed) {
-        return toggleBar;
-    } else {
-
-        return (
-            <div>
-                {toggleBar}
-                {content}
-            </div>
-        );
-    }
-};
-
 export default function CollapsibleLeftPaneView(props: ReactProps<Props>) {
     const {children, collapsed, leftPaneWidth, collapseButtonTitle, onCollapseChanged} = props;
     const leftWidth = (collapsed ? getToggleAreaDimension() : leftPaneWidth);
@@ -67,10 +43,13 @@ export default function CollapsibleLeftPaneView(props: ReactProps<Props>) {
     const leftPaneContent = children[0];
     const rightPaneContent = children[1];
     const classes = useStyles();
+    const toggleArea = getToggleArea(collapsed, onToggleClicked, collapseButtonTitle);
+    const toggleBar = (<div className={classes.toggleBar}>{toggleArea}</div>);
     return (
         <div style={{display:"table", width:"100%"}}>
             <div style={{display:"table-cell", width: leftWidth}}>
-                {getLeftPane(classes, collapsed, onToggleClicked, leftPaneContent, collapseButtonTitle)}
+                {toggleBar}
+                {collapsed ? null : leftPaneContent}
             </div>
             <div style={{display:"table-cell"}}>
                 {rightPaneContent}
