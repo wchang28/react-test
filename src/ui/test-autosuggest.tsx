@@ -3,6 +3,9 @@ import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, FontSizeC
 import Autosuggest, {InputProps, SuggestionsFetchRequestedParams} from 'react-autosuggest';
 import {createUseStyles} from 'react-jss';
 
+const BORDER_COLOR = "#ccc";
+const STD_BORDER_STYLE = `1px solid ${BORDER_COLOR}`;
+
 const styles = {
     container: {
         width: ({width}) => width,
@@ -11,7 +14,7 @@ const styles = {
     input: {
         width: "100%",
         padding: "0.5em",
-        border: "1px solid #ccc",
+        border: STD_BORDER_STYLE,
         "border-radius": ({borderRadius}) => borderRadius
     },
     inputFocused: {
@@ -28,9 +31,9 @@ const styles = {
         display: "block",
         position: "absolute",
         width: ({width}) => width,
-        "border-left": "1px solid #ccc",
-        "border-right": "1px solid #ccc",
-        "border-bottom": "1px solid #ccc",
+        "border-left": STD_BORDER_STYLE,
+        "border-right": STD_BORDER_STYLE,
+        "border-bottom": STD_BORDER_STYLE,
         "border-bottom-left-radius": ({borderRadius}) => borderRadius,
         "border-bottom-right-radius": ({borderRadius}) => borderRadius,
         "z-index": 2
@@ -45,7 +48,7 @@ const styles = {
         padding: "0.5em"
     },
     suggestionHighlighted: {
-        "background-color": "#ddd"
+        "background-color": "#ccc"
     }
 };
 
