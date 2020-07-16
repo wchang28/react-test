@@ -2,18 +2,22 @@ import * as React from "react";
 import {ReactNode} from "react";
 import {createUseStyles} from 'react-jss';
 
-const clearFloat = {
+const cf = {
     content: '""',
     display: "table",
     clear: "both"  
-}
+};
+
+const clearFloat = {
+    "&:before": cf,
+    "&:after": cf  
+};
 
 const useStyles = createUseStyles({
     toggleBar: {
+        ...clearFloat,
         width: "100%",
-        overflow: "hidden",
-        "&:before": clearFloat,
-        "&:after": clearFloat
+        overflow: "hidden"
     }
 });
 
