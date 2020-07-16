@@ -22,10 +22,10 @@ export interface Props {
     onCollapseChanged: (collapsed: boolean) => void;
 }
 
-const getToggleAreaDimension = () => "1.5em";
+const TOGGLE_AREA_DIMENSION = "1.5em";
 
 const getToggleArea = (collapsed: boolean, onToggleClicked: () => void, collapseButtonTitle: (collapsed: boolean) => string) => {
-    const dimension = getToggleAreaDimension();
+    const dimension = TOGGLE_AREA_DIMENSION;
     const float = (collapsed ? undefined : "right");
     const icon = (collapsed ? "arrow-circle-o-right" : "arrow-circle-o-left");
     const title = collapseButtonTitle(collapsed);
@@ -38,7 +38,7 @@ const getToggleArea = (collapsed: boolean, onToggleClicked: () => void, collapse
 
 export default function CollapsibleLeftPaneView(props: ReactProps<Props>) {
     const {children, collapsed, leftPaneWidth, collapseButtonTitle, onCollapseChanged} = props;
-    const leftWidth = (collapsed ? getToggleAreaDimension() : leftPaneWidth);
+    const leftWidth = (collapsed ? TOGGLE_AREA_DIMENSION : leftPaneWidth);
     const onToggleClicked = () => {onCollapseChanged(!collapsed);};
     const leftPaneContent = children[0];
     const rightPaneContent = children[1];
