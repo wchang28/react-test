@@ -25,10 +25,12 @@ const getToggleArea = (collapsed: boolean, onToggleClicked: () => void, collapse
 };
 
 const getLeftPane = (collapsed: boolean, onToggleClicked: () => void, content: JSX.Element, collapseButtonTitle: (collapsed: boolean) => string) => {
-    const toggleBar = (<div className={`w3-bar`}>{getToggleArea(collapsed, onToggleClicked, collapseButtonTitle)}</div>);
+    const toggleArea = getToggleArea(collapsed, onToggleClicked, collapseButtonTitle);
+    const toggleBar = (<div className="w3-bar">{toggleArea}</div>);
     if (collapsed) {
         return toggleBar;
     } else {
+
         return (
             <div>
                 {toggleBar}
@@ -49,7 +51,7 @@ export default function CollapsibleLeftPaneView(props: ReactProps<Props>) {
             <div style={{display:"table-cell", width: leftWidth}}>
                 {getLeftPane(collapsed, onToggleClicked, leftPaneContent, collapseButtonTitle)}
             </div>
-            <div className="w3-border-left" style={{display:"table-cell"}}>
+            <div style={{display:"table-cell"}}>
                 {rightPaneContent}
             </div>
         </div>
