@@ -1,10 +1,11 @@
 import React, {useState} from "react";
-import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, FontSizeColorTestingWrapper, getNumberInput, getCheckbox, getTestTable} from "./test-common";
+import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, FontSizeColorTestingWrapper, getNumberInput, getCheckbox, getTestTable, getTextInput} from "./test-common";
 import Autosuggest, {InputProps, SuggestionsFetchRequestedParams} from 'react-autosuggest';
 import {createUseStyles} from 'react-jss';
 
 const BORDER_COLOR = "#ccc";
 const STD_BORDER_STYLE = `1px solid ${BORDER_COLOR}`;
+const HIGHLIGHTED_BACKGROUND_COLOR = "#ccc"
 
 const styles = {
     container: {
@@ -48,7 +49,7 @@ const styles = {
         padding: "0.5em"
     },
     suggestionHighlighted: {
-        "background-color": "#ccc"
+        "background-color": HIGHLIGHTED_BACKGROUND_COLOR
     }
 };
 
@@ -130,7 +131,18 @@ export default () => {
     const [fontSize, setFontSize] = useState<FontSize>("small");
     const [widthPx, setWidthPx] = useState(400);
     const [borderRadiusPx, setBorderRadiusPx] = useState(4);
+    const [placeholder, setPlaceholder] = useState("🔍");   // or "\u{1f50d}"
     const [hasContentBelow, setHasContentBelow] = useState(false);
+    const configurationPane = (
+        <ConfigurationPane>
+            {getFontSizeSelector(fontSize, setFontSize)}
+            {getNumberInput("Width (px)", widthPx, setWidthPx)}
+            {getNumberInput("Border Radius (px)", borderRadiusPx, setBorderRadiusPx)}
+            {getTextInput("Placeholder", placeholder, setPlaceholder)}
+            {getCheckbox("Has Content Below", hasContentBelow, setHasContentBelow)}
+        </ConfigurationPane>
+    );
+
     const [value, setValue] = useState("");
     const [suggestions, setSuggestions] = useState<SuggestItem[]>([]);
     const classes = useStyles({width: `${widthPx}px`, borderRadius: `${borderRadiusPx}px`});
@@ -144,7 +156,7 @@ export default () => {
     };
     // Autosuggest will pass through all these props to the input.
     const inputProps: InputProps<SuggestItem> = {
-        placeholder: "🔍", // or "\u{1f50d}"
+        placeholder,
         value,
         onChange: (event, {newValue, method}) => {
             //console.log(`onChange(): method=${method}, newValue=${newValue}`);
@@ -174,12 +186,7 @@ export default () => {
     const contentBelow = (hasContentBelow ? <div style={{marginTop: "8px"}}>{getTestTable()}</div> : null);
     return (
         <TestingPane>
-            <ConfigurationPane>
-                {getFontSizeSelector(fontSize, setFontSize)}
-                {getNumberInput("Width (px)", widthPx, setWidthPx)}
-                {getNumberInput("Border Radius (px)", borderRadiusPx, setBorderRadiusPx)}
-                {getCheckbox("Has Content Below", hasContentBelow, setHasContentBelow)}
-            </ConfigurationPane>
+            {configurationPane}
             <FontSizeColorTestingWrapper fontSize={fontSize} color="light-grey">
                 <div style={{padding: "0.01em 16px"}}>
                     {autoSuggest}
