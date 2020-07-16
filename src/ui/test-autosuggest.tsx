@@ -5,21 +5,21 @@ import {createUseStyles} from 'react-jss';
 
 const styles = {
     container: {
-        width: ({widthPx}) => `${widthPx}px`,
+        width: ({width}) => width,
         position: "relative",
     },
     input: {
         width: "100%",
         padding: "0.5em",
-        border: "1px solid #aaa",
-        "border-radius": "4px"        
+        border: "1px solid #ccc",
+        "border-radius": ({borderRadius}) => borderRadius
     },
     inputFocused: {
         outline: "none"
     },
     inputOpen: {
-        "border-bottom-left-radius": 0,
-        "border-bottom-right-radius": 0        
+        "border-bottom-left-radius": ({}) => 0,
+        "border-bottom-right-radius": ({}) => 0        
     },
     suggestionsContainer: {
         display: "none"
@@ -27,13 +27,12 @@ const styles = {
     suggestionsContainerOpen: {
         display: "block",
         position: "absolute",
-        width: ({widthPx}) => `${widthPx}px`,
-        "border-left": "1px solid #aaa",
-        "border-right": "1px solid #aaa",
-        "border-bottom": "1px solid #aaa",
-        "background-color": "#fff",
-        "border-bottom-left-radius": "4px",
-        "border-bottom-right-radius": "4px",
+        width: ({width}) => width,
+        "border-left": "1px solid #ccc",
+        "border-right": "1px solid #ccc",
+        "border-bottom": "1px solid #ccc",
+        "border-bottom-left-radius": ({borderRadius}) => borderRadius,
+        "border-bottom-right-radius": ({borderRadius}) => borderRadius,
         "z-index": 2
     },
     suggestionsList: {
@@ -127,10 +126,11 @@ const fetchSuggestions = async (value: string) => {
 export default () => {
     const [fontSize, setFontSize] = useState<FontSize>("small");
     const [widthPx, setWidthPx] = useState(400);
+    const [borderRadiusPx, setBorderRadiusPx] = useState(4);
     const [hasContentBelow, setHasContentBelow] = useState(false);
     const [value, setValue] = useState("");
     const [suggestions, setSuggestions] = useState<SuggestItem[]>([]);
-    const classes = useStyles({widthPx});
+    const classes = useStyles({width: `${widthPx}px`, borderRadius: `${borderRadiusPx}px`});
     const renderSuggestion = (suggestion: SuggestItem) => (
         <div>
             {suggestion.name}
@@ -174,6 +174,7 @@ export default () => {
             <ConfigurationPane>
                 {getFontSizeSelector(fontSize, setFontSize)}
                 {getNumberInput("Width (px)", widthPx, setWidthPx)}
+                {getNumberInput("Border Radius (px)", borderRadiusPx, setBorderRadiusPx)}
                 {getCheckbox("Has Content Below", hasContentBelow, setHasContentBelow)}
             </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize} color="light-grey">
