@@ -1,5 +1,21 @@
 import * as React from "react";
 import {ReactNode} from "react";
+import {createUseStyles} from 'react-jss';
+
+const clearFloat = {
+    content: '""',
+    display: "table",
+    clear: "both"  
+}
+
+const useStyles = createUseStyles({
+    toggleBar: {
+        width: "100%",
+        overflow: "hidden",
+        "&:before": clearFloat,
+        "&:after": clearFloat
+    }
+});
 
 type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
@@ -24,9 +40,9 @@ const getToggleArea = (collapsed: boolean, onToggleClicked: () => void, collapse
     );
 };
 
-const getLeftPane = (collapsed: boolean, onToggleClicked: () => void, content: JSX.Element, collapseButtonTitle: (collapsed: boolean) => string) => {
+const getLeftPane = (classes: {[styleName: string]: string}, collapsed: boolean, onToggleClicked: () => void, content: JSX.Element, collapseButtonTitle: (collapsed: boolean) => string) => {
     const toggleArea = getToggleArea(collapsed, onToggleClicked, collapseButtonTitle);
-    const toggleBar = (<div className="w3-bar">{toggleArea}</div>);
+    const toggleBar = (<div className={classes.toggleBar}>{toggleArea}</div>);
     if (collapsed) {
         return toggleBar;
     } else {
@@ -46,10 +62,11 @@ export default function CollapsibleLeftPaneView(props: ReactProps<Props>) {
     const onToggleClicked = () => {onCollapseChanged(!collapsed);};
     const leftPaneContent = children[0];
     const rightPaneContent = children[1];
+    const classes = useStyles();
     return (
         <div style={{display:"table", width:"100%"}}>
             <div style={{display:"table-cell", width: leftWidth}}>
-                {getLeftPane(collapsed, onToggleClicked, leftPaneContent, collapseButtonTitle)}
+                {getLeftPane(classes, collapsed, onToggleClicked, leftPaneContent, collapseButtonTitle)}
             </div>
             <div style={{display:"table-cell"}}>
                 {rightPaneContent}
