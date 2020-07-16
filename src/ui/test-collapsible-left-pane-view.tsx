@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import {FontSize, getFontSizeSelector, getNumberInput, getCheckbox, TestingPane, ConfigurationPane, FontSizeColorTestingWrapper} from "./test-common";
-import CollapsibleLeftPaneView, {CLASS_PREFIX as CTRL_CLASS_PREFIX} from "./collapsible-left-pane-view";
+import CollapsibleLeftPaneView, {CLASS_PREFIX as CTRL_CLASS_PREFIX} from "./collapsible-left-pane-view-2";
 import {uuid, injectCSS} from "./utils";
 
 const leftPaneContent = (
-    <div className="left-content w3-khaki">
+    <div className="w3-container left-content w3-khaki">
         Hello,---------World!<br/>
         Hello,---------World!<br/>
         Hello,---------World!<br/>
@@ -17,7 +17,7 @@ const leftPaneContent = (
 );
     
 const rightPaneContent = (
-    <div className="right-content w3-light-green">
+    <div className="w3-container right-content w3-light-green">
         Hawdy, World!<br/>
         Hawdy, World!<br/>
         Hawdy, World!<br/>
