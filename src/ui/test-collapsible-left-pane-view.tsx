@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {FontSize, getFontSizeSelector, getNumberInput, getCheckbox, TestingPane, ConfigurationPane, FontSizeColorTestingWrapper} from "./test-common";
-import CollapsibleLeftPaneView, {CLASS_PREFIX as CTRL_CLASS_PREFIX} from "./collapsible-left-pane-view-2";
-import {uuid, injectCSS} from "./utils";
+import CollapsibleLeftPaneView from "./collapsible-left-pane-view-2";
 
 const leftPaneContent = (
     <div className="w3-container left-content w3-khaki">
@@ -26,25 +25,12 @@ const rightPaneContent = (
     </div>
 );
 
-const this_class = `test-collapsible-left-pane-view-${uuid()}`;
-
-injectCSS(`
-.${this_class} .${CTRL_CLASS_PREFIX}-left-pane-top-bar {
-    color:#000!important;
-    background-color:#9e9e9e!important
-}
-.${this_class} .${CTRL_CLASS_PREFIX}-toggle-area {
-    color:#000!important;
-    background-color:#9e9e9e!important
-}
-`);
-
 export default () => {
     const [collapsed, setCollapsed] = useState(false);
     const [leftPaneWidthPx, setLeftPaneWidthPx] = useState(200);
     const [fontSize, setFontSize] = useState<FontSize>("small");
     return (
-        <TestingPane testingClassName={this_class}>
+        <TestingPane>
             <ConfigurationPane>
                 {getCheckbox("Collapsed", collapsed, setCollapsed)}
                 {getNumberInput("Left Pane Width px:", leftPaneWidthPx, setLeftPaneWidthPx)}

@@ -62,5 +62,3 @@ CollapsibleLeftPaneView.defaultProps = {
     ,collapseButtonTitle: (collapsed: boolean) => (collapsed ? "Expand to the right" : "Collapse to the left")
     ,onCollapseChanged: () => {}
 } as Props;
-
-export const CLASS_PREFIX = "clpv";
