@@ -37,6 +37,7 @@ const styles = {
         "border-bottom": STD_BORDER_STYLE,
         "border-bottom-left-radius": ({borderRadius}) => borderRadius,
         "border-bottom-right-radius": ({borderRadius}) => borderRadius,
+        "background-color": "#fff",
         "z-index": 2
     },
     suggestionsList: {
