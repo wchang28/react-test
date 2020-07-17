@@ -109,6 +109,10 @@ const useStyles = createUseStyles({
         left: "50%",
         transform:"translate(-50%, -50%)",
         cursor:"pointer"
+    },
+    leftContentContainer: {
+        ...clearFloat,
+        display: ({collapsed}) => (collapsed ? "none" : "block")
     }
 });
 
@@ -132,7 +136,7 @@ export default function CollapsibleLeftPaneView(props: ReactProps<Props>) {
         <div className={classes.mainContainer}>
             <div className={classes.leftContainer}>
                 {toggleBar}
-                {collapsed ? null : leftPaneContent}
+                <div className={classes.leftContentContainer}>{leftPaneContent}</div>
             </div>
             <div className={classes.rightContainer}>
                 {rightPaneContent}
