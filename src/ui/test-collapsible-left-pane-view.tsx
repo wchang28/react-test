@@ -3,20 +3,30 @@ import {FontSize, getFontSizeSelector, getNumberInput, getCheckbox, TestingPane,
 import CollapsibleLeftPaneView from "./collapsible-left-pane-view";
 
 const leftPaneContent = (
-    <div className="w3-container left-content w3-khaki">
-        Hello,---------World!<br/>
-        Hello,---------World!<br/>
-        Hello,---------World!<br/>
-        Hello,---------World!<br/>
-        Hello,---------World!<br/>
-        Hello,---------World!<br/>
-        Hello,---------World!<br/>
-        Hello,---------World!<br/>
+    <div className="w3-clear" style={{height:"150px", overflow: "auto"}}>
+        <div className="w3-container w3-khaki">
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+        </div>
     </div>
 );
     
 const rightPaneContent = (
-    <div className="w3-container right-content w3-light-green">
+    <div className="w3-container w3-light-green">
         Hawdy, World!<br/>
         Hawdy, World!<br/>
         Hawdy, World!<br/>
