@@ -81,7 +81,8 @@ const useStyles = createUseStyles({
     },
     leftContainer: {
         ...clearFloat,
-        display: "table-cell"
+        display: "table-cell",
+        width: ({collapsed, leftPaneWidth}) => (collapsed ? TOGGLE_AREA_DIMENSION : leftPaneWidth)
     },
     rightContainer: {
         ...clearFloat,
@@ -122,15 +123,14 @@ export interface Props {
 
 export default function CollapsibleLeftPaneView(props: ReactProps<Props>) {
     const {children, collapsed, leftPaneWidth, collapseButtonTitle, onCollapseChanged} = props;
-    const leftWidth = (collapsed ? TOGGLE_AREA_DIMENSION : leftPaneWidth);
     const leftPaneContent = children[0];
     const rightPaneContent = children[1];
-    const classes = useStyles();
+    const classes = useStyles({collapsed, leftPaneWidth});
     const toggleButton = <i className={`fa fa-${collapsed ? "arrow-circle-o-right" : "arrow-circle-o-left"} ${classes.toggleButton}`} title={collapseButtonTitle(collapsed)} onClick={() => {onCollapseChanged(!collapsed);}}></i>;
     const toggleBar = <div className={classes.toggleBar}><div className={classes.toggleArea}>{toggleButton}</div></div>;
     return (
         <div className={classes.mainContainer}>
-            <div className={classes.leftContainer} style={{width: leftWidth}}>
+            <div className={classes.leftContainer}>
                 {toggleBar}
                 {collapsed ? null : leftPaneContent}
             </div>
