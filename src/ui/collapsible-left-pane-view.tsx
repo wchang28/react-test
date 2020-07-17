@@ -2,14 +2,112 @@ import * as React from "react";
 import {ReactNode} from "react";
 import {createUseStyles} from 'react-jss';
 
+/*
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+	.clear-float::before {content:"";display:table;clear:both;}
+    .clear-float::after {content:"";display:table;clear:both;}
+</style>
+<body>
+
+<div class="clear-float" style="width:100%;display:table;">
+  <div class="w3-red clear-float" style="display:table-cell;width:200px">
+  
+    <div class="w3-blue clear-float" style="width:100%;position:relative;height:1.5em;overflow:hidden;">
+      <div class="w3-white" style="width:1.5em;height:1.5em;position:absolute;right:0;">
+        <i class="fa fa-arrow-circle-o-right" style="font-size:1.25em;margin:0;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);cursor:pointer;"></i>
+      </div>
+    </div>
+
+  	<div class="w3-container">
+    	L<br/>
+    	L<br/>
+    </div>
+    
+  </div>
+  <div class="w3-green clear-float" style="display:table-cell;">
+  	<div class="w3-container">
+    	R<br/>
+    	R<br/>
+    	R<br/>
+    	R<br/>
+    </div>
+  </div>
+</div>
+
+<div class="clear-float w3-padding w3-grey">
+	Collapse
+</div>
+
+<div class="clear-float" style="width:100%;display:table;">
+  <div class="w3-red clear-float" style="display:table-cell;width:1.5em;">
+  
+    <div class="w3-blue clear-float" style="width:100%;position:relative;height:1.5em;overflow:hidden;">
+      <div class="w3-white" style="width:1.5em;height:1.5em;position:absolute;right:0;">
+        <i class="fa fa-arrow-circle-o-right" style="font-size:1.25em;margin:0;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);cursor:pointer;"></i>
+      </div>
+    </div>
+
+  </div>
+  <div class="w3-green clear-float" style="display:table-cell;">
+  	<div class="w3-container">
+    	R<br/>
+    	R<br/>
+    	R<br/>
+    	R<br/>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+*/
+
+const TOGGLE_AREA_DIMENSION = "1.5em";
+
 const cf = {content: '""', display: "table", clear: "both"};
 const clearFloat = {"&:before": cf, "&:after": cf};
 
 const useStyles = createUseStyles({
+    mainContainer: {
+        ...clearFloat,
+        display: "table"
+        ,width: "100%"
+    },
+    leftContainer: {
+        ...clearFloat,
+        display: "table-cell"
+    },
+    rightContainer: {
+        ...clearFloat,
+        display: "table-cell"
+    },
     toggleBar: {
         ...clearFloat,
         width: "100%",
-        overflow: "hidden"
+        position: "relative",
+        overflow: "hidden",
+        height: TOGGLE_AREA_DIMENSION
+    },
+    toggleArea: {
+        height: TOGGLE_AREA_DIMENSION,
+        width: TOGGLE_AREA_DIMENSION,
+        position: "absolute",
+        right: "0"
+    },
+    toggleButton: {
+        "font-size": "1.25em",
+        margin: "0",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform:"translate(-50%, -50%)",
+        cursor:"pointer"
     }
 });
 
@@ -22,36 +120,21 @@ export interface Props {
     onCollapseChanged: (collapsed: boolean) => void;
 }
 
-const TOGGLE_AREA_DIMENSION = "1.5em";
-
-const getToggleArea = (collapsed: boolean, onToggleClicked: () => void, collapseButtonTitle: (collapsed: boolean) => string) => {
-    const dimension = TOGGLE_AREA_DIMENSION;
-    const float = (collapsed ? undefined : "right");
-    const icon = (collapsed ? "arrow-circle-o-right" : "arrow-circle-o-left");
-    const title = collapseButtonTitle(collapsed);
-    return (
-        <div style={{float:float, height: `${dimension}`, width: `${dimension}`, position: "relative"}}>
-            <i className={`fa fa-${icon}`} title={title} style={{fontSize:"1.25em", margin:0, position:"absolute", top:"50%", left:"50%", transform:"translate(-50%, -50%)", cursor:"pointer"}} onClick={onToggleClicked}></i>
-        </div>
-    );
-};
-
 export default function CollapsibleLeftPaneView(props: ReactProps<Props>) {
     const {children, collapsed, leftPaneWidth, collapseButtonTitle, onCollapseChanged} = props;
     const leftWidth = (collapsed ? TOGGLE_AREA_DIMENSION : leftPaneWidth);
-    const onToggleClicked = () => {onCollapseChanged(!collapsed);};
     const leftPaneContent = children[0];
     const rightPaneContent = children[1];
     const classes = useStyles();
-    const toggleArea = getToggleArea(collapsed, onToggleClicked, collapseButtonTitle);
-    const toggleBar = (<div className={classes.toggleBar}>{toggleArea}</div>);
+    const toggleButton = <i className={`fa fa-${collapsed ? "arrow-circle-o-right" : "arrow-circle-o-left"} ${classes.toggleButton}`} title={collapseButtonTitle(collapsed)} onClick={() => {onCollapseChanged(!collapsed);}}></i>;
+    const toggleBar = <div className={classes.toggleBar}><div className={classes.toggleArea}>{toggleButton}</div></div>;
     return (
-        <div style={{display:"table", width:"100%"}}>
-            <div style={{display:"table-cell", width: leftWidth}}>
+        <div className={classes.mainContainer}>
+            <div className={classes.leftContainer} style={{width: leftWidth}}>
                 {toggleBar}
                 {collapsed ? null : leftPaneContent}
             </div>
-            <div style={{display:"table-cell"}}>
+            <div className={classes.rightContainer}>
                 {rightPaneContent}
             </div>
         </div>
