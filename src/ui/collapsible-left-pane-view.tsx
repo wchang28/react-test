@@ -1,5 +1,5 @@
 import * as React from "react";
-import {ReactNode} from "react";
+import {ReactNode, useEffect, useState, useRef} from "react";
 import {createUseStyles} from 'react-jss';
 
 const TOGGLE_AREA_DIMENSION = "1.5em";
@@ -10,17 +10,20 @@ const clearFloat = {"&:before": cf, "&:after": cf};
 const useStyles = createUseStyles({
     mainContainer: {
         ...clearFloat,
-        display: "table"
-        ,width: "100%"
+        position: "relative",
+        width: "100%",
+        height: ({mainContainerHeightPx}) => `${mainContainerHeightPx}px`
     },
     leftContainer: {
         ...clearFloat,
-        display: "table-cell",
+        position: "absolute",
         width: ({collapsed, leftPaneWidth}) => (collapsed ? TOGGLE_AREA_DIMENSION : leftPaneWidth)
     },
     rightContainer: {
         ...clearFloat,
-        display: "table-cell"
+        position: "absolute",
+        left: ({collapsed, leftPaneWidth}) => (collapsed ? TOGGLE_AREA_DIMENSION : leftPaneWidth),
+        right:0
     },
     toggleBar: {
         ...clearFloat,
@@ -63,16 +66,36 @@ export default function CollapsibleLeftPaneView(props: ReactProps<Props>) {
     const {children, collapsed, leftPaneWidth, collapseButtonTitle, onCollapseChanged} = props;
     const leftPaneContent = children[0];
     const rightPaneContent = children[1];
-    const classes = useStyles({collapsed, leftPaneWidth});
+    const [mainContainerHeightPx, setMainContainerHeightPx] = useState(0);
+    const refLeftContainer = useRef<HTMLDivElement>();
+    const refRightContainer = useRef<HTMLDivElement>();
+    const [isActive] = useState(true);
+    useEffect(() => {
+        const handleResize = () => {
+            const leftRect = refLeftContainer.current.getBoundingClientRect();
+            const rightRect = refRightContainer.current.getBoundingClientRect();
+            setMainContainerHeightPx(Math.max(leftRect.height, rightRect.height));
+        }
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        }
+    }, [isActive]);
+    useEffect(() => {
+        const leftRect = refLeftContainer.current.getBoundingClientRect();
+        const rightRect = refRightContainer.current.getBoundingClientRect();
+        setMainContainerHeightPx(Math.max(leftRect.height, rightRect.height));
+    });
+    const classes = useStyles({collapsed, leftPaneWidth, mainContainerHeightPx});
     const toggleButton = <i className={`fa fa-${collapsed ? "arrow-circle-o-right" : "arrow-circle-o-left"} ${classes.toggleButton}`} title={collapseButtonTitle(collapsed)} onClick={() => {onCollapseChanged(!collapsed);}}></i>;
     const toggleBar = <div className={classes.toggleBar}><div className={classes.toggleArea}>{toggleButton}</div></div>;
     return (
         <div className={classes.mainContainer}>
-            <div className={classes.leftContainer}>
+            <div className={classes.leftContainer} ref={refLeftContainer}>
                 {toggleBar}
                 <div className={classes.leftContentContainer}>{leftPaneContent}</div>
             </div>
-            <div className={classes.rightContainer}>
+            <div className={classes.rightContainer} ref={refRightContainer}>
                 {rightPaneContent}
             </div>
         </div>

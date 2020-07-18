@@ -210,7 +210,7 @@ export function TestingPane(props: ReactProps<TestPaneProps>) {
 
 export function ConfigurationPane(props: ReactProps<unknown>) {
     return (
-        <div className="test-configuration w3-tiny" style={{padding: "0.01em 16px"}}>
+        <div className="w3-clear test-configuration w3-tiny" style={{padding: "0.01em 16px"}}>
             <div className="w3-light-blue w3-border w3-small" style={{fontWeight:"bold"}}>
                 Configuration
             </div>
@@ -220,7 +220,7 @@ export function ConfigurationPane(props: ReactProps<unknown>) {
 }
 
 export function FontSizeColorTestingWrapper(props: ReactProps<{fontSize: FontSize, color?: Color}>) {
-    let className = `font-size-color-testing-wrapper w3-${props.fontSize}`;
+    let className = `w3-clear font-size-color-testing-wrapper w3-${props.fontSize}`;
     if (props.color) {
         className += ` w3-${props.color}`;
     }
