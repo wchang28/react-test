@@ -23,7 +23,7 @@ const useStyles = createUseStyles({
 });
 
 export interface Props {
-    height: number | string;
+    height?: number | string;
     width?: number | string;
 }
 
