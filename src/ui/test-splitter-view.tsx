@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {SplitterView} from "./splitter-view";
 import ScrollView from "./scroll-view";
+import NoOverflowContainer from "./no-overflow-container";
 import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, getNumberInput, FontSizeColorTestingWrapper, getTestTable} from "./test-common";
 
 export default () => {
@@ -28,9 +29,9 @@ export default () => {
                                     Second Pane
                                 </div>
                             </ScrollView>
-                            <div className="w3-light-blue" style={{height:"100%", overflow:"hidden"}}>
+                            <NoOverflowContainer>
                                 {getTestTable()}
-                            </div>
+                            </NoOverflowContainer>
                         </SplitterView>
                     </SplitterView>
                 </div>
