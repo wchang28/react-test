@@ -29,7 +29,7 @@ export interface Props {
 
 type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
-export default (props: ReactProps<Props>) => {
+export default function ScrollView (props: ReactProps<Props>) {
     const {height, width, children} = props;
     const classes = useStyles({height, width});
     return (
@@ -39,4 +39,9 @@ export default (props: ReactProps<Props>) => {
             </div>
         </div>
     );
-};
+}
+
+ScrollView.defaultProps = {
+    height: "100%"
+    ,width: "100%"
+} as Props

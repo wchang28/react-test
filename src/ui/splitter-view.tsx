@@ -97,8 +97,7 @@ export class SplitterView extends React.Component<Props, State> {
         // styleSecondPane
         /////////////////////////////////////////////////////////////////////////////////////
         const styleSecondPane: React.CSSProperties = {
-            overflow: "auto"
-            ,position: "absolute"
+            position: "absolute"
             ,bottom: "0px"
             ,right: "0px"
         };
@@ -113,8 +112,7 @@ export class SplitterView extends React.Component<Props, State> {
         // styleFirstPaneInner
         /////////////////////////////////////////////////////////////////////////////////////
         const styleFirstPaneInner: React.CSSProperties = {
-            overflow: "auto"
-            ,position:"absolute"
+            position:"absolute"
             ,left:"0px"
             ,top:"0px"
         };

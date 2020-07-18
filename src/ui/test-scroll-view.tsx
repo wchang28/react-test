@@ -15,7 +15,7 @@ export default () => {
             </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
                 <div className="w3-clear" style={{border: "1px solid #ccc", width: `${widthPx}px`}}>
-                    <ScrollView width="100%" height={`${heightPx}px`}>{getTestDiv("light-grey")}</ScrollView>
+                    <ScrollView height={`${heightPx}px`}>{getTestDiv("light-grey")}</ScrollView>
                 </div>
             </FontSizeColorTestingWrapper>
         </TestingPane>
