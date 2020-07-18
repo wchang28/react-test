@@ -166,6 +166,29 @@ export const getTestTable = () => {
     );
 }
 
+export function getTestDiv(color: Color) {
+    return (
+        <div className={`w3-container${color ? ` w3-${color}`: ""}`}>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+            Hello,---------World!<br/>
+        </div>
+    );
+}
+
 export function getW3CSSHorizontalAlignmentClass(horizontalAlignment: HorzontalAlignment) {
     switch(horizontalAlignment) {
         case "center":
