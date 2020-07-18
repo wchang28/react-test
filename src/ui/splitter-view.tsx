@@ -15,15 +15,17 @@ export interface Props {
 export interface State {
     direction?: Direction;
     splitterSizePx?: number;
-    firstPaneSize?: string;
+    firstPaneSize?: string; // include splitter
 }
 
 export class SplitterView extends React.Component<Props, State> {
+    private refMainContainer: React.RefObject<HTMLDivElement>;
     private refFirstPane: React.RefObject<HTMLDivElement>;
     private docMouseMoveListener: (event: MouseEvent) => void;
     private docMouseUpListener: (event: MouseEvent) => void;
     constructor(props) {
         super(props);
+        this.refMainContainer = React.createRef<HTMLDivElement>();
         this.refFirstPane = React.createRef<HTMLDivElement>();
         this.docMouseMoveListener = this.DocumentMouseMoveListener;
         this.docMouseUpListener = this.DocumentMouseUpListener;
@@ -45,6 +47,8 @@ export class SplitterView extends React.Component<Props, State> {
     }
     get DocumentMouseMoveListener() {
         return ((event: MouseEvent) => {
+            const mainContainer = this.refMainContainer.current;
+            const mainContainerRect = mainContainer.getBoundingClientRect();
             const firstPaneDiv = this.refFirstPane.current;
             const rect = firstPaneDiv.getBoundingClientRect();
             const x = event.clientX;
@@ -52,7 +56,10 @@ export class SplitterView extends React.Component<Props, State> {
             const offsetX = x - rect.x;
             const offsetY = y - rect.y;
             const offset = (this.Direction === "vertical" ? offsetX : offsetY);
-            const firstPaneSizePx = offset + Math.floor(this.SplitterSizePx/2);
+            let firstPaneSizePx = offset + Math.floor(this.SplitterSizePx/2);
+            const minFirstPaneSizePx = this.SplitterSizePx;
+            const maxFirstPaneSizePx = (this.Direction === "vertical" ? mainContainerRect.width : mainContainerRect.height);
+            firstPaneSizePx = Math.min(Math.max(firstPaneSizePx, minFirstPaneSizePx), maxFirstPaneSizePx);
             this.setState({firstPaneSize: `${firstPaneSizePx}px`});
         }).bind(this);
     }
@@ -143,7 +150,7 @@ export class SplitterView extends React.Component<Props, State> {
         const firstPaneContent = this.props.children[0];
         const secondPaneContent = this.props.children[1];
         return (
-            <div style={{position: "relative", width: "100%", height:"100%"}}>
+            <div ref={this.refMainContainer} style={{position: "relative", width: "100%", height:"100%"}}>
                 <div ref={this.refFirstPane} style={styleFirstPane}>
                     <div style={{position: "relative", width: "100%", height:"100%"}}>
                         <div style={styleFirstPaneInner}>
