@@ -9,14 +9,14 @@ const cf = {content: '""', display: "table", clear: "both"};
 const clearFloat = {"&:before": cf, "&:after": cf};
 
 const useStyles = createUseStyles({
-    mainContainer: {
+    scrollViewMainContainer: {
         ...clearFloat,
         overflow: "auto",
         "white-space": "nowrap",
         height: ({height}) => height,
         width: ({width}) => width
     },
-    innerContainer: {
+    scrollViewInnerContainer: {
         ...clearFloat,
         display:"table-row"
     }
@@ -33,8 +33,8 @@ export default (props: ReactProps<Props>) => {
     const {height, width, children} = props;
     const classes = useStyles({height, width});
     return (
-        <div className={classes.mainContainer}>
-            <div className={classes.innerContainer}>
+        <div className={classes.scrollViewMainContainer}>
+            <div className={classes.scrollViewInnerContainer}>
                 {children}
             </div>
         </div>
