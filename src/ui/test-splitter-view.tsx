@@ -18,7 +18,7 @@ export default () => {
                 <div style={{height: `${testAreaHeightPx}px`}}>
                     <SplitterView direction="vertical" splitterSizePx={splitterWidthPx} defaultFirstPaneSize="150px">
                         <ScrollView>
-                            <div className="w3-khaki" style={{width:"500px", height:"2000px"}}>
+                            <div className="w3-khaki" style={{width:"300px", height:"2000px"}}>
                                 First Pane
                             </div>
                         </ScrollView>
