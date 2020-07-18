@@ -6,18 +6,17 @@ export default () => {
     const [widthPx, setWidthPx] = useState(150);
     const [heightPx, setHeightPx] = useState(200);
     const [fontSize, setFontSize] = useState<FontSize>("small");
-    const [hasBorder, setHasBorder] = useState(false);
-    const props = {width: `${widthPx}px`, height: `${heightPx}px`, hasBorder};
     return (
         <TestingPane>
             <ConfigurationPane>
                 {getNumberInput("Width (px)", widthPx, setWidthPx)}
                 {getNumberInput("Height (px)", heightPx, setHeightPx)}
-                {getCheckbox("Border", hasBorder, setHasBorder)}
                 {getFontSizeSelector(fontSize, setFontSize)}
             </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
-                <ScrollView {...props}>{getTestDiv("light-grey")}</ScrollView>
+                <div className="w3-clear" style={{border: "1px solid #ccc", width: `${widthPx}px`}}>
+                    <ScrollView width="100%" height={`${heightPx}px`}>{getTestDiv("light-grey")}</ScrollView>
+                </div>
             </FontSizeColorTestingWrapper>
         </TestingPane>
     );

@@ -14,8 +14,7 @@ const useStyles = createUseStyles({
         overflow: "auto",
         "white-space": "nowrap",
         height: ({height}) => height,
-        width: ({width}) => width,
-        border: ({hasBorder}) => (hasBorder ? "1px solid #ccc" : undefined)
+        width: ({width}) => width
     },
     innerContainer: {
         ...clearFloat,
@@ -26,14 +25,13 @@ const useStyles = createUseStyles({
 export interface Props {
     height: number | string;
     width?: number | string;
-    hasBorder?: boolean;
 }
 
 type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
 export default (props: ReactProps<Props>) => {
-    const {height, width, hasBorder, children} = props;
-    const classes = useStyles({height, width, hasBorder});
+    const {height, width, children} = props;
+    const classes = useStyles({height, width});
     return (
         <div className={classes.mainContainer}>
             <div className={classes.innerContainer}>
