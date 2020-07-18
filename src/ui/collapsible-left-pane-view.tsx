@@ -104,8 +104,8 @@ export default function CollapsibleLeftPaneView(props: ReactProps<Props>) {
 }
 
 CollapsibleLeftPaneView.defaultProps = {
-    collapsed: false
-    ,leftPaneWidth: "300px"
+    leftPaneWidth: "300px"
+    ,collapsed: false
     ,collapseButtonTitle: (collapsed: boolean) => (collapsed ? "Expand to the right" : "Collapse to the left")
     ,onCollapseChanged: () => {}
 } as Props;
