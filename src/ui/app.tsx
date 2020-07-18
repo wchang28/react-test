@@ -25,7 +25,8 @@ import TestCheckbox from "./test-checkbox";
 import TestPolling from "./test-polling";
 import TestReactHTMLParser from "./test-react-html-parser";
 import TestPaginate from "./test-paginate";
-import TestAutoSuggest from "./test-autosuggest"
+import TestAutoSuggest from "./test-autosuggest";
+import TestScrollView from "./test-scroll-view";
 
 interface TestItem {
 	id: string;
@@ -58,6 +59,7 @@ const testConfig: TestItem[] = [
 	,{id: "checkbox", name: "Checkbox", component: TestCheckbox}
 	,{id: "polling", name: "Polling", component: TestPolling}
 	,{id: "react-html-parser", name: "React HTML Parser", component: TestReactHTMLParser}
+	,{id: "scroll-view", name: "Scroll View", component: TestScrollView}
 	// TODO: add more test cases here
 ];
 

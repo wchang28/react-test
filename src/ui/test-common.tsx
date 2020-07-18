@@ -166,7 +166,7 @@ export const getTestTable = () => {
     );
 }
 
-export function getTestDiv(color: Color) {
+export function getTestDiv(color?: Color) {
     return (
         <div className={`w3-container${color ? ` w3-${color}`: ""}`}>
             Hello,---------World!<br/>
