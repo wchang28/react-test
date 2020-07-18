@@ -20,18 +20,16 @@ export default () => {
                 {getCheckbox("Allow Left Pane Scrolling", allowLeftPaneScrolling, setAllowLeftPaneScrolling)}
             </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
-                <div>
-                    <CollapsibleLeftPaneView
-                        collapsed={collapsed}
-                        leftPaneWidth={`${leftPaneWidthPx}px`}
-                        onCollapseChanged={setCollapsed}
-                        collapseButtonTitle={(collapsed) => (collapsed ? "Expand" : "Collapse")}
-                    >
-                        {leftPaneContent}
-                        {rightPaneContent}
-                    </CollapsibleLeftPaneView>
-                    <div className="w3-padding w3-dark-grey"></div>
-                </div>
+                <CollapsibleLeftPaneView
+                    collapsed={collapsed}
+                    leftPaneWidth={`${leftPaneWidthPx}px`}
+                    onCollapseChanged={setCollapsed}
+                    collapseButtonTitle={(collapsed) => (collapsed ? "Expand" : "Collapse")}
+                >
+                    {leftPaneContent}
+                    {rightPaneContent}
+                </CollapsibleLeftPaneView>
+                <div className="w3-padding w3-dark-grey"></div>
             </FontSizeColorTestingWrapper>
         </TestingPane>
     );
