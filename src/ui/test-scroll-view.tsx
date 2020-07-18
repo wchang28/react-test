@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {FontSize, getFontSizeSelector, getNumberInput, TestingPane, ConfigurationPane, getCheckbox, FontSizeColorTestingWrapper, getTestDiv} from "./test-common";
+import {FontSize, getFontSizeSelector, getNumberInput, TestingPane, ConfigurationPane, FontSizeColorTestingWrapper, getTestDiv} from "./test-common";
 import ScrollView from "./scroll-view";
 
 export default () => {
