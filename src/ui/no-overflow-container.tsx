@@ -24,11 +24,7 @@ type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 export default function NoOverflowContainer(props: ReactProps<Props>) {
     const {height, width, children} = props;
     const classes = useStyles({height, width});
-    return (
-        <div className={classes.noOverflowContainer}>
-            {children}
-        </div>
-    );
+    return <div className={classes.noOverflowContainer}>{children}</div>;
 }
 
 NoOverflowContainer.defaultProps = {
