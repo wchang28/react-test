@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {SplitterView} from "./splitter-view";
 import ScrollView from "./scroll-view";
-import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, getNumberInput, FontSizeColorTestingWrapper} from "./test-common";
+import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, getNumberInput, FontSizeColorTestingWrapper, getTestTable} from "./test-common";
 
 export default () => {
     const [testAreaHeightPx, setTestAreaHeightPx] = useState(500);
@@ -28,8 +28,8 @@ export default () => {
                                     Second Pane
                                 </div>
                             </ScrollView>
-                            <div className="w3-light-blue" style={{height:"100%"}}>
-                                Third Pane
+                            <div className="w3-light-blue" style={{height:"100%", overflow:"hidden"}}>
+                                {getTestTable()}
                             </div>
                         </SplitterView>
                     </SplitterView>
