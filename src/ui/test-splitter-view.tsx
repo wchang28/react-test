@@ -23,9 +23,11 @@ export default () => {
                             </div>
                         </ScrollView>
                         <SplitterView direction="horizontal" defaultFirstPaneSize="75%" splitterSizePx={splitterWidthPx}>
-                            <div className="w3-pale-green" style={{height: "1500px", width: "1300px"}}>
-                                Second Pane
-                            </div>
+                            <ScrollView>
+                                <div className="w3-pale-green" style={{height: "1500px", width: "1300px"}}>
+                                    Second Pane
+                                </div>
+                            </ScrollView>
                             <div className="w3-light-blue" style={{height: "100%", width: "100%"}}>
                                 Third Pane
                             </div>
