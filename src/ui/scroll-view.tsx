@@ -2,6 +2,9 @@ import * as React from "react";
 import {ReactNode} from "react";
 import {createUseStyles} from 'react-jss';
 
+// inner content need to have css "display: table-row;":
+// https://stackoverflow.com/questions/17405982/set-width-of-inner-div-on-scrollable-element-to-100-of-scrollable-width
+
 const cf = {content: '""', display: "table", clear: "both"};
 const clearFloat = {"&:before": cf, "&:after": cf};
 
