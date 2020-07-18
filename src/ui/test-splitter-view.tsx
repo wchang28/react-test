@@ -18,17 +18,17 @@ export default () => {
                 <div style={{height: `${testAreaHeightPx}px`}}>
                     <SplitterView direction="vertical" splitterSizePx={splitterWidthPx} defaultFirstPaneSize="150px">
                         <ScrollView>
-                            <div className="w3-khaki" style={{width:"500px", height: "2000px"}}>
+                            <div className="w3-khaki" style={{width:"500px", height:"2000px"}}>
                                 First Pane
                             </div>
                         </ScrollView>
                         <SplitterView direction="horizontal" defaultFirstPaneSize="75%" splitterSizePx={splitterWidthPx}>
                             <ScrollView>
-                                <div className="w3-pale-green" style={{height: "1500px", width: "1300px"}}>
+                                <div className="w3-pale-green" style={{height:"1500px", width:"1300px"}}>
                                     Second Pane
                                 </div>
                             </ScrollView>
-                            <div className="w3-light-blue" style={{height: "100%", width: "100%"}}>
+                            <div className="w3-light-blue" style={{height:"100%"}}>
                                 Third Pane
                             </div>
                         </SplitterView>
