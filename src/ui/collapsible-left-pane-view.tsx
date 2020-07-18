@@ -17,12 +17,12 @@ const useStyles = createUseStyles({
     leftContainer: {
         ...clearFloat,
         position: "absolute",
-        width: ({collapsed, leftPaneWidth}) => (collapsed ? TOGGLE_AREA_DIMENSION : leftPaneWidth)
+        width: ({leftContainerWidth}) => leftContainerWidth
     },
     rightContainer: {
         ...clearFloat,
         position: "absolute",
-        left: ({collapsed, leftPaneWidth}) => (collapsed ? TOGGLE_AREA_DIMENSION : leftPaneWidth),
+        left: ({leftContainerWidth}) => leftContainerWidth,
         right:0
     },
     toggleBar: {
@@ -86,7 +86,8 @@ export default function CollapsibleLeftPaneView(props: ReactProps<Props>) {
         const rightRect = refRightContainer.current.getBoundingClientRect();
         setMainContainerHeightPx(Math.max(leftRect.height, rightRect.height));
     });
-    const classes = useStyles({collapsed, leftPaneWidth, mainContainerHeightPx});
+    const leftContainerWidth = (collapsed ? TOGGLE_AREA_DIMENSION : leftPaneWidth);
+    const classes = useStyles({leftContainerWidth, mainContainerHeightPx, collapsed});
     const toggleButton = <i className={`fa fa-${collapsed ? "arrow-circle-o-right" : "arrow-circle-o-left"} ${classes.toggleButton}`} title={collapseButtonTitle(collapsed)} onClick={() => {onCollapseChanged(!collapsed);}}></i>;
     const toggleBar = <div className={classes.toggleBar}><div className={classes.toggleArea}>{toggleButton}</div></div>;
     return (
