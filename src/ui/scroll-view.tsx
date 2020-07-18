@@ -13,6 +13,10 @@ const useStyles = createUseStyles({
         height: ({height}) => height,
         width: ({width}) => width,
         border: ({hasBorder}) => (hasBorder ? "1px solid #ccc" : undefined)
+    },
+    innerContainer: {
+        ...clearFloat,
+        display:"table-row"
     }
 });
 
@@ -27,5 +31,11 @@ type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 export default (props: ReactProps<Props>) => {
     const {height, width, hasBorder, children} = props;
     const classes = useStyles({height, width, hasBorder});
-    return <div className={classes.mainContainer}>{children}</div>;
+    return (
+        <div className={classes.mainContainer}>
+            <div className={classes.innerContainer}>
+                {children}
+            </div>
+        </div>
+    );
 };
