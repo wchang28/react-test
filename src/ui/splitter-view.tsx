@@ -14,8 +14,6 @@ type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
 export default function SplitterView(props: ReactProps<Props>) {
     const {direction, splitterSizePx, dividerPosition, onChange, children} = props;
-    const refMainContainer = useRef<HTMLDivElement>();
-    const refFirstPane = useRef<HTMLDivElement>();
     const firstPaneSize = `${dividerPosition}%`;
     // styleMainContainer
     const styleMainContainer: React.CSSProperties = {position: "relative", width: "100%", height: "100%"};
@@ -63,6 +61,8 @@ export default function SplitterView(props: ReactProps<Props>) {
         styleDivider.height = `${splitterSizePx}px`;
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
+    const refMainContainer = useRef<HTMLDivElement>();
+    const refFirstPane = useRef<HTMLDivElement>();
     const onDividerMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.preventDefault();
         const docMouseMoveListener = (event: MouseEvent) => {
