@@ -5,7 +5,7 @@ import NoOverflowContainer from "./no-overflow-container";
 import {TestingPane, ConfigurationPane, getFontSizeSelector, FontSize, getNumberInput, FontSizeColorTestingWrapper, getTestTable} from "./test-common";
 
 export default () => {
-    const [testAreaHeightPx, setTestAreaHeightPx] = useState(500);
+    const [testAreaHeightPx, setTestAreaHeightPx] = useState(550);
     const [splitterWidthPx, setSplitterWidthPx] = useState(5);
     const [fontSize, setFontSize] = useState<FontSize>("small");
     return (
