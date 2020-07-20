@@ -107,5 +107,5 @@ SplitterView.defaultProps = {
     direction: "vertical"
     ,splitterSizePx: 5
     ,dividerPosition: 20
-    ,onChange: () =>{}
+    ,onChange: () => {}
 } as Props;
