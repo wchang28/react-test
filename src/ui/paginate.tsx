@@ -1,78 +1,60 @@
 import * as React from "react";
 import {ReactNode} from "react";
 import ReactPaginate from 'react-paginate';
-import * as uglifycss from "uglify-css";
+import {createUseStyles} from 'react-jss';
 
-function injectCSS(css: string, uglify: boolean = false) {
-    const style = document.createElement('style');
-    style.setAttribute("type", "text/css");
-    if (uglify) {
-        css = uglifycss.processString(css);
+const liBaselineStyle = {
+    padding: 0,
+    float: "left",
+    width: "auto",
+    "border-right": "1px solid #ddd",
+    display: "block",
+    outline:0,
+    "&:last-child": {
+        "border-right":"none"
     }
-    style.appendChild(document.createTextNode(css));
-    document.getElementsByTagName("head")[0].appendChild(style); 
-}
+};
 
-function getW3CSSHorizontalAlignmentClass(horizontalAlignment?: HorzontalAlignment) {
-    switch(horizontalAlignment) {
-        case "center":
-            return "w3-center";
-        case "right":
-            return "w3-right-align";
-        case "left":
-        default:
-            return "w3-left-align";
+const useStyles = createUseStyles({
+    paginateOuterContainer: {
+        "line-height": 0,
+        "text-align": ({horizontalAlignment}) => horizontalAlignment
+    },
+    paginateContainer: {
+        width: "auto",
+        display: "inline-block",
+        "line-height": "normal",
+        "list-style-type": "none",
+        padding: 0,
+        margin: 0,
+        border: "1px solid #ccc"
+    },
+    paginate_li: {
+        ...liBaselineStyle
+    },
+    paginate_li_disabled: {
+        ...liBaselineStyle,
+        opacity: 0.3
+    },
+    paginate_link: {
+        outline: 0,
+        padding: "0.53em 0.8em",
+        border: "none",
+        display: "inline-block",
+        "vertical-align": "middle",
+        overflow: "hidden",
+        "text-decoration": "none",
+        color: "inherit",
+        "background-color": "inherit",
+        "text-align": "center",
+        cursor: "pointer",
+        "white-space": "nowrap",
+        "&:hover": {
+            color: "#000",
+            "background-color": "#ccc"
+        }
     }
-}
-
-export const ROOT_CLASS_NAME = "paginate-root";
-const UL_CLASS_NAME = `react-paginate-ul`;
-
-// !!! Need to set the container line-height to "0" in order to get rid of the extra padding on the bottom due to <ul> being an inline-block element
-// also need to set <ul>'s line-height back to "normal" to undo the "0" being set on the container
-injectCSS(`
-.${ROOT_CLASS_NAME} {
-    line-height:0;
-}
-.${UL_CLASS_NAME} {
-    width:auto;
-    display:inline-block;
-    line-height:normal;
-    list-style-type:none;
-    padding:0;
-    margin:0;
-    border:1px solid #ccc!important;
-}
-.${UL_CLASS_NAME} li {
-    padding:0;
-    float:left;
-    width:auto;
-    border-right:1px solid #ddd;
-    display:block;
-    outline:0;
-}
-.${UL_CLASS_NAME} li:last-child {
-    border-right:none;
-}
-.${UL_CLASS_NAME} a {
-    outline:0;
-    padding:0.53em 0.8em;
-    border:none;
-    display:inline-block;
-    vertical-align:middle;
-    overflow:hidden;
-    text-decoration:none;
-    color:inherit;
-    background-color:inherit;
-    text-align:center;
-    cursor:pointer;
-    white-space:nowrap;
-}
-.${UL_CLASS_NAME} a:hover {
-    color:#000!important;
-    background-color:#ccc!important;
-}
-`);
+});
 
 export type HorzontalAlignment = "left" | "center" | "right";
 
@@ -90,9 +72,10 @@ type ReactProps<P = unknown> = Readonly<P> & Readonly<{ children?: ReactNode }>;
 
 export default (props: ReactProps<Props>) => {
     const {pageCount, pageIndex, pageRangeDisplayed, marginPagesDisplayed, onPageChange, activeClassName, horizontalAlignment} = props;
+    const classes = useStyles({horizontalAlignment});
     const content = (pageCount < 2
         ? null :
-        <div className={`${ROOT_CLASS_NAME}`} style={{textAlign: horizontalAlignment}}>
+        <div className={classes.paginateOuterContainer}>
             <ReactPaginate
                 pageCount={pageCount}
                 pageRangeDisplayed={pageRangeDisplayed}
@@ -100,8 +83,18 @@ export default (props: ReactProps<Props>) => {
                 forcePage={pageIndex}
                 previousLabel="«"
                 nextLabel="»"
-                containerClassName={UL_CLASS_NAME}
-                activeClassName={activeClassName}
+                containerClassName={classes.paginateContainer}
+                breakClassName={classes.paginate_li}
+                pageClassName={classes.paginate_li}
+                previousClassName={classes.paginate_li}
+                nextClassName={classes.paginate_li}
+                activeClassName={`${classes.paginate_li} ${activeClassName}`}
+                breakLinkClassName={classes.paginate_link}
+                pageLinkClassName={classes.paginate_link}
+                activeLinkClassName={classes.paginate_link}
+                previousLinkClassName={classes.paginate_link}
+                nextLinkClassName={classes.paginate_link}
+                disabledClassName={classes.paginate_li_disabled}
                 onPageChange={({selected}) => {onPageChange(selected)}}
             />
         </div>
