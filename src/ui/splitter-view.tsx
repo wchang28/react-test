@@ -3,7 +3,7 @@ import * as React from 'react';
 export type Direction = "vertical" | "horizontal";
 
 const DEFAULT_DIRECTION: Direction = "vertical";
-const DEFAULT_FIRST_PANE_SIZE: string = "30%";
+const DEFAULT_FIRST_PANE_SIZE: number = 30;
 const DEFAULT_SPLITTER_SIZE_PX: number = 3;
 
 export interface Props {
