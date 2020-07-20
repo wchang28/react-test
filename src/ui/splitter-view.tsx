@@ -9,7 +9,7 @@ const DEFAULT_SPLITTER_SIZE_PX: number = 3;
 export interface Props {
     direction: Direction;
     splitterSizePx?: number;
-    defaultFirstPaneSize?: string;
+    defaultFirstPaneSizePct?: number;
 }
 
 export interface State {
@@ -32,7 +32,7 @@ export class SplitterView extends React.Component<Props, State> {
         this.state = {
             direction: null
             ,splitterSizePx: null
-            ,firstPaneSize: (this.props.defaultFirstPaneSize ? this.props.defaultFirstPaneSize : DEFAULT_FIRST_PANE_SIZE)
+            ,firstPaneSize: `${(this.props.defaultFirstPaneSizePct ? this.props.defaultFirstPaneSizePct : DEFAULT_FIRST_PANE_SIZE)}%`
         };
     }
     static getDerivedStateFromProps(nextProps: Props, prevState: State) {
@@ -62,7 +62,6 @@ export class SplitterView extends React.Component<Props, State> {
             firstPaneSizePx = Math.min(Math.max(firstPaneSizePx, minFirstPaneSizePx), maxFirstPaneSizePx);
             const containerSizePx = (this.Direction === "vertical" ? mainContainerRect.width : mainContainerRect.height);
             const percent = (containerSizePx ? firstPaneSizePx*100.0/containerSizePx : 0);
-            //this.setState({firstPaneSize: `${firstPaneSizePx}px`});
             this.setState({firstPaneSize: `${percent}%`});
         }).bind(this);
     }
