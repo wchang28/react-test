@@ -60,7 +60,10 @@ export class SplitterView extends React.Component<Props, State> {
             const minFirstPaneSizePx = this.SplitterSizePx;
             const maxFirstPaneSizePx = (this.Direction === "vertical" ? mainContainerRect.width : mainContainerRect.height);
             firstPaneSizePx = Math.min(Math.max(firstPaneSizePx, minFirstPaneSizePx), maxFirstPaneSizePx);
-            this.setState({firstPaneSize: `${firstPaneSizePx}px`});
+            const containerSizePx = (this.Direction === "vertical" ? mainContainerRect.width : mainContainerRect.height);
+            const percent = (containerSizePx ? firstPaneSizePx*100.0/containerSizePx : 0);
+            //this.setState({firstPaneSize: `${firstPaneSizePx}px`});
+            this.setState({firstPaneSize: `${percent}%`});
         }).bind(this);
     }
     get DocumentMouseUpListener() {
