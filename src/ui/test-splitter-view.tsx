@@ -17,7 +17,7 @@ export default () => {
             </ConfigurationPane>
             <FontSizeColorTestingWrapper fontSize={fontSize}>
                 <div style={{height: `${testAreaHeightPx}px`}}>
-                    <SplitterView direction="vertical" splitterSizePx={splitterWidthPx} defaultFirstPaneSize="150px">
+                    <SplitterView direction="vertical" splitterSizePx={splitterWidthPx} defaultFirstPaneSize="25%">
                         <ScrollView>
                             <div className="w3-khaki" style={{width:"300px", height:"2000px"}}>
                                 First Pane
