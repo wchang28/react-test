@@ -41,7 +41,7 @@ export default function SplitterView(props: ReactProps<Props>) {
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // styleFirstPaneInner
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    const styleFirstPaneInner: React.CSSProperties = {position:"absolute", left: 0, top: 0};
+    const styleFirstPaneInner: React.CSSProperties = {position: "absolute", left: 0, top: 0};
     if (direction === "vertical") {
         styleFirstPaneInner.bottom = 0;
         styleFirstPaneInner.right = `${splitterSizePx}px`;
