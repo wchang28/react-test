@@ -92,7 +92,7 @@ export default (props: ReactProps<Props>) => {
     const {pageCount, pageIndex, pageRangeDisplayed, marginPagesDisplayed, onPageChange, activeClassName, horizontalAlignment} = props;
     const content = (pageCount < 2
         ? null :
-        <div className={`${ROOT_CLASS_NAME} ${getW3CSSHorizontalAlignmentClass(horizontalAlignment)}`}>
+        <div className={`${ROOT_CLASS_NAME}`} style={{textAlign: horizontalAlignment}}>
             <ReactPaginate
                 pageCount={pageCount}
                 pageRangeDisplayed={pageRangeDisplayed}
