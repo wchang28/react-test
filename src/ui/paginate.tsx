@@ -98,8 +98,8 @@ export default (props: ReactProps<Props>) => {
                 pageRangeDisplayed={pageRangeDisplayed}
                 marginPagesDisplayed={marginPagesDisplayed}
                 forcePage={pageIndex}
-                previousLabel="<"
-                nextLabel=">"
+                previousLabel="«"
+                nextLabel="»"
                 containerClassName={UL_CLASS_NAME}
                 activeClassName={activeClassName}
                 onPageChange={({selected}) => {onPageChange(selected)}}
