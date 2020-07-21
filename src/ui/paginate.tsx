@@ -69,7 +69,7 @@ export interface Props {
     pageRangeDisplayed: number;
     marginPagesDisplayed: number;
     onPageChange: (pageIndex: number) => void;
-    activeClassName?: string;
+    activeClassName?: string;   // extra class name that is added to active <li/>
     horizontalAlignment?: HorzontalAlignment;
 }
 
