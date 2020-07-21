@@ -5,13 +5,18 @@ import {createUseStyles} from 'react-jss';
 
 const liBaselineStyle = {
     padding: 0,
+    margin: 0,
     float: "left",
     width: "auto",
-    "border-right": "1px solid #ddd",
+    "border-right": "1px solid #ccc",
     display: "block",
-    outline:0,
+    outline: 0,
     "&:last-child": {
-        "border-right":"none"
+        "border-right":"none!important"
+    },
+    "&:hover": {
+        color: "#000!important",
+        "background-color": "#ccc!important"
     }
 };
 
@@ -34,11 +39,11 @@ const useStyles = createUseStyles({
     },
     paginate_li_disabled: {
         ...liBaselineStyle,
-        opacity: 0.3
+        opacity: "0.3!important"
     },
     paginate_link: {
         outline: 0,
-        padding: "0.53em 0.8em",
+        padding: "0.5em 0.8em",
         border: "none",
         display: "inline-block",
         "vertical-align": "middle",
@@ -49,10 +54,6 @@ const useStyles = createUseStyles({
         "text-align": "center",
         cursor: "pointer",
         "white-space": "nowrap",
-        "&:hover": {
-            color: "#000",
-            "background-color": "#ccc"
-        }
     }
 });
 
