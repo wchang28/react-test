@@ -4,6 +4,7 @@
   "description": "React Tester",
   "scripts": {
     "transpile": "tsc",
+    "clean": "rimraf ./dist && rimraf ./node_modules",
     "browserify": "browserify -o ./dist/ui/bundle.js ./dist/ui/main.js",
     "uglify": "uglifyjs ./dist/ui/bundle.js -o ./public/js/bundle.min.js --compress --mangle",
     "package-ui": "npm run browserify && npm run uglify",
@@ -64,6 +65,7 @@
   },
   "devDependencies": {
     "browserify": "^16.5.0",
+    "rimraf": "^3.0.2",
     "typescript": "^3.9.5",
     "uglify-js": "^3.7.6"
   }
