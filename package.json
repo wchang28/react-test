@@ -39,7 +39,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/shortid": "0.0.29",
     "clsx": "^1.1.0",
-    "codemirror": "^5.51.0",
+    "codemirror": "^5.58.2",
     "csvtojson": "^2.0.10",
     "express": "^4.17.1",
     "interval-polling": "git+https://github.com/wchang28/interval-polling.git",
