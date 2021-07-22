@@ -61,7 +61,7 @@
     "react-themeable": "^1.1.0",
     "shortid": "^2.2.15",
     "uglify-css": "git+https://github.com/wchang28/uglify-css.git",
-    "xlsx": "^0.16.2"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "browserify": "^16.5.0",
