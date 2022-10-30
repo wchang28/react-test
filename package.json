@@ -48,7 +48,7 @@
     "react-autosuggest": "^10.0.2",
     "react-codemirror2": "^6.0.0",
     "react-data-grid": "^6.1.0",
-    "react-data-grid-addons": "^6.1.0",
+    "react-data-grid-addons": "^7.0.0-alpha.24",
     "react-data-grid-addons-extension": "git+https://github.com/wchang28/react-data-grid-addons-extension.git",
     "react-datepicker": "^2.12.1",
     "react-dom": "^16.13.1",
