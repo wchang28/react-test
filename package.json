@@ -41,7 +41,7 @@
     "clsx": "^1.1.0",
     "codemirror": "^5.51.0",
     "csvtojson": "^2.0.10",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "interval-polling": "git+https://github.com/wchang28/interval-polling.git",
     "jquery": "^3.5.1",
     "react": "^16.13.1",
